@@ -4,16 +4,18 @@ import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Main from '../main/main';
 import Login from '../login/login';
 import Favorites from '../favorites/favorites';
-import Property from '../property/property';
+import OfferDetails from '../offer-details/offer-details';
+import {OFFER_PROPTYPES} from '../../types.js';
 
 
-const App = ({placesCount}) => {
+const App = ({placesCount, offers}) => {
   return (
     <Router>
       <Switch>
-        <Route path="/" exact>
-          <Main placesCount={placesCount} />
-        </Route>
+        <Route path="/" exact
+          render={({history}) => (
+            <Main placesCount={placesCount} offers={offers} onOfferClick={(id) => history.push(`/offer/${id}`)} />
+          )} />
         <Route path="/login" exact>
           <Login />
         </Route>
@@ -21,7 +23,7 @@ const App = ({placesCount}) => {
           <Favorites />
         </Route>
         <Route path="/offer/:id" exact>
-          <Property />
+          <OfferDetails offers={offers} />
         </Route>
         <Route>
           <Link to="/">Page Not Found, back to main page</Link>
@@ -32,7 +34,10 @@ const App = ({placesCount}) => {
 };
 
 App.propTypes = {
-  placesCount: PropTypes.number.isRequired
+  placesCount: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(
+      PropTypes.shape(OFFER_PROPTYPES).isRequired
+  ).isRequired,
 };
 
 export default App;
