@@ -1,15 +1,17 @@
 import PropTypes from 'prop-types';
 
-export const REVIEW_PROPTYPES = PropTypes.shape({
+export const REVIEW_PROP_TYPES = {
   name: PropTypes.string,
   photoUrl: PropTypes.string,
   reviewText: PropTypes.string,
   rating: PropTypes.string,
   date: PropTypes.string,
-});
+};
 
-export const OFFER_PROPTYPES = {
-  photosUrl: PropTypes.array.isRequired,
+export const OFFER_PROP_TYPES = {
+  photosUrl: PropTypes.arrayOf(
+      PropTypes.string.isRequired
+  ).isRequired,
   type: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,

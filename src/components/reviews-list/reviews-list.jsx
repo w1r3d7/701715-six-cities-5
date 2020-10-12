@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {REVIEW_PROPTYPES} from '../../types';
+import {REVIEW_PROP_TYPES} from '../../types';
 import ReviewItem from '../review-item/review-item';
 import PropTypes from 'prop-types';
 import FormComment from '../form-comment/form-comment';
@@ -38,7 +38,7 @@ export default class ReviewsList extends PureComponent {
       <section className="property__reviews reviews">
         <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews ? reviews.length : `0`}</span></h2>
         <ul className="reviews__list">
-          {reviews ? reviews.map((review) => <ReviewItem review={review} key={review.id} />) : ``}
+          {reviews.length > 0 ? reviews.map((review) => <ReviewItem review={review} key={review.id} />) : ``}
         </ul>
         <FormComment onSubmit={this.handleFormSubmit} />
       </section>
@@ -46,5 +46,5 @@ export default class ReviewsList extends PureComponent {
   }
 }
 
-ReviewsList.propTypes = PropTypes.arrayOf(REVIEW_PROPTYPES).isRequired;
+ReviewsList.propTypes = PropTypes.arrayOf(REVIEW_PROP_TYPES).isRequired;
 

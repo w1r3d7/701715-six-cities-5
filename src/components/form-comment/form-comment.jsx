@@ -8,7 +8,7 @@ export default class FormComment extends PureComponent {
     this.state = {
       areaText: ``,
       rating: null,
-      isSubmitButtonDisable: false,
+      inputChecked: ``
     };
 
     this._handleStarButtonActive = this._handleStarButtonActive.bind(this);
@@ -21,15 +21,18 @@ export default class FormComment extends PureComponent {
   }
 
   _handleStarButtonActive(evt) {
-    this.setState({rating: evt.target.value});
+    this.setState({
+      rating: evt.target.value,
+      inputChecked: evt.target.id,
+    });
   }
 
   _handleFormSubmit(evt) {
     evt.preventDefault();
     const {areaText, rating} = this.state;
     this.setState({
-      isSubmitButtonDisable: true,
-      areaText: ``
+      areaText: ``,
+      inputChecked: ``,
     });
     this.props.onSubmit(areaText, rating);
   }
@@ -39,35 +42,40 @@ export default class FormComment extends PureComponent {
       <form className="reviews__form form" action="#" method="post" onSubmit={this._handleFormSubmit}>
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
-          <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" onChange={this._handleStarButtonActive} />
+          <input className="form__rating-input visually-hidden" name="rating"
+            value="5" id="5-stars" type="radio" onChange={this._handleStarButtonActive} checked={this.state.inputChecked === `5-stars`}/>
           <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
             <svg className="form__star-image" width="37" height="33">
               <use xlinkHref="#icon-star" />
             </svg>
           </label>
 
-          <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio" onChange={this._handleStarButtonActive} />
+          <input className="form__rating-input visually-hidden" name="rating"
+            value="4" id="4-stars" type="radio" onChange={this._handleStarButtonActive} checked={this.state.inputChecked === `4-stars`}/>
           <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
             <svg className="form__star-image" width="37" height="33">
               <use xlinkHref="#icon-star" />
             </svg>
           </label>
 
-          <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" onChange={this._handleStarButtonActive} />
+          <input className="form__rating-input visually-hidden" name="rating"
+            value="3" id="3-stars" type="radio" onChange={this._handleStarButtonActive} checked={this.state.inputChecked === `3-stars`}/>
           <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
             <svg className="form__star-image" width="37" height="33">
               <use xlinkHref="#icon-star" />
             </svg>
           </label>
 
-          <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" onChange={this._handleStarButtonActive} />
+          <input className="form__rating-input visually-hidden" name="rating"
+            value="2" id="2-stars" type="radio" onChange={this._handleStarButtonActive} checked={this.state.inputChecked === `2-stars`}/>
           <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
             <svg className="form__star-image" width="37" height="33">
               <use xlinkHref="#icon-star" />
             </svg>
           </label>
 
-          <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" onChange={this._handleStarButtonActive} />
+          <input className="form__rating-input visually-hidden" name="rating"
+            value="1" id="1-star" type="radio" onChange={this._handleStarButtonActive} checked={this.state.inputChecked === `1-stars`}/>
           <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
             <svg className="form__star-image" width="37" height="33">
               <use xlinkHref="#icon-star" />
@@ -81,7 +89,7 @@ export default class FormComment extends PureComponent {
             To submit review please make sure to set <span className="reviews__star">rating</span> and describe your
             stay with at least <b className="reviews__text-amount">50 characters</b>.
           </p>
-          <button className="reviews__submit form__submit button" type="submit" disabled={this.state.isSubmitButtonDisable}>Submit</button>
+          <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
         </div>
       </form>
     );

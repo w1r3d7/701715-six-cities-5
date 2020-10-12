@@ -2,12 +2,13 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 import AppHeader from '../app-header/app-header';
 import {getRatingInPercentage} from '../../utils.js';
-import {OFFER_PROPTYPES} from '../../types.js';
+import {OFFER_PROP_TYPES} from '../../types.js';
 import PropTypes from 'prop-types';
 import OfferMap from '../offer-map/offer-map';
 import ReviewsList from '../reviews-list/reviews-list';
+import {BOOKMARK_ACTIVE_CLASS} from '../../const.js';
+import OfferOtherCard from '../offer-other-card/offer-other-card';
 
-const BOOKMARK_ACTIVE_CLASS = `property__bookmark-button--active`;
 const PREMIUM_HOST_CLASS = `property__avatar-wrapper--pro`;
 const PREMIUM_TEMPLATE = (
   <div className="property__mark">
@@ -18,9 +19,19 @@ const PREMIUM_TEMPLATE = (
 const OfferDetails = (props) => {
   const {offers} = props;
   const path = document.location.pathname;
-  const [,, id] = path.split(`/`);
+  const [,, offerId] = path.split(`/`);
 
-  const [offer] = offers.filter((offerItem) => offerItem.id === +id);
+  let offer = null;
+  const otherOffers = [];
+
+  offers.forEach((item) => {
+    if (item.id === Number(offerId)) {
+      offer = item;
+      return;
+    }
+
+    otherOffers.push(item);
+  });
 
   if (!offer) {
     return <Redirect to="/" />;
@@ -44,17 +55,13 @@ const OfferDetails = (props) => {
     reviews
   } = offer;
 
-  const generatedPhotos = photosUrl.map((url) => {
-    return (
-      <div className="property__image-wrapper" key={url}>
-        <img className="property__image" src={url} alt={type} />
-      </div>
-    );
-  });
+  const generatedPhotos = photosUrl.map((url) => (
+    <div className="property__image-wrapper" key={url}>
+      <img className="property__image" src={url} alt={type} />
+    </div>
+  ));
 
-  const generatedFacility = facilities.map((facility) => {
-    return <li key={facility} className="property__inside-item">{facility}</li>;
-  });
+  const generatedFacility = facilities.map((facility) => <li key={facility} className="property__inside-item">{facility}</li>);
 
   return (
     <div className="page">
@@ -119,6 +126,14 @@ const OfferDetails = (props) => {
           </div>
           <OfferMap />
         </section>
+        <div className="container">
+          <section className="near-places places">
+            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <div className="near-places__list places__list">
+              {otherOffers.map((offerItem) => <OfferOtherCard offer={offerItem} key={offerItem.id}/>)}
+            </div>
+          </section>
+        </div>
       </main>
     </div>
   );
@@ -126,7 +141,7 @@ const OfferDetails = (props) => {
 
 OfferDetails.propTypes = {
   offers: PropTypes.arrayOf(
-      PropTypes.shape(OFFER_PROPTYPES).isRequired
+      PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,
 };
 

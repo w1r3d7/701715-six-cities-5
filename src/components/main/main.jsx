@@ -1,11 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import OfferList from "../offer-list/offer-list";
 import AppHeader from '../app-header/app-header';
+import CitiesResult from '../cities-result/cities-result';
+import CitiesEmpty from '../cities-empty/cities-empty';
+import {OFFER_PROP_TYPES} from '../../types.js';
+
+const PAGE_MAIN_EMPTY_CLASS = `page__main--index-empty`;
 
 const Main = ({placesCount, offers, onOfferClick}) => {
+
+  const isOffersEmpty = Boolean(!offers.length);
+
   return (
-    <div className="page page--gray page--main">
+    <div className={`page page--gray page--main ${isOffersEmpty ? PAGE_MAIN_EMPTY_CLASS : ``}`}>
       <AppHeader />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -46,31 +53,11 @@ const Main = ({placesCount, offers, onOfferClick}) => {
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placesCount} places to stay in Amsterdam</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex="0">
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select" />
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom ">
-                  <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                  <li className="places__option" tabIndex="0">Price: low to high</li>
-                  <li className="places__option" tabIndex="0">Price: high to low</li>
-                  <li className="places__option" tabIndex="0">Top rated first</li>
-                </ul>
-              </form>
-              <OfferList offers={offers} onOfferClick={onOfferClick} />
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map" />
-            </div>
-          </div>
+          {
+            isOffersEmpty ?
+              <CitiesEmpty city="Amsterdam" /> :
+              <CitiesResult offers={offers} city="Amsterdam" onOfferClick={onOfferClick} placesCount={placesCount} />
+          }
         </div>
       </main>
     </div>
@@ -80,7 +67,9 @@ const Main = ({placesCount, offers, onOfferClick}) => {
 Main.propTypes = {
   onOfferClick: PropTypes.func.isRequired,
   placesCount: PropTypes.number.isRequired,
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(
+      PropTypes.shape(OFFER_PROP_TYPES)
+  ).isRequired
 };
 
 export default Main;

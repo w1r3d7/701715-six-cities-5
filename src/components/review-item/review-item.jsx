@@ -1,6 +1,7 @@
 import React from 'react';
-import {REVIEW_PROPTYPES} from '../../types.js';
+import {REVIEW_PROP_TYPES} from '../../types.js';
 import {getRatingInPercentage} from '../../utils.js';
+import PropTypes from 'prop-types';
 
 const ReviewItem = (props) => {
   const {review} = props;
@@ -38,7 +39,7 @@ const ReviewItem = (props) => {
 };
 
 ReviewItem.propTypes = {
-  review: REVIEW_PROPTYPES
+  review: PropTypes.shape(REVIEW_PROP_TYPES)
 };
 
 export default ReviewItem;

@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {OFFER_PROPTYPES} from '../../types.js';
-import {getRatingInPercentage} from '../../utils';
-
-const BOOKMARK_ACTIVE_CLASS = `place-card__bookmark-button--active`;
+import {OFFER_PROP_TYPES} from '../../types.js';
+import {getRatingInPercentage} from '../../utils.js';
+import {BOOKMARK_ACTIVE_CLASS} from '../../const.js';
 
 const OfferCard = (props) => {
   const {
@@ -74,7 +73,7 @@ const OfferCard = (props) => {
 OfferCard.propTypes = {
   onCardClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
-  offer: PropTypes.shape(OFFER_PROPTYPES),
+  offer: PropTypes.shape(OFFER_PROP_TYPES),
 };
 
 export default OfferCard;
