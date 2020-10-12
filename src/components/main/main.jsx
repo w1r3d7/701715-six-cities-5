@@ -68,7 +68,7 @@ Main.propTypes = {
   onOfferClick: PropTypes.func.isRequired,
   placesCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(
-      PropTypes.shape(OFFER_PROP_TYPES)
+      PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired
 };
 

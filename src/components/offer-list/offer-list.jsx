@@ -42,9 +42,7 @@ export default class OfferList extends PureComponent {
 OfferList.propTypes = {
   onOfferClick: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        offer: PropTypes.shape(OFFER_PROP_TYPES)
-      }).isRequired
+      PropTypes.shape(OFFER_PROP_TYPES).isRequired
   )
 };
 

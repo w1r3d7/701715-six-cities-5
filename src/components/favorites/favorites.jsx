@@ -21,8 +21,8 @@ const Favorites = ({offers}) => {
 
 Favorites.propTypes = {
   offers: PropTypes.arrayOf(
-      PropTypes.shape(OFFER_PROP_TYPES)
-  )
+      PropTypes.shape(OFFER_PROP_TYPES).isRequired
+  ).isRequired
 };
 
 export default Favorites;

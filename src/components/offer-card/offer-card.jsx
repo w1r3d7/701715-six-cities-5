@@ -73,7 +73,7 @@ const OfferCard = (props) => {
 OfferCard.propTypes = {
   onCardClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
-  offer: PropTypes.shape(OFFER_PROP_TYPES),
+  offer: PropTypes.shape(OFFER_PROP_TYPES).isRequired,
 };
 
 export default OfferCard;

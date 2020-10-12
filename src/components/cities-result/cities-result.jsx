@@ -37,7 +37,7 @@ CitiesResult.propTypes = {
   placesCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES)
-  ),
+  ).isRequired,
 };
 
 export default CitiesResult;
