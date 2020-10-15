@@ -4,35 +4,41 @@ import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Main from '../main/main';
 import Login from '../login/login';
 import Favorites from '../favorites/favorites';
-import Property from '../property/property';
+import OfferDetails from '../offer-details/offer-details';
+import {OFFER_PROP_TYPES} from '../../types.js';
 
 
-const App = ({placesCount}) => {
-  return (
-    <Router>
-      <Switch>
-        <Route path="/" exact>
-          <Main placesCount={placesCount} />
-        </Route>
-        <Route path="/login" exact>
-          <Login />
-        </Route>
-        <Route path="/favorites" exact>
-          <Favorites />
-        </Route>
-        <Route path="/offer/:id" exact>
-          <Property />
-        </Route>
-        <Route>
-          <Link to="/">Page Not Found, back to main page</Link>
-        </Route>
-      </Switch>
-    </Router>
-  );
+const App = ({offers}) => (
+  <Router>
+    <Switch>
+      <Route path="/" exact
+        render={({history}) => (
+          <Main offers={offers} onOfferClick={(id) => history.push(`/offer/${id}`)} />
+        )} />
+      <Route path="/login" exact>
+        <Login />
+      </Route>
+      <Route path="/favorites" exact>
+        <Favorites offers={offers} />
+      </Route>
+      <Route path="/offer/:id" exact>
+        <OfferDetails offers={offers} />
+      </Route>
+      <Route>
+        <Link to="/">Page Not Found, back to main page</Link>
+      </Route>
+    </Switch>
+  </Router>
+);
+
+App.defaultProps = {
+  offers: []
 };
 
 App.propTypes = {
-  placesCount: PropTypes.number.isRequired
+  offers: PropTypes.arrayOf(
+      PropTypes.shape(OFFER_PROP_TYPES).isRequired
+  ).isRequired
 };
 
 export default App;
