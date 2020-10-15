@@ -16,8 +16,7 @@ const PREMIUM_TEMPLATE = (
   </div>
 );
 
-const OfferDetails = (props) => {
-  const {offers} = props;
+const OfferDetails = ({offers}) => {
   const path = document.location.pathname;
   const [,, offerId] = path.split(`/`);
 

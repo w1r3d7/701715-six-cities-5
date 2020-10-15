@@ -9,7 +9,7 @@ const CitiesResult = ({placesCount, city, offers, onOfferClick}) => (
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">{placesCount} places to stay in {city}</b>
       <form className="places__sorting" action="#" method="get">
-        <span className="places__sorting-caption">Sort by</span>
+        <span className="places__sorting-caption">Sort by </span>
         <span className="places__sorting-type" tabIndex="0">
                   Popular
           <svg className="places__sorting-arrow" width="7" height="4">
@@ -36,7 +36,7 @@ CitiesResult.propTypes = {
   onOfferClick: PropTypes.func.isRequired,
   placesCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(
-      PropTypes.shape(OFFER_PROP_TYPES)
+      PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,
 };
 

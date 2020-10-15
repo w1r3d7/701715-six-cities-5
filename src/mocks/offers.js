@@ -1,3 +1,6 @@
+import {City, OfferType} from '../const.js';
+
+
 const getRating = () => {
   return String((Math.random() * 5).toFixed(2));
 };
@@ -53,13 +56,13 @@ const reviews = [
 export default [
   {
     id: 1,
-    city: `Amsterdam`,
+    city: City.AMSTERDAM,
     photosUrl: [`/img/apartment-01.jpg`, `/img/apartment-small-03.jpg`, `/img/apartment-small-04.jpg`],
-    type: `Apartment`,
+    type: OfferType.APARTMENT,
     price: 120,
     description: `Beautiful & luxurious studio at great location`,
     isPremium: true,
-    isInBookmark: false,
+    isInBookmark: true,
     facilities: [
       `Wi-Fi`,
       `Towels`,
@@ -79,9 +82,9 @@ export default [
   },
   {
     id: 2,
-    city: `Amsterdam`,
+    city: City.AMSTERDAM,
     photosUrl: [`/img/apartment-02.jpg`, `/img/apartment-small-03.jpg`, `/img/apartment-small-04.jpg`],
-    type: `House`,
+    type: OfferType.HOTEL,
     price: 40,
     description: `Great location`,
     isPremium: true,
@@ -105,9 +108,9 @@ export default [
   },
   {
     id: 3,
-    city: `Amsterdam`,
+    city: City.PARIS,
     photosUrl: [`/img/apartment-03.jpg`, `/img/apartment-small-03.jpg`, `/img/apartment-small-04.jpg`],
-    type: `Villa`,
+    type: OfferType.HOUSE,
     price: 4000,
     description: `Nice, cozy, warm big bed apartment`,
     isPremium: false,
@@ -132,9 +135,9 @@ export default [
   },
   {
     id: 4,
-    city: `Amsterdam`,
+    city: City.PARIS,
     photosUrl: [`/img/room.jpg`, `/img/apartment-small-03.jpg`, `/img/apartment-small-04.jpg`],
-    type: `Private Room`,
+    type: OfferType.ROOM,
     price: 4,
     description: `Wood and stone place`,
     isPremium: false,
@@ -147,6 +150,30 @@ export default [
     ],
     rating: getRating(),
     bedroomsCount: 1,
+    maxCapacity: 1,
+    hostName: `Oleg`,
+    hostAvatar: `/img/avatar-max.jpg`,
+    isHostPremium: false,
+    hostDescription: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis doloremque in iure
+      laborum magnam placeat quasi quidem quo! Assumenda error fuga iste laborum molestiae nam odit quia repellendus sed
+      soluta.`,
+    reviews: getRandomItemsCount(reviews),
+  },
+  {
+    id: 5,
+    city: City.BRUSSELS,
+    photosUrl: [`/img/room.jpg`, `/img/apartment-small-03.jpg`, `/img/apartment-small-04.jpg`],
+    type: OfferType.ROOM,
+    price: 422,
+    description: `Wood place`,
+    isPremium: false,
+    isInBookmark: true,
+    facilities: [
+      `Kitchen`,
+      `Dishwasher`,
+    ],
+    rating: getRating(),
+    bedroomsCount: 5,
     maxCapacity: 1,
     hostName: `Oleg`,
     hostAvatar: `/img/avatar-max.jpg`,

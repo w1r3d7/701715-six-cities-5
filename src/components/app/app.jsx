@@ -8,12 +8,12 @@ import OfferDetails from '../offer-details/offer-details';
 import {OFFER_PROP_TYPES} from '../../types.js';
 
 
-const App = ({placesCount, offers}) => (
+const App = ({offers}) => (
   <Router>
     <Switch>
       <Route path="/" exact
         render={({history}) => (
-          <Main placesCount={placesCount} offers={offers} onOfferClick={(id) => history.push(`/offer/${id}`)} />
+          <Main offers={offers} onOfferClick={(id) => history.push(`/offer/${id}`)} />
         )} />
       <Route path="/login" exact>
         <Login />
@@ -31,11 +31,14 @@ const App = ({placesCount, offers}) => (
   </Router>
 );
 
+App.defaultProps = {
+  offers: []
+};
+
 App.propTypes = {
-  placesCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
-  ).isRequired,
+  ).isRequired
 };
 
 export default App;

@@ -46,5 +46,9 @@ export default class ReviewsList extends PureComponent {
   }
 }
 
-ReviewsList.propTypes = PropTypes.arrayOf(REVIEW_PROP_TYPES).isRequired;
+ReviewsList.propTypes = {
+  reviews: PropTypes.arrayOf(
+      PropTypes.shape(REVIEW_PROP_TYPES).isRequired
+  ).isRequired
+};
 

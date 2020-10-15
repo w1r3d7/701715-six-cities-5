@@ -4,7 +4,7 @@ import {OFFER_PROP_TYPES} from '../../types.js';
 import {getRatingInPercentage} from '../../utils.js';
 import {BOOKMARK_ACTIVE_CLASS} from '../../const.js';
 
-const OfferCard = (props) => {
+const OfferCard = ({offer, onCardClick, onCardHover}) => {
   const {
     id,
     photosUrl,
@@ -14,10 +14,9 @@ const OfferCard = (props) => {
     isPremium,
     isInBookmark,
     rating
-  } = props.offer;
+  } = offer;
 
   const [mainPhotoUrl] = photosUrl;
-  const {onCardHover, onCardClick} = props;
 
   const premiumTemplate = (
     <div className="place-card__mark">

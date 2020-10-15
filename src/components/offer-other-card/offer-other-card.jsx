@@ -54,7 +54,7 @@ const OfferOtherCard = ({offer}) => {
 };
 
 OfferOtherCard.propTypes = {
-  offer: PropTypes.shape(OFFER_PROP_TYPES)
+  offer: PropTypes.shape(OFFER_PROP_TYPES).isRequired,
 };
 
 export default OfferOtherCard;

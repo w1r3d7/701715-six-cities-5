@@ -3,8 +3,7 @@ import {REVIEW_PROP_TYPES} from '../../types.js';
 import {getRatingInPercentage} from '../../utils.js';
 import PropTypes from 'prop-types';
 
-const ReviewItem = (props) => {
-  const {review} = props;
+const ReviewItem = ({review}) => {
   const {
     name,
     photoUrl,
@@ -39,7 +38,7 @@ const ReviewItem = (props) => {
 };
 
 ReviewItem.propTypes = {
-  review: PropTypes.shape(REVIEW_PROP_TYPES)
+  review: PropTypes.shape(REVIEW_PROP_TYPES).isRequired,
 };
 
 export default ReviewItem;

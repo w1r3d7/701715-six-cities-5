@@ -3,7 +3,7 @@ import OfferCard from '../offer-card/offer-card';
 import PropTypes from 'prop-types';
 import {OFFER_PROP_TYPES} from '../../types.js';
 
-export default class OfferList extends PureComponent {
+class OfferList extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -16,7 +16,7 @@ export default class OfferList extends PureComponent {
   }
 
   handleCardHover(id) {
-    this.setState({activeCard: id});
+    this.setState((prevState) => prevState.activeCard === id ? null : {activeCard: id});
   }
 
   handleCardClick(id) {
@@ -43,6 +43,7 @@ OfferList.propTypes = {
   onOfferClick: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
-  )
+  ).isRequired
 };
 
+export default OfferList;
