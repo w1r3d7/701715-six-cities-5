@@ -4,7 +4,6 @@ import AppHeader from '../app-header/app-header';
 import {getRatingInPercentage} from '../../utils.js';
 import {OFFER_PROP_TYPES} from '../../types.js';
 import PropTypes from 'prop-types';
-import OfferMap from '../offer-map/offer-map';
 import ReviewsList from '../reviews-list/reviews-list';
 import {BOOKMARK_ACTIVE_CLASS} from '../../const.js';
 import OfferOtherCard from '../offer-other-card/offer-other-card';
@@ -123,7 +122,7 @@ const OfferDetails = ({offers}) => {
               <ReviewsList reviews={reviews} />
             </div>
           </div>
-          <OfferMap />
+          <section className="property__map map"></section>
         </section>
         <div className="container">
           <section className="near-places places">

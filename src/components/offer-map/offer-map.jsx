@@ -52,7 +52,7 @@ class OfferMap extends PureComponent {
 
 OfferMap.propTypes = {
   city: PropTypes.string.isRequired,
-  activeCardId: PropTypes.string,
+  activeCardId: PropTypes.number,
   offers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,

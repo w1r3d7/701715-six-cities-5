@@ -8,7 +8,7 @@ class OfferList extends PureComponent {
     super(props);
 
     this.state = {
-      activeCard: null,
+      activeCardId: null,
     };
 
     this.handleCardHover = this.handleCardHover.bind(this);
@@ -16,7 +16,7 @@ class OfferList extends PureComponent {
   }
 
   handleCardHover(id) {
-    this.setState((prevState) => prevState.activeCard === id ? null : {activeCard: id});
+    this.setState((prevState) => prevState.activeCardId === id ? null : {activeCardId: id});
 
     this.props.onHoverCard(id);
   }
