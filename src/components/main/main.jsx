@@ -29,7 +29,7 @@ class Main extends PureComponent {
     super(props);
 
     this.state = {
-      currentCity: City.PARIS
+      currentCity: City.AMSTERDAM
     };
 
     this.handleCityClick = this.handleCityClick.bind(this);

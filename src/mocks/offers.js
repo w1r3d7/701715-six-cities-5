@@ -79,6 +79,7 @@ export default [
       praesentium quasi qui quibusdam quo recusandae repellat, repellendus rerum saepe sapiente sequi unde velit vero
       voluptatem.`,
     reviews: getRandomItemsCount(reviews),
+    coordinates: [52.3909553943508, 4.85309666406198]
   },
   {
     id: 2,
@@ -105,10 +106,11 @@ export default [
       laborum magnam placeat quasi quidem quo! Assumenda error fuga iste laborum molestiae nam odit quia repellendus sed
       soluta.`,
     reviews: getRandomItemsCount(reviews),
+    coordinates: [52.369553943508, 4.85309666406198]
   },
   {
     id: 3,
-    city: City.PARIS,
+    city: City.AMSTERDAM,
     photosUrl: [`/img/apartment-03.jpg`, `/img/apartment-small-03.jpg`, `/img/apartment-small-04.jpg`],
     type: OfferType.HOUSE,
     price: 4000,
@@ -132,10 +134,11 @@ export default [
       laborum magnam placeat quasi quidem quo! Assumenda error fuga iste laborum molestiae nam odit quia repellendus sed
       soluta.`,
     reviews: getRandomItemsCount(reviews),
+    coordinates: [52.3909553943508, 4.929309666406198],
   },
   {
     id: 4,
-    city: City.PARIS,
+    city: City.AMSTERDAM,
     photosUrl: [`/img/room.jpg`, `/img/apartment-small-03.jpg`, `/img/apartment-small-04.jpg`],
     type: OfferType.ROOM,
     price: 4,
@@ -158,10 +161,11 @@ export default [
       laborum magnam placeat quasi quidem quo! Assumenda error fuga iste laborum molestiae nam odit quia repellendus sed
       soluta.`,
     reviews: getRandomItemsCount(reviews),
+    coordinates: [52.3809553943508, 4.939309666406198],
   },
   {
     id: 5,
-    city: City.BRUSSELS,
+    city: City.PARIS,
     photosUrl: [`/img/room.jpg`, `/img/apartment-small-03.jpg`, `/img/apartment-small-04.jpg`],
     type: OfferType.ROOM,
     price: 422,
@@ -182,5 +186,6 @@ export default [
       laborum magnam placeat quasi quidem quo! Assumenda error fuga iste laborum molestiae nam odit quia repellendus sed
       soluta.`,
     reviews: getRandomItemsCount(reviews),
+    coordinates: [48.8729139, 2.3216323],
   },
 ];
