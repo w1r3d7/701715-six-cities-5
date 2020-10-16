@@ -17,6 +17,8 @@ class OfferList extends PureComponent {
 
   handleCardHover(id) {
     this.setState((prevState) => prevState.activeCard === id ? null : {activeCard: id});
+
+    this.props.onHoverCard(id);
   }
 
   handleCardClick(id) {
@@ -40,6 +42,7 @@ class OfferList extends PureComponent {
 }
 
 OfferList.propTypes = {
+  onHoverCard: PropTypes.func.isRequired,
   onOfferClick: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
