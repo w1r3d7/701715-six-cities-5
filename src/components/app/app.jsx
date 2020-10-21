@@ -11,10 +11,13 @@ import {OFFER_PROP_TYPES} from '../../types.js';
 const App = ({offers}) => (
   <Router>
     <Switch>
-      <Route path="/" exact
+      <Route
+        path="/"
+        exact
         render={({history}) => (
           <Main offers={offers} onOfferClick={(id) => history.push(`/offer/${id}`)} />
-        )} />
+        )}
+      />
       <Route path="/login" exact>
         <Login />
       </Route>

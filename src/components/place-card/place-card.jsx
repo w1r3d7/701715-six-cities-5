@@ -4,7 +4,7 @@ import {getRatingInPercentage} from '../../utils';
 import PropTypes from 'prop-types';
 import {OFFER_PROP_TYPES} from '../../types';
 
-const PlaceCard = ({offer, className}) => {
+const PlaceCard = ({offer, cardType}) => {
   const {
     type,
     price,
@@ -13,7 +13,7 @@ const PlaceCard = ({offer, className}) => {
     rating
   } = offer;
   return (
-    <div className={`${className} place-card__info`}>
+    <div className={`${cardType} place-card__info`}>
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
           <b className="place-card__price-value">&euro;{price}</b>
@@ -41,11 +41,11 @@ const PlaceCard = ({offer, className}) => {
 };
 
 PlaceCard.defaultProps = {
-  className: ``
+  cardType: ``
 };
 
 PlaceCard.propTypes = {
-  className: PropTypes.string.isRequired,
+  cardType: PropTypes.string.isRequired,
   offer: PropTypes.shape(OFFER_PROP_TYPES).isRequired
 };
 

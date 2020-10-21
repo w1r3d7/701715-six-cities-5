@@ -18,7 +18,7 @@ const FavoritesCard = ({offer}) => {
           <img className="place-card__image" src={mainPhotoUrl} width="150" height="110" alt="Place image" />
         </a>
       </div>
-      <PlaceCard className={FAVORITE_CARD_CLASS} offer={offer} />
+      <PlaceCard cardType={FAVORITE_CARD_CLASS} offer={offer} />
     </article>
   );
 };

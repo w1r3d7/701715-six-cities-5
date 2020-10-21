@@ -3,13 +3,13 @@ import Map from '../map/map';
 import PropTypes from 'prop-types';
 import {OFFER_PROP_TYPES} from '../../types';
 
-const CitiesMap = ({offers, city, activeCardId}) => <
-  Map
-  className="cities__map"
-  offers={offers}
-  city={city}
-  activeCardId={activeCardId}
-/>;
+const CitiesMap = ({offers, city, activeCardId}) =>
+  <Map
+    className="cities__map"
+    offers={offers}
+    city={city}
+    activeCardId={activeCardId}
+  />;
 
 CitiesMap.propTypes = {
   city: PropTypes.string.isRequired,
