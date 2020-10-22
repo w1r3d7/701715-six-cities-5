@@ -40,7 +40,12 @@ export default class ReviewsList extends PureComponent {
       <section className="property__reviews reviews">
         <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews ? reviews.length : EMPTY_REVIEWS}</span></h2>
         <ul className="reviews__list">
-          {reviews.length > EMPTY_REVIEWS ? reviews.map((review) => <ReviewItem review={review} key={review.id} />) : ``}
+          {reviews.length > EMPTY_REVIEWS
+            ?
+            reviews.map((review) => <ReviewItem review={review} key={review.id} />)
+            :
+            ``
+          }
         </ul>
         <FormComment onSubmit={this.handleFormSubmit} />
       </section>

@@ -8,6 +8,7 @@ import ReviewsList from '../reviews-list/reviews-list';
 import {BOOKMARK_ACTIVE_CLASS} from '../../const.js';
 import OfferDetailsCard from '../offer-details-card/offer-details-card';
 import OfferDetailsMap from '../offer-details-map/offer-details-map';
+import {connect} from 'react-redux';
 
 const OTHER_OFFERS_MAX_COUNT = 3;
 
@@ -148,4 +149,9 @@ OfferDetails.propTypes = {
   ).isRequired,
 };
 
-export default OfferDetails;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+export {OfferDetails};
+export default connect(mapStateToProps)(OfferDetails);

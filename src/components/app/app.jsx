@@ -8,24 +8,24 @@ import OfferDetails from '../offer-details/offer-details';
 import {OFFER_PROP_TYPES} from '../../types.js';
 
 
-const App = ({offers}) => (
+const App = () => (
   <Router>
     <Switch>
       <Route
         path="/"
         exact
         render={({history}) => (
-          <Main offers={offers} onOfferClick={(id) => history.push(`/offer/${id}`)} />
+          <Main onOfferClick={(id) => history.push(`/offer/${id}`)} />
         )}
       />
       <Route path="/login" exact>
         <Login />
       </Route>
       <Route path="/favorites" exact>
-        <Favorites offers={offers} />
+        <Favorites />
       </Route>
       <Route path="/offer/:id" exact>
-        <OfferDetails offers={offers} />
+        <OfferDetails />
       </Route>
       <Route>
         <Link to="/">Page Not Found, back to main page</Link>
