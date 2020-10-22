@@ -5,44 +5,60 @@ import {CityNameToCoordinates} from '../../const.js';
 import PropTypes from 'prop-types';
 import {OFFER_PROP_TYPES} from '../../types';
 
+const DEFAULT_ICON = leaflet.icon({
+  iconUrl: `/img/pin.svg`,
+  iconSize: [30, 30]
+});
+
+const ACTIVE_ICON = leaflet.icon({
+  iconUrl: `/img/pin-active.svg`,
+  iconSize: [30, 30]
+});
+
+const ZOOM = 12;
+
 class Map extends PureComponent {
-  componentDidMount() {
+  renderMap() {
     const city = CityNameToCoordinates[this.props.city];
-    const defaultIcon = leaflet.icon({
-      iconUrl: `/img/pin.svg`,
-      iconSize: [30, 30]
-    });
 
-    const activeIcon = leaflet.icon({
-      iconUrl: `/img/pin-active.svg`,
-      iconSize: [30, 30]
-    });
-
-    const getIcon = (id) => this.props.activeCardId === id ? activeIcon : defaultIcon;
-
-    const zoom = 12;
-    const map = leaflet.map(`map`, {
+    this.map = leaflet.map(`map`, {
       center: city,
-      zoom,
+      zoom: ZOOM,
       zoomControl: false,
       marker: true
     });
-    map.setView(city, zoom);
+    this.map.setView(city, ZOOM);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
-      .addTo(map);
+      .addTo(this.map);
 
-    const offerCords = this.props.offers;
+    this.renderMarkers();
+  }
 
-    offerCords.map((offer) => {
+  renderMarkers() {
+    const {offers, activeCardId} = this.props;
+
+    const getIcon = (id) => activeCardId === id ? ACTIVE_ICON : DEFAULT_ICON;
+
+    offers.map((offer) => {
       const icon = getIcon(offer.id);
       leaflet
         .marker(offer.coordinates, {icon})
-        .addTo(map);
+        .addTo(this.map);
     });
+  }
+
+
+  componentDidMount() {
+    this.renderMap();
+  }
+
+  componentDidUpdate() {
+    this.map.remove();
+    this.renderMap();
   }
 
   render() {

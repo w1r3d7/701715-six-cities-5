@@ -1,4 +1,4 @@
-import {City} from '../const.js';
+import {City, FilterType} from '../const.js';
 import offers from '../mocks/offers';
 import {getOffersByCity} from '../utils';
 import {ActionType} from './action-creator';
@@ -7,6 +7,7 @@ import {extend} from '../utils';
 const initialState = {
   currentCity: City.PARIS,
   offers,
+  filterType: FilterType.POPULAR,
 };
 
 initialState.filteredOffers = getOffersByCity(initialState.offers, initialState.currentCity);

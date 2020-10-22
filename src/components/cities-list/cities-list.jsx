@@ -1,5 +1,6 @@
 import React from 'react';
 import {City} from '../../const';
+import PropTypes from 'prop-types';
 
 const LOCATIONS_ITEM_ACTIVE_CLASS = `tabs__item--active`;
 
@@ -29,6 +30,11 @@ const CitiesList = (props) => {
       </section>
     </div>
   );
+};
+
+CitiesList.propTypes = {
+  currentCity: PropTypes.string.isRequired,
+  handleCityClick: PropTypes.func.isRequired,
 };
 
 export default CitiesList;

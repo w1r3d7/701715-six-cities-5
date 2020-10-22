@@ -11,7 +11,7 @@ const ActionCreator = {
       currentCity,
       filteredOffers: getOffersByCity(offers, currentCity),
     }
-  })
+  }),
 };
 
 export default ActionCreator;
