@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const BOOKMARK_ACTIVE_CLASS = `place-card__bookmark-button--active`;
 const MAX_RATING = 5;
 export const RATING_IN_PERCENT = 100 / MAX_RATING;
@@ -42,9 +40,3 @@ export const CityNameToCoordinates = {
   [City.AMSTERDAM]: [52.38333, 4.9],
   [City.PARIS]: [48.8729139, 2.3216323]
 };
-
-export const PREMIUM_TEMPLATE = (
-  <div className="place-card__mark">
-    <span>Premium</span>
-  </div>
-);

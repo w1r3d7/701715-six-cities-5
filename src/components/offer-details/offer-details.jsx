@@ -6,9 +6,10 @@ import AppHeader from '../app-header/app-header';
 import {getRatingInPercentage, checkForPlural} from '../../utils.js';
 import {OFFER_PROP_TYPES} from '../../types.js';
 import ReviewsList from '../reviews-list/reviews-list';
-import {BOOKMARK_ACTIVE_CLASS, PREMIUM_TEMPLATE} from '../../constants.js';
+import {BOOKMARK_ACTIVE_CLASS} from '../../constants.js';
 import OfferDetailsCard from '../offer-details-card/offer-details-card';
 import OfferDetailsMap from '../offer-details-map/offer-details-map';
+import OfferDetailsPremiumMark from '../offer-details-premium-mark/offer-details-premium-mark';
 
 const OTHER_OFFERS_MAX_COUNT = 3;
 const PREMIUM_HOST_CLASS = `property__avatar-wrapper--pro`;
@@ -76,7 +77,7 @@ const OfferDetails = ({offers}) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {isPremium ? PREMIUM_TEMPLATE : ``}
+              <OfferDetailsPremiumMark isPremium={isPremium} />
               <div className="property__name-wrapper">
                 <h1 className="property__name">{description}</h1>
                 <button
