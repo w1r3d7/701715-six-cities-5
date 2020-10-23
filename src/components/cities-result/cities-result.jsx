@@ -51,11 +51,11 @@ class CitiesResult extends PureComponent {
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
           <b className="places__found">{placesCount} places to stay in {city}</b>
-          <CitiesFilter onFilterChange={this.handleFilterChange} currentFilter={currentFilter}/>
+          <CitiesFilter onFilterChange={this.handleFilterChange} currentFilter={currentFilter} />
           <OfferList offers={filteredOffers} onOfferClick={onOfferClick} onHoverCard={this.handleCardHover} />
         </section>
         <div className="cities__right-section">
-          <CitiesMap city={city} offers={filteredOffers} activeCardId={activeCardId}/>
+          <CitiesMap city={city} offers={filteredOffers} activeCardId={activeCardId} />
         </div>
       </div>
     );

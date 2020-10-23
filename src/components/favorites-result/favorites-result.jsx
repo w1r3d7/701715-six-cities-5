@@ -22,7 +22,9 @@ const getFavoritesItems = (city, index, offers) => {
         </div>
       </div>
       <div className="favorites__places">
-        {favoritesOffersByCities.map((offer) => <FavoritesCard offer={offer} key={offer.id} />)}
+        {favoritesOffersByCities.map((offer) => (
+          <FavoritesCard offer={offer} key={offer.id} />
+        ))}
       </div>
     </li>
   );

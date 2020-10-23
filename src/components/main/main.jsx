@@ -11,9 +11,7 @@ import CitiesList from '../cities-list/cities-list';
 
 const PAGE_MAIN_EMPTY_CLASS = `page__main--index-empty`;
 
-const Main = (props) => {
-  const {offers, onOfferClick, currentCity, onCityChange, filteredOffers} = props;
-
+const Main = ({offers, onOfferClick, currentCity, onCityChange, filteredOffers}) => {
   const handleCityClick = (evt) => {
     evt.preventDefault();
     const selectedCity = evt.target.textContent;
@@ -38,8 +36,7 @@ const Main = (props) => {
                 offers={filteredOffers}
                 city={currentCity}
                 onOfferClick={onOfferClick}
-                placesCount={filteredOffers.length}
-              />
+                placesCount={filteredOffers.length} />
           }
         </div>
       </main>

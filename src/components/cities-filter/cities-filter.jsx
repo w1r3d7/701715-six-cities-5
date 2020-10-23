@@ -10,9 +10,6 @@ class CitiesFilter extends PureComponent {
     super(props);
 
     this.filterPopup = React.createRef();
-    this.state = {
-      menuOpen: false,
-    };
 
     this.handleMenuOpenerClick = this.handleMenuOpenerClick.bind(this);
     this.handleFilterClick = this.handleFilterClick.bind(this);
