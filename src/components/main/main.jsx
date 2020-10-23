@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import AppHeader from '../app-header/app-header';
 import CitiesResult from '../cities-result/cities-result';
 import CitiesEmpty from '../cities-empty/cities-empty';
 import {OFFER_PROP_TYPES} from '../../types.js';
-import {connect} from 'react-redux';
 import ActionCreator from '../../store/action-creator';
-import {bindActionCreators} from 'redux';
 import CitiesList from '../cities-list/cities-list';
 
 const PAGE_MAIN_EMPTY_CLASS = `page__main--index-empty`;
@@ -31,16 +31,15 @@ const Main = (props) => {
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList handleCityClick={handleCityClick} currentCity={currentCity} />
         <div className="cities">
-          {isOffersEmpty
-            ?
-            <CitiesEmpty city={currentCity} />
-            :
-            <CitiesResult
-              offers={filteredOffers}
-              city={currentCity}
-              onOfferClick={onOfferClick}
-              placesCount={filteredOffers.length}
-            />
+          {
+            isOffersEmpty
+              ? <CitiesEmpty city={currentCity} />
+              : <CitiesResult
+                offers={filteredOffers}
+                city={currentCity}
+                onOfferClick={onOfferClick}
+                placesCount={filteredOffers.length}
+              />
           }
         </div>
       </main>

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {OFFER_PROP_TYPES} from '../../types.js';
 import PlaceCard from '../place-card/place-card';
-import {PREMIUM_TEMPLATE} from '../../const.js';
+import {PREMIUM_TEMPLATE} from '../../constants.js';
 
 const OfferDetailsCard = ({offer}) => {
   const {photosUrl, isPremium} = offer;

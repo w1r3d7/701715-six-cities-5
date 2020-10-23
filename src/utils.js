@@ -1,4 +1,4 @@
-import {FilterType, RATING_IN_PERCENT} from './const';
+import {FilterType, RATING_IN_PERCENT} from './constants';
 export const getRatingInPercentage = (rating) => `${rating * RATING_IN_PERCENT}%`;
 
 export const getOffersByCity = (offers, city) => offers.filter((offer) => offer.city === city);
@@ -16,6 +16,7 @@ export const getOffersByFilter = (filteredOffers, filterType) => {
   return filteredOffers;
 };
 
-export const extend = (a, b) => {
-  return Object.assign({}, a, b);
-};
+export const extend = (a, b) => Object.assign({}, a, b);
+
+const SINGULAR = 1;
+export const checkForPlural = (item, count) => count > SINGULAR ? `${item}s` : item;

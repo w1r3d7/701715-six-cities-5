@@ -1,6 +1,6 @@
 import React from 'react';
-import {OFFER_PROP_TYPES} from '../../types.js';
 import PropTypes from 'prop-types';
+import {OFFER_PROP_TYPES} from '../../types.js';
 import FavoritesCard from '../favorites-card/favorites-card';
 
 const getCities = (offers) => {

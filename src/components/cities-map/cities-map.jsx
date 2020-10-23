@@ -1,15 +1,18 @@
 import React from 'react';
-import Map from '../map/map';
 import PropTypes from 'prop-types';
+import Map from '../map/map';
 import {OFFER_PROP_TYPES} from '../../types';
 
-const CitiesMap = ({offers, city, activeCardId}) =>
+const CITIES_MAP_CLASS = `cities__map`;
+
+const CitiesMap = ({offers, city, activeCardId}) => (
   <Map
-    className="cities__map"
+    mapType={CITIES_MAP_CLASS}
     offers={offers}
     city={city}
     activeCardId={activeCardId}
-  />;
+  />
+);
 
 CitiesMap.propTypes = {
   city: PropTypes.string.isRequired,

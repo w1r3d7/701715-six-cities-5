@@ -1,4 +1,4 @@
-import {City, FilterType} from '../const.js';
+import {City, FilterType} from '../constants.js';
 import offers from '../mocks/offers';
 import {getOffersByCity} from '../utils';
 import {ActionType} from './action-creator';

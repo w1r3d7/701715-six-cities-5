@@ -1,8 +1,8 @@
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {CityNameToCoordinates} from '../../const.js';
-import PropTypes from 'prop-types';
+import {CityNameToCoordinates} from '../../constants.js';
 import {OFFER_PROP_TYPES} from '../../types';
 
 const DEFAULT_ICON = leaflet.icon({
@@ -17,6 +17,9 @@ const ACTIVE_ICON = leaflet.icon({
 
 const ZOOM = 12;
 
+const LAYER = `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`;
+const COPYRIGHT = `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`;
+
 class Map extends PureComponent {
   renderMap() {
     const city = CityNameToCoordinates[this.props.city];
@@ -30,9 +33,7 @@ class Map extends PureComponent {
     this.map.setView(city, ZOOM);
 
     leaflet
-      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-      })
+      .tileLayer(LAYER, {attribution: COPYRIGHT})
       .addTo(this.map);
 
     this.renderMarkers();
@@ -51,7 +52,6 @@ class Map extends PureComponent {
     });
   }
 
-
   componentDidMount() {
     this.renderMap();
   }
@@ -62,12 +62,12 @@ class Map extends PureComponent {
   }
 
   render() {
-    return <section id="map" className={`${this.props.className} map`} />;
+    return <section id="map" className={`${this.props.mapType} map`} />;
   }
 }
 
 Map.propTypes = {
-  className: PropTypes.string.isRequired,
+  mapType: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
   activeCardId: PropTypes.number,
   offers: PropTypes.arrayOf(

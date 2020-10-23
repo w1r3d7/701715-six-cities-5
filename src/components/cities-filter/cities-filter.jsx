@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
-import {FilterType} from '../../const';
 import PropTypes from 'prop-types';
+import {FilterType} from '../../constants';
 
 const FILTER_POPUP_OPENED_CLASS = `places__options--opened`;
 const ACTIVE_FILTER_ITEM_CLASS = `places__option--active`;

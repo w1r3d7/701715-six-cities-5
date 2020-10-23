@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {RATING_TITLES, RATING_COUNT} from '../../const.js';
+import {RATING_TITLES, RATING_COUNT} from '../../constants.js';
 
 const getRatingTemplate = (title, index, handleStarChange, currentRating) => {
   const rating = RATING_COUNT[index];
@@ -40,9 +40,7 @@ export default class FormComment extends PureComponent {
   }
 
   handleStarButtonActive(evt) {
-    this.setState({
-      currentRating: evt.target.value,
-    });
+    this.setState({currentRating: evt.target.value});
   }
 
   handleFormSubmit(evt) {
@@ -56,14 +54,16 @@ export default class FormComment extends PureComponent {
   }
 
   render() {
+    const {currentRating, areaText} = this.state;
+
     return (
       <form className="reviews__form form" action="#" method="post" onSubmit={this.handleFormSubmit}>
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
-          {RATING_TITLES.map((title, index) => getRatingTemplate(title, index, this.handleStarButtonActive, this.state.currentRating))}
+          {RATING_TITLES.map((title, index) => getRatingTemplate(title, index, this.handleStarButtonActive, currentRating))}
         </div>
         <textarea className="reviews__textarea form__textarea" id="review" name="review"
-          placeholder="Tell how was your stay, what you like and what can be improved" value={this.state.areaText} onChange={this.handleAreaChange} />
+          placeholder="Tell how was your stay, what you like and what can be improved" value={areaText} onChange={this.handleAreaChange} />
         <div className="reviews__button-wrapper">
           <p className="reviews__help">
             To submit review please make sure to set <span className="reviews__star">rating</span> and describe your
