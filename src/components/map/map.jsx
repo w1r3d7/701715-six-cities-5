@@ -5,16 +5,16 @@ import {CityNameToCoordinates} from '../../const.js';
 import PropTypes from 'prop-types';
 import {OFFER_PROP_TYPES} from '../../types';
 
-class OfferMap extends PureComponent {
+class Map extends PureComponent {
   componentDidMount() {
     const city = CityNameToCoordinates[this.props.city];
     const defaultIcon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl: `/img/pin.svg`,
       iconSize: [30, 30]
     });
 
     const activeIcon = leaflet.icon({
-      iconUrl: `img/pin-active.svg`,
+      iconUrl: `/img/pin-active.svg`,
       iconSize: [30, 30]
     });
 
@@ -46,11 +46,12 @@ class OfferMap extends PureComponent {
   }
 
   render() {
-    return <section id="map" className="property__map map" />;
+    return <section id="map" className={`${this.props.className} map`} />;
   }
 }
 
-OfferMap.propTypes = {
+Map.propTypes = {
+  className: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
   activeCardId: PropTypes.number,
   offers: PropTypes.arrayOf(
@@ -58,4 +59,4 @@ OfferMap.propTypes = {
   ).isRequired,
 };
 
-export default OfferMap;
+export default Map;

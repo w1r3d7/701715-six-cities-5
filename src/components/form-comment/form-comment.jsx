@@ -5,8 +5,9 @@ import {RATING_TITLES, RATING_COUNT} from '../../const.js';
 const getRatingTemplate = (title, index, handleStarChange, currentRating) => {
   const rating = RATING_COUNT[index];
   return (
-    <React.Fragment key={title}>
-      <input className="form__rating-input visually-hidden" name="rating"
+    <React.Fragment key={title + index}>
+      <input
+        className="form__rating-input visually-hidden" name="rating"
         value={rating} id={`${rating}-stars`} type="radio"
         onChange={handleStarChange}
         checked={rating === currentRating}

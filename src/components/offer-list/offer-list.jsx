@@ -31,7 +31,8 @@ class OfferList extends PureComponent {
     return (
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer) => (
-          <OfferCard offer={offer}
+          <OfferCard
+            offer={offer}
             key={offer.id}
             onCardHover={this.handleCardHover}
             onCardClick={this.handleCardClick}/>

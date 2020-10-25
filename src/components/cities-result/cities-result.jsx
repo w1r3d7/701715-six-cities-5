@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import OfferList from '../offer-list/offer-list';
 import PropTypes from 'prop-types';
 import {OFFER_PROP_TYPES} from '../../types.js';
-import OfferMap from '../offer-map/offer-map';
+import CitiesMap from '../cities-map/cities-map';
 
 class CitiesResult extends PureComponent {
   constructor(props) {
@@ -16,7 +16,7 @@ class CitiesResult extends PureComponent {
   }
 
   handleCardHover(activeCardId) {
-    this.setState((prevState) => prevState.activeCard === activeCardId ? null : {activeCard: activeCardId});
+    this.setState((prevState) => prevState.activeCardId === activeCardId ? null : {activeCardId});
   }
 
   render() {
@@ -44,7 +44,7 @@ class CitiesResult extends PureComponent {
           <OfferList offers={offers} onOfferClick={onOfferClick} onHoverCard={this.handleCardHover} />
         </section>
         <div className="cities__right-section">
-          <OfferMap city={city} offers={offers} activeCardId={this.state.activeCardId}/>
+          <CitiesMap city={city} offers={offers} activeCardId={this.state.activeCardId}/>
         </div>
       </div>
     );
@@ -55,7 +55,6 @@ CitiesResult.propTypes = {
   city: PropTypes.string.isRequired,
   onOfferClick: PropTypes.func.isRequired,
   placesCount: PropTypes.number.isRequired,
-  activeCardId: PropTypes.number,
   offers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,

@@ -62,9 +62,16 @@ class Main extends PureComponent {
           </div>
           <div className="cities">
             {
-              isOffersEmpty ?
-                <CitiesEmpty city={this.state.currentCity} /> :
-                <CitiesResult offers={offersByCity} city={this.state.currentCity} onOfferClick={onOfferClick} placesCount={offersByCity.length} />
+              isOffersEmpty
+                ?
+                <CitiesEmpty city={this.state.currentCity} />
+                :
+                <CitiesResult
+                  offers={offersByCity}
+                  city={this.state.currentCity}
+                  onOfferClick={onOfferClick}
+                  placesCount={offersByCity.length}
+                />
             }
           </div>
         </main>

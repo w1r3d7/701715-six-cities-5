@@ -6,7 +6,10 @@ import {OFFER_PROP_TYPES} from '../../types.js';
 import PropTypes from 'prop-types';
 import ReviewsList from '../reviews-list/reviews-list';
 import {BOOKMARK_ACTIVE_CLASS} from '../../const.js';
-import OfferOtherCard from '../offer-other-card/offer-other-card';
+import OfferDetailsCard from '../offer-details-card/offer-details-card';
+import OfferDetailsMap from '../offer-details-map/offer-details-map';
+
+const OTHER_OFFERS_MAX_COUNT = 3;
 
 const PREMIUM_HOST_CLASS = `property__avatar-wrapper--pro`;
 const PREMIUM_TEMPLATE = (
@@ -20,7 +23,7 @@ const OfferDetails = ({offers}) => {
   const [,, offerId] = path.split(`/`);
 
   let offer = null;
-  const otherOffers = [];
+  let otherOffers = [];
 
   offers.forEach((item) => {
     if (item.id === Number(offerId)) {
@@ -34,6 +37,8 @@ const OfferDetails = ({offers}) => {
   if (!offer) {
     return <Redirect to="/" />;
   }
+
+  otherOffers = otherOffers.filter((offerItem) => offerItem.city === offer.city).slice(0, OTHER_OFFERS_MAX_COUNT);
 
   const {
     photosUrl,
@@ -122,13 +127,13 @@ const OfferDetails = ({offers}) => {
               <ReviewsList reviews={reviews} />
             </div>
           </div>
-          <section className="property__map map"></section>
+          <OfferDetailsMap offers={otherOffers} city={offer.city} />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              {otherOffers.map((offerItem) => <OfferOtherCard offer={offerItem} key={offerItem.id}/>)}
+              {otherOffers.map((offerItem) => <OfferDetailsCard offer={offerItem} key={offerItem.id}/>)}
             </div>
           </section>
         </div>
