@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import {RATING_COUNT} from '../../constants';
 
 const ReviewRating = ({title, index, onStarClick, currentRating}) => {
-
   const rating = RATING_COUNT[index];
   return (
     <React.Fragment key={title + index}>
@@ -13,7 +13,11 @@ const ReviewRating = ({title, index, onStarClick, currentRating}) => {
         onChange={onStarClick}
         checked={rating === currentRating}
       />
-      <label htmlFor={`${rating}-stars`} className="reviews__rating-label form__rating-label" title={title}>
+      <label
+        htmlFor={`${rating}-stars`}
+        className="reviews__rating-label form__rating-label"
+        title={title}
+      >
         <svg className="form__star-image" width="37" height="33">
           <use xlinkHref="#icon-star" />
         </svg>

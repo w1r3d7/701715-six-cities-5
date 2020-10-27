@@ -45,12 +45,11 @@ class Map extends PureComponent {
 
     const getIcon = (id) => activeCardId === id ? ACTIVE_ICON : DEFAULT_ICON;
 
-    offers.map((offer) => {
+    this.layerGroup = leaflet.layerGroup(offers.map((offer) => {
       const icon = getIcon(offer.id);
-      leaflet
-        .marker(offer.coordinates, {icon})
-        .addTo(this.map);
-    });
+      return leaflet.marker(offer.coordinates, {icon});
+    }));
+    this.layerGroup.addTo(this.map);
   }
 
   componentDidMount() {
@@ -58,8 +57,10 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
-    this.map.remove();
-    this.renderMap();
+    this.layerGroup.clearLayers();
+    this.renderMarkers();
+    const cityCoords = CityNameToCoordinates[this.props.city];
+    this.map.flyTo(cityCoords, ZOOM);
   }
 
   render() {
