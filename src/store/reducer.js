@@ -1,7 +1,7 @@
 import {City, FilterType} from '../constants.js';
 import offers from '../mocks/offers';
 import {getOffersByCityAndFilter} from '../utils';
-import {ActionType} from './action';
+import {ActionType} from './actions';
 import {extend} from '../utils';
 
 const initialState = {

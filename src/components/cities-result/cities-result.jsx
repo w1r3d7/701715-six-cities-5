@@ -9,7 +9,7 @@ import CitiesFilter from '../cities-filter/cities-filter';
 
 import {OFFER_PROP_TYPES} from '../../types.js';
 import {getOffersByCityAndFilter} from '../../utils';
-import {Actions} from '../../store/action';
+import {actions} from '../../store/actions';
 
 class CitiesResult extends PureComponent {
   constructor(props) {
@@ -90,7 +90,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => {
-  const onFilterChange = bindActionCreators(Actions.changeFilter, dispatch);
+  const onFilterChange = bindActionCreators(actions.changeFilter, dispatch);
   return {onFilterChange: (offers, city, currentFilter) => {
     const filteredOffers = getOffersByCityAndFilter(offers, city, currentFilter);
     return onFilterChange(currentFilter, filteredOffers);

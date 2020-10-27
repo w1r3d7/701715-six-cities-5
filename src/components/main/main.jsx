@@ -9,7 +9,7 @@ import CitiesEmpty from '../cities-empty/cities-empty';
 import CitiesList from '../cities-list/cities-list';
 
 import {OFFER_PROP_TYPES} from '../../types.js';
-import {Actions} from '../../store/action';
+import {actions} from '../../store/actions';
 import {getOffersByCityAndFilter} from '../../utils';
 
 const PAGE_MAIN_EMPTY_CLASS = `page__main--index-empty`;
@@ -64,7 +64,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => {
-  const onCityChange = bindActionCreators(Actions.changeCity, dispatch);
+  const onCityChange = bindActionCreators(actions.changeCity, dispatch);
   return {onCityChange: (currentCity, offers, currentFilter) => {
     const filteredOffers = getOffersByCityAndFilter(offers, currentCity, currentFilter);
     return onCityChange(currentCity, filteredOffers);
