@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {REVIEW_PROP_TYPES} from '../../types.js';
 import {getRatingInPercentage} from '../../utils.js';
-import PropTypes from 'prop-types';
 
 const ReviewItem = ({review}) => {
   const {
@@ -16,7 +17,11 @@ const ReviewItem = ({review}) => {
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src={photoUrl} width="54" height="54"
+          <img
+            className="reviews__avatar user__avatar"
+            src={photoUrl}
+            width="54"
+            height="54"
             alt={`Avatar ${name}`} />
         </div>
         <span className="reviews__user-name">{name}</span>

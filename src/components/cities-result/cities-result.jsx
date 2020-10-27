@@ -1,8 +1,15 @@
 import React, {PureComponent} from 'react';
-import OfferList from '../offer-list/offer-list';
 import PropTypes from 'prop-types';
-import {OFFER_PROP_TYPES} from '../../types.js';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
+import OfferList from '../offer-list/offer-list';
 import CitiesMap from '../cities-map/cities-map';
+import CitiesFilter from '../cities-filter/cities-filter';
+
+import {OFFER_PROP_TYPES} from '../../types.js';
+import {getOffersByCityAndFilter} from '../../utils';
+import {actions} from '../../store/actions';
 
 class CitiesResult extends PureComponent {
   constructor(props) {
@@ -13,38 +20,48 @@ class CitiesResult extends PureComponent {
     };
 
     this.handleCardHover = this.handleCardHover.bind(this);
+    this.handleFilterChange = this.handleFilterChange.bind(this);
   }
 
   handleCardHover(activeCardId) {
-    this.setState((prevState) => prevState.activeCardId === activeCardId ? null : {activeCardId});
+    this.setState((prevState) => (
+      prevState.activeCardId === activeCardId
+        ? null
+        : {activeCardId})
+    );
+  }
+
+  handleFilterChange(selectedFilter) {
+    const {onFilterChange, offers, city, currentFilter} = this.props;
+    if (currentFilter !== selectedFilter) {
+      onFilterChange(offers, city, selectedFilter);
+    }
   }
 
   render() {
-    const {placesCount, city, offers, onOfferClick} = this.props;
+    const {
+      placesCount,
+      city,
+      filteredOffers,
+      onOfferClick,
+      currentFilter
+    } = this.props;
+    const {activeCardId} = this.state;
+
     return (
       <div className="cities__places-container container">
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
           <b className="places__found">{placesCount} places to stay in {city}</b>
-          <form className="places__sorting" action="#" method="get">
-            <span className="places__sorting-caption">Sort by </span>
-            <span className="places__sorting-type" tabIndex="0">
-                  Popular
-              <svg className="places__sorting-arrow" width="7" height="4">
-                <use xlinkHref="#icon-arrow-select" />
-              </svg>
-            </span>
-            <ul className="places__options places__options--custom ">
-              <li className="places__option places__option--active" tabIndex="0">Popular</li>
-              <li className="places__option" tabIndex="0">Price: low to high</li>
-              <li className="places__option" tabIndex="0">Price: high to low</li>
-              <li className="places__option" tabIndex="0">Top rated first</li>
-            </ul>
-          </form>
-          <OfferList offers={offers} onOfferClick={onOfferClick} onHoverCard={this.handleCardHover} />
+          <CitiesFilter onFilterChange={this.handleFilterChange} currentFilter={currentFilter} />
+          <OfferList
+            offers={filteredOffers}
+            onOfferClick={onOfferClick}
+            onHoverCard={this.handleCardHover}
+          />
         </section>
         <div className="cities__right-section">
-          <CitiesMap city={city} offers={offers} activeCardId={this.state.activeCardId}/>
+          <CitiesMap city={city} offers={filteredOffers} activeCardId={activeCardId} />
         </div>
       </div>
     );
@@ -58,6 +75,28 @@ CitiesResult.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,
+  currentFilter: PropTypes.string.isRequired,
+  onFilterChange: PropTypes.func.isRequired,
+  filteredOffers: PropTypes.arrayOf(
+      PropTypes.shape(OFFER_PROP_TYPES).isRequired
+  ).isRequired,
 };
 
-export default CitiesResult;
+const mapStateToProps = (state) => ({
+  placesCount: state.filteredOffers.length,
+  offers: state.offers,
+  filteredOffers: state.filteredOffers,
+  currentFilter: state.currentFilter,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  const onFilterChange = bindActionCreators(actions.changeFilter, dispatch);
+  return {onFilterChange: (offers, city, currentFilter) => {
+    const filteredOffers = getOffersByCityAndFilter(offers, city, currentFilter);
+    return onFilterChange(currentFilter, filteredOffers);
+  }};
+};
+
+
+export {CitiesResult};
+export default connect(mapStateToProps, mapDispatchToProps)(CitiesResult);

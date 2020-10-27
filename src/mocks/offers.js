@@ -1,4 +1,4 @@
-import {City, OfferType} from '../const.js';
+import {City, OfferType} from '../constants.js';
 
 
 const getRating = () => {

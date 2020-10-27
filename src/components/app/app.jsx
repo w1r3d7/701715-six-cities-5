@@ -1,12 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+
 import Main from '../main/main';
 import Login from '../login/login';
 import Favorites from '../favorites/favorites';
 import OfferDetails from '../offer-details/offer-details';
-import {OFFER_PROP_TYPES} from '../../types.js';
-
 
 const App = () => (
   <Router>
@@ -24,24 +22,12 @@ const App = () => (
       <Route path="/favorites" exact>
         <Favorites />
       </Route>
-      <Route path="/offer/:id" exact>
-        <OfferDetails />
-      </Route>
+      <Route path="/offer/:id" exact component={OfferDetails} />
       <Route>
         <Link to="/">Page Not Found, back to main page</Link>
       </Route>
     </Switch>
   </Router>
 );
-
-App.defaultProps = {
-  offers: []
-};
-
-App.propTypes = {
-  offers: PropTypes.arrayOf(
-      PropTypes.shape(OFFER_PROP_TYPES).isRequired
-  ).isRequired
-};
 
 export default App;

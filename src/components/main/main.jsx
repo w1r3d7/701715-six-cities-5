@@ -1,24 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
 import AppHeader from '../app-header/app-header';
 import CitiesResult from '../cities-result/cities-result';
 import CitiesEmpty from '../cities-empty/cities-empty';
-import {OFFER_PROP_TYPES} from '../../types.js';
-import {connect} from 'react-redux';
-import ActionCreator from '../../store/action-creator';
-import {bindActionCreators} from 'redux';
 import CitiesList from '../cities-list/cities-list';
+
+import {OFFER_PROP_TYPES} from '../../types.js';
+import {actions} from '../../store/actions';
+import {getOffersByCityAndFilter} from '../../utils';
 
 const PAGE_MAIN_EMPTY_CLASS = `page__main--index-empty`;
 
-const Main = (props) => {
-  const {offers, onOfferClick, currentCity, onCityChange, filteredOffers} = props;
-
+const Main = ({offers, onOfferClick, currentCity, onCityChange, filteredOffers, currentFilter}) => {
   const handleCityClick = (evt) => {
     evt.preventDefault();
     const selectedCity = evt.target.textContent;
     if (currentCity !== selectedCity) {
-      onCityChange(selectedCity, offers);
+      onCityChange(selectedCity, offers, currentFilter);
     }
   };
 
@@ -31,16 +32,10 @@ const Main = (props) => {
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList handleCityClick={handleCityClick} currentCity={currentCity} />
         <div className="cities">
-          {isOffersEmpty
-            ?
-            <CitiesEmpty city={currentCity} />
-            :
-            <CitiesResult
-              offers={filteredOffers}
-              city={currentCity}
-              onOfferClick={onOfferClick}
-              placesCount={filteredOffers.length}
-            />
+          {
+            isOffersEmpty
+              ? <CitiesEmpty city={currentCity} />
+              : <CitiesResult city={currentCity} onOfferClick={onOfferClick}/>
           }
         </div>
       </main>
@@ -58,17 +53,22 @@ Main.propTypes = {
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,
   onCityChange: PropTypes.func.isRequired,
+  currentFilter: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   currentCity: state.currentCity,
   offers: state.offers,
   filteredOffers: state.filteredOffers,
+  currentFilter: state.currentFilter,
 });
 
 const mapDispatchToProps = (dispatch) => {
-  const onCityChange = bindActionCreators(ActionCreator.changeCity, dispatch);
-  return {onCityChange: (currentCity, offers) => onCityChange(currentCity, offers)};
+  const onCityChange = bindActionCreators(actions.changeCity, dispatch);
+  return {onCityChange: (currentCity, offers, currentFilter) => {
+    const filteredOffers = getOffersByCityAndFilter(offers, currentCity, currentFilter);
+    return onCityChange(currentCity, filteredOffers);
+  }};
 };
 
 export {Main};

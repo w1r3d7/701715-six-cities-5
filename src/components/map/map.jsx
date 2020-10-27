@@ -1,57 +1,75 @@
 import React, {PureComponent} from 'react';
-import leaflet from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import {CityNameToCoordinates} from '../../const.js';
 import PropTypes from 'prop-types';
+import leaflet from 'leaflet';
+
+import {CityNameToCoordinates} from '../../constants.js';
 import {OFFER_PROP_TYPES} from '../../types';
 
+import 'leaflet/dist/leaflet.css';
+
+const DEFAULT_ICON = leaflet.icon({
+  iconUrl: `/img/pin.svg`,
+  iconSize: [30, 30]
+});
+
+const ACTIVE_ICON = leaflet.icon({
+  iconUrl: `/img/pin-active.svg`,
+  iconSize: [30, 30]
+});
+
+const ZOOM = 12;
+const LAYER = `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`;
+const COPYRIGHT = `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`;
+
 class Map extends PureComponent {
-  componentDidMount() {
+  renderMap() {
     const city = CityNameToCoordinates[this.props.city];
-    const defaultIcon = leaflet.icon({
-      iconUrl: `/img/pin.svg`,
-      iconSize: [30, 30]
-    });
 
-    const activeIcon = leaflet.icon({
-      iconUrl: `/img/pin-active.svg`,
-      iconSize: [30, 30]
-    });
-
-    const getIcon = (id) => this.props.activeCardId === id ? activeIcon : defaultIcon;
-
-    const zoom = 12;
-    const map = leaflet.map(`map`, {
+    this.map = leaflet.map(`map`, {
       center: city,
-      zoom,
+      zoom: ZOOM,
       zoomControl: false,
       marker: true
     });
-    map.setView(city, zoom);
+    this.map.setView(city, ZOOM);
 
     leaflet
-      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-      })
-      .addTo(map);
+      .tileLayer(LAYER, {attribution: COPYRIGHT})
+      .addTo(this.map);
 
-    const offerCords = this.props.offers;
+    this.renderMarkers();
+  }
 
-    offerCords.map((offer) => {
+  renderMarkers() {
+    const {offers, activeCardId} = this.props;
+
+    const getIcon = (id) => activeCardId === id ? ACTIVE_ICON : DEFAULT_ICON;
+
+    this.layerGroup = leaflet.layerGroup(offers.map((offer) => {
       const icon = getIcon(offer.id);
-      leaflet
-        .marker(offer.coordinates, {icon})
-        .addTo(map);
-    });
+      return leaflet.marker(offer.coordinates, {icon});
+    }));
+    this.layerGroup.addTo(this.map);
+  }
+
+  componentDidMount() {
+    this.renderMap();
+  }
+
+  componentDidUpdate() {
+    this.layerGroup.clearLayers();
+    this.renderMarkers();
+    const cityCoords = CityNameToCoordinates[this.props.city];
+    this.map.flyTo(cityCoords, ZOOM);
   }
 
   render() {
-    return <section id="map" className={`${this.props.className} map`} />;
+    return <section id="map" className={`${this.props.mapType} map`} />;
   }
 }
 
 Map.propTypes = {
-  className: PropTypes.string.isRequired,
+  mapType: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
   activeCardId: PropTypes.number,
   offers: PropTypes.arrayOf(
