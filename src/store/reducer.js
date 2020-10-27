@@ -1,22 +1,31 @@
 import {City, FilterType} from '../constants.js';
 import offers from '../mocks/offers';
-import {getOffersByCity} from '../utils';
-import {ActionType} from './action-creator';
+import {getOffersByCityAndFilter} from '../utils';
+import {ActionType} from './action';
 import {extend} from '../utils';
 
 const initialState = {
   currentCity: City.PARIS,
   offers,
-  filterType: FilterType.POPULAR,
+  currentFilter: FilterType.POPULAR,
 };
 
-initialState.filteredOffers = getOffersByCity(initialState.offers, initialState.currentCity);
+initialState.filteredOffers = getOffersByCityAndFilter(
+    initialState.offers,
+    initialState.currentCity,
+    initialState.currentFilter
+);
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_CITY:
       return extend(state, {
         currentCity: action.payload.currentCity,
+        filteredOffers: action.payload.filteredOffers,
+      });
+    case ActionType.CHANGE_FILTER:
+      return extend(state, {
+        currentFilter: action.payload.currentFilter,
         filteredOffers: action.payload.filteredOffers,
       });
     default:

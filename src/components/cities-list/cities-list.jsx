@@ -1,29 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import CitiesItem from '../cities-item/cities-item';
+
 import {City} from '../../constants';
 
-const LOCATIONS_ITEM_ACTIVE_CLASS = `tabs__item--active`;
-
-const getLocationsItemTemplate = (city, currentCity, handleCityClick) => {
-  const isActiveItem = city === currentCity;
-
-  return (
-    <li className="locations__item" key={city}>
-      <a className={`locations__item-link tabs__item ${isActiveItem ? LOCATIONS_ITEM_ACTIVE_CLASS : ``}`}
-        href="#"
-        onClick={handleCityClick}>
-        <span>{city}</span>
-      </a>
-    </li>
-  );
-};
-
+const citiesList = Object.values(City);
 
 const CitiesList = ({currentCity, handleCityClick}) => (
   <div className="tabs">
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {Object.values(City).map((city) => getLocationsItemTemplate(city, currentCity, handleCityClick))}
+        {citiesList.map((city) => (
+          <CitiesItem
+            key={city}
+            city={city}
+            currentCity={currentCity}
+            onCityClick={handleCityClick}
+          />
+        ))}
       </ul>
     </section>
   </div>

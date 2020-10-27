@@ -1,11 +1,15 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
 import OfferList from '../offer-list/offer-list';
-import {OFFER_PROP_TYPES} from '../../types.js';
 import CitiesMap from '../cities-map/cities-map';
 import CitiesFilter from '../cities-filter/cities-filter';
-import {FilterType} from '../../constants';
-import {getOffersByFilter} from '../../utils';
+
+import {OFFER_PROP_TYPES} from '../../types.js';
+import {getOffersByCityAndFilter} from '../../utils';
+import {Action} from '../../store/action';
 
 class CitiesResult extends PureComponent {
   constructor(props) {
@@ -13,8 +17,6 @@ class CitiesResult extends PureComponent {
 
     this.state = {
       activeCardId: null,
-      offers: this.props.offers,
-      currentFilter: FilterType.POPULAR,
     };
 
     this.handleCardHover = this.handleCardHover.bind(this);
@@ -30,21 +32,21 @@ class CitiesResult extends PureComponent {
   }
 
   handleFilterChange(selectedFilter) {
-    this.setState((prevState) => (
-      prevState.currentFilter === selectedFilter
-        ? null
-        : {currentFilter: selectedFilter})
-    );
+    const {onFilterChange, offers, city, currentFilter} = this.props;
+    if (currentFilter !== selectedFilter) {
+      onFilterChange(offers, city, selectedFilter);
+    }
   }
 
   render() {
-    const {placesCount, city, offers, onOfferClick} = this.props;
-    const {currentFilter, activeCardId} = this.state;
-    const filteredOffers = (
-      currentFilter === FilterType.POPULAR
-        ? offers
-        : getOffersByFilter(offers, currentFilter)
-    );
+    const {
+      placesCount,
+      city,
+      filteredOffers,
+      onOfferClick,
+      currentFilter
+    } = this.props;
+    const {activeCardId} = this.state;
 
     return (
       <div className="cities__places-container container">
@@ -69,6 +71,28 @@ CitiesResult.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,
+  currentFilter: PropTypes.string.isRequired,
+  onFilterChange: PropTypes.func.isRequired,
+  filteredOffers: PropTypes.arrayOf(
+      PropTypes.shape(OFFER_PROP_TYPES).isRequired
+  ).isRequired,
 };
 
-export default CitiesResult;
+const mapStateToProps = (state) => ({
+  placesCount: state.filteredOffers.length,
+  offers: state.offers,
+  filteredOffers: state.filteredOffers,
+  currentFilter: state.currentFilter,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  const onFilterChange = bindActionCreators(Action.changeFilter, dispatch);
+  return {onFilterChange: (offers, city, currentFilter) => {
+    const filteredOffers = getOffersByCityAndFilter(offers, city, currentFilter);
+    return onFilterChange(currentFilter, filteredOffers);
+  }};
+};
+
+
+export {CitiesResult};
+export default connect(mapStateToProps, mapDispatchToProps)(CitiesResult);

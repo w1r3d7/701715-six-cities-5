@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import {BOOKMARK_ACTIVE_CLASS} from '../../constants';
 import {getRatingInPercentage} from '../../utils';
 import {OFFER_PROP_TYPES} from '../../types';

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Map from '../map/map';
+
 import {OFFER_PROP_TYPES} from '../../types';
 
 const OfferDetailsMap = ({offers, city}) => (

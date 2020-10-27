@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {OFFER_PROP_TYPES} from '../../types.js';
+
 import PlaceCard from '../place-card/place-card';
 import PlaceCardPremiumMark from '../place-card-premium-mark/place-card-premium-mark';
+
+import {OFFER_PROP_TYPES} from '../../types.js';
 
 const OfferCard = ({offer, onCardClick, onCardHover}) => {
   const {

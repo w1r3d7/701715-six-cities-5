@@ -1,8 +1,8 @@
 import {FilterType, RATING_IN_PERCENT} from './constants';
 export const getRatingInPercentage = (rating) => `${rating * RATING_IN_PERCENT}%`;
 
-export const getOffersByCity = (offers, city) => offers.filter((offer) => offer.city === city);
 
+export const getOffersByCity = (offers, city) => offers.filter((offer) => offer.city === city);
 export const getOffersByFilter = (filteredOffers, filterType) => {
   switch (filterType) {
     case FilterType.TOP_RATED_FIRST:
@@ -14,6 +14,11 @@ export const getOffersByFilter = (filteredOffers, filterType) => {
   }
 
   return filteredOffers;
+};
+
+export const getOffersByCityAndFilter = (offers, city, filter) => {
+  const offersByCity = getOffersByCity(offers, city);
+  return getOffersByFilter(offersByCity, filter);
 };
 
 export const extend = (a, b) => Object.assign({}, a, b);

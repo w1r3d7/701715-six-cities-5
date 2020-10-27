@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import PlaceCard from '../place-card/place-card';
-import {OFFER_PROP_TYPES} from '../../types';
 import PlaceCardPremiumMark from '../place-card-premium-mark/place-card-premium-mark';
+
+import {OFFER_PROP_TYPES} from '../../types';
 
 const FAVORITE_CARD_CLASS = `favorites__card-info`;
 

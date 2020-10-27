@@ -1,8 +1,10 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {REVIEW_PROP_TYPES} from '../../types';
+
 import ReviewItem from '../review-item/review-item';
-import FormComment from '../form-comment/form-comment';
+import ReviewForm from '../review-form/review-form';
+
+import {REVIEW_PROP_TYPES} from '../../types';
 
 const EMPTY_REVIEWS = 0;
 
@@ -47,11 +49,11 @@ export default class ReviewsList extends PureComponent {
         <ul className="reviews__list">
           {
             reviews.length > EMPTY_REVIEWS
-              ? reviews.map((review) => <ReviewItem review={review} key={review.id} />)
-              : ``
+            &&
+            reviews.map((review) => <ReviewItem review={review} key={review.id} />)
           }
         </ul>
-        <FormComment onSubmit={this.handleFormSubmit} />
+        <ReviewForm onSubmit={this.handleFormSubmit} />
       </section>
     );
   }

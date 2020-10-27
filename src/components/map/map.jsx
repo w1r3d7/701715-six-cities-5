@@ -1,9 +1,11 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+
 import {CityNameToCoordinates} from '../../constants.js';
 import {OFFER_PROP_TYPES} from '../../types';
+
+import 'leaflet/dist/leaflet.css';
 
 const DEFAULT_ICON = leaflet.icon({
   iconUrl: `/img/pin.svg`,

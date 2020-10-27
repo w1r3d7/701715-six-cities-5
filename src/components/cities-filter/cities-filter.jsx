@@ -1,58 +1,67 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+
+import CitiesFilterItem from '../cities-filter-item/cities-filter-item';
+
 import {FilterType} from '../../constants';
 
 const FILTER_POPUP_OPENED_CLASS = `places__options--opened`;
-const ACTIVE_FILTER_ITEM_CLASS = `places__option--active`;
+const filtersList = Object.values(FilterType);
 
-const CitiesFilter = ({currentFilter, onFilterChange}) => {
-  const filterPopup = React.createRef();
+class CitiesFilter extends PureComponent {
+  constructor(props) {
+    super(props);
 
-  const toggleFilterPopup = () => {
-    filterPopup.current.classList.toggle(FILTER_POPUP_OPENED_CLASS);
-  };
+    this.state = {
+      isMenuOpen: false,
+    };
 
-  const handleMenuOpenerClick = () => {
-    toggleFilterPopup();
-  };
+    this.handleMenuOpenerClick = this.handleMenuOpenerClick.bind(this);
+    this.handleFilterClick = this.handleFilterClick.bind(this);
+  }
 
-  const handleFilterClick = (evt) => {
+  changeMenuStatus(prevState) {
+    return {isMenuOpen: !prevState.isMenuOpen};
+  }
+
+  handleMenuOpenerClick() {
+    this.setState(this.changeMenuStatus);
+  }
+
+  handleFilterClick(evt) {
     const selectedFilter = evt.target.textContent;
 
-    onFilterChange(selectedFilter);
-    toggleFilterPopup();
-  };
+    this.props.onFilterChange(selectedFilter);
+    this.setState(this.changeMenuStatus);
+  }
 
-  const createFilters = () => {
-    return Object.values(FilterType).map((filter, index) => {
-      const isActiveFilter = filter === currentFilter;
-      return (
-        <li
-          key={filter + index}
-          className={`places__option ${isActiveFilter ? ACTIVE_FILTER_ITEM_CLASS : ``}`}
-          tabIndex="0"
-          onClick={handleFilterClick}
-        >{filter}</li>
-      );
-    });
-  };
 
-  return (
-    <form className="places__sorting" action="#" method="get">
-      <span className="places__sorting-caption">Sort by </span>
-      <span className="places__sorting-type" tabIndex="0" onClick={handleMenuOpenerClick}>
-        {currentFilter}
-        <svg className="places__sorting-arrow" width="7" height="4">
-          <use xlinkHref="#icon-arrow-select" />
-        </svg>
-      </span>
-      <ul ref={filterPopup} className="places__options places__options--custom ">
-        {createFilters()}
-      </ul>
-    </form>
-  );
-};
-
+  render() {
+    const {currentFilter} = this.props;
+    const {isMenuOpen} = this.state;
+    return (
+      <form className="places__sorting" action="#" method="get">
+        <span className="places__sorting-caption">Sort by </span>
+        <span className="places__sorting-type" tabIndex="0" onClick={this.handleMenuOpenerClick}>
+          {currentFilter}
+          <svg className="places__sorting-arrow" width="7" height="4">
+            <use xlinkHref="#icon-arrow-select" />
+          </svg>
+        </span>
+        <ul className={`places__options places__options--custom ${isMenuOpen ? FILTER_POPUP_OPENED_CLASS : ``}`}>
+          {filtersList.map((filter) => (
+            <CitiesFilterItem
+              key={filter}
+              filter={filter}
+              currentFilter={currentFilter}
+              handleFilterClick={this.handleFilterClick}
+            />
+          ))}
+        </ul>
+      </form>
+    );
+  }
+}
 
 CitiesFilter.propTypes = {
   currentFilter: PropTypes.string.isRequired,

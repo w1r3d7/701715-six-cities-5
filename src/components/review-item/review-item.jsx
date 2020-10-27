@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import {REVIEW_PROP_TYPES} from '../../types.js';
 import {getRatingInPercentage} from '../../utils.js';
 

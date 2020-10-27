@@ -2,22 +2,23 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+
 import AppHeader from '../app-header/app-header';
-import {getRatingInPercentage, checkForPlural} from '../../utils.js';
-import {OFFER_PROP_TYPES} from '../../types.js';
 import ReviewsList from '../reviews-list/reviews-list';
-import {BOOKMARK_ACTIVE_CLASS} from '../../constants.js';
 import OfferDetailsCard from '../offer-details-card/offer-details-card';
 import OfferDetailsMap from '../offer-details-map/offer-details-map';
 import OfferDetailsPremiumMark from '../offer-details-premium-mark/offer-details-premium-mark';
+
+import {getRatingInPercentage, checkForPlural} from '../../utils.js';
+import {OFFER_PROP_TYPES} from '../../types.js';
+import {BOOKMARK_ACTIVE_CLASS} from '../../constants.js';
 
 const OTHER_OFFERS_MAX_COUNT = 3;
 const PREMIUM_HOST_CLASS = `property__avatar-wrapper--pro`;
 const BEDROOM = `bedroom`;
 
-const OfferDetails = ({offers}) => {
-  const path = document.location.pathname;
-  const [,, offerId] = path.split(`/`);
+const OfferDetails = ({offers, match}) => {
+  const offerId = match.params.id;
 
   let offer = null;
   let otherOffers = [];
@@ -149,6 +150,11 @@ OfferDetails.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired
+    }).isRequired,
+  }).isRequired
 };
 
 const mapStateToProps = (state) => ({
