@@ -3,7 +3,7 @@ export const ActionType = {
   CHANGE_FILTER: `CHANGE_FILTER`,
 };
 
-export const Action = {
+export const Actions = {
   changeCity: (currentCity, filteredOffers) => ({
     type: ActionType.CHANGE_CITY,
     payload: {

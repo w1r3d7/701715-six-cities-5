@@ -1,9 +1,10 @@
-import {FilterType, RATING_IN_PERCENT} from './constants';
+import {FilterType, RATING_IN_PERCENT, SINGULAR} from './constants';
+
 export const getRatingInPercentage = (rating) => `${rating * RATING_IN_PERCENT}%`;
 
+export const filterOffersByCity = (offers, city) => offers.filter((offer) => offer.city === city);
 
-export const getOffersByCity = (offers, city) => offers.filter((offer) => offer.city === city);
-export const getOffersByFilter = (filteredOffers, filterType) => {
+export const sortOffersByFilterType = (filteredOffers, filterType) => {
   switch (filterType) {
     case FilterType.TOP_RATED_FIRST:
       return filteredOffers.slice().sort((a, b) => b.rating - a.rating);
@@ -12,16 +13,14 @@ export const getOffersByFilter = (filteredOffers, filterType) => {
     case FilterType.PRICE_LOW_TO_HIGH:
       return filteredOffers.slice().sort((a, b) => a.price - b.price);
   }
-
   return filteredOffers;
 };
 
-export const getOffersByCityAndFilter = (offers, city, filter) => {
-  const offersByCity = getOffersByCity(offers, city);
-  return getOffersByFilter(offersByCity, filter);
+export const getOffersByCityAndFilter = (offers, city, filterType) => {
+  const filteredOffersByCity = filterOffersByCity(offers, city);
+  return sortOffersByFilterType(filteredOffersByCity, filterType);
 };
 
 export const extend = (a, b) => Object.assign({}, a, b);
 
-const SINGULAR = 1;
 export const checkForPlural = (item, count) => count > SINGULAR ? `${item}s` : item;
