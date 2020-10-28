@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -10,63 +10,49 @@ import CitiesFilter from '../cities-filter/cities-filter';
 import {OFFER_PROP_TYPES} from '../../types.js';
 import {getOffersByCityAndFilter} from '../../utils';
 import {actions} from '../../store/actions';
+import withActiveId from '../../hocs/with-active-id';
 
-class CitiesResult extends PureComponent {
-  constructor(props) {
-    super(props);
+const CitiesResult = (props) => {
+  const {
+    placesCount,
+    city,
+    filteredOffers,
+    onOfferClick,
+    currentFilter,
+    onCardHover,
+    activeCardId,
+    onFilterChange,
+    offers,
+  } = props;
 
-    this.state = {
-      activeCardId: null,
-    };
-
-    this.handleCardHover = this.handleCardHover.bind(this);
-    this.handleFilterChange = this.handleFilterChange.bind(this);
-  }
-
-  handleCardHover(activeCardId) {
-    this.setState((prevState) => (
-      prevState.activeCardId === activeCardId
-        ? null
-        : {activeCardId})
-    );
-  }
-
-  handleFilterChange(selectedFilter) {
-    const {onFilterChange, offers, city, currentFilter} = this.props;
+  const handleFilterChange = (selectedFilter) => {
     if (currentFilter !== selectedFilter) {
       onFilterChange(offers, city, selectedFilter);
     }
-  }
+  };
 
-  render() {
-    const {
-      placesCount,
-      city,
-      filteredOffers,
-      onOfferClick,
-      currentFilter
-    } = this.props;
-    const {activeCardId} = this.state;
-
-    return (
-      <div className="cities__places-container container">
-        <section className="cities__places places">
-          <h2 className="visually-hidden">Places</h2>
-          <b className="places__found">{placesCount} places to stay in {city}</b>
-          <CitiesFilter onFilterChange={this.handleFilterChange} currentFilter={currentFilter} />
-          <OfferList
-            offers={filteredOffers}
-            onOfferClick={onOfferClick}
-            onHoverCard={this.handleCardHover}
-          />
-        </section>
-        <div className="cities__right-section">
-          <CitiesMap city={city} offers={filteredOffers} activeCardId={activeCardId} />
-        </div>
+  return (
+    <div className="cities__places-container container">
+      <section className="cities__places places">
+        <h2 className="visually-hidden">Places</h2>
+        <b className="places__found">{placesCount} places to stay in {city}</b>
+        <CitiesFilter onFilterChange={handleFilterChange} currentFilter={currentFilter} />
+        <OfferList
+          offers={filteredOffers}
+          onOfferClick={onOfferClick}
+          onHoverCard={onCardHover}
+        />
+      </section>
+      <div className="cities__right-section">
+        <CitiesMap
+          city={city}
+          offers={filteredOffers}
+          activeCardId={activeCardId}
+        />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 CitiesResult.propTypes = {
   city: PropTypes.string.isRequired,
@@ -80,6 +66,8 @@ CitiesResult.propTypes = {
   filteredOffers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,
+  activeCardId: PropTypes.number,
+  onCardHover: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -99,4 +87,4 @@ const mapDispatchToProps = (dispatch) => {
 
 
 export {CitiesResult};
-export default connect(mapStateToProps, mapDispatchToProps)(CitiesResult);
+export default connect(mapStateToProps, mapDispatchToProps)(withActiveId(CitiesResult));

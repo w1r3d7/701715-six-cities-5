@@ -63,6 +63,10 @@ class Map extends PureComponent {
     this.map.flyTo(cityCoords, ZOOM);
   }
 
+  componentWillUnmount() {
+    this.map.remove();
+  }
+
   render() {
     return <section id="map" className={`${this.props.mapType} map`} />;
   }
