@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import {bindActionCreators, compose} from 'redux';
 
 import OfferList from '../offer-list/offer-list';
 import CitiesMap from '../cities-map/cities-map';
@@ -10,21 +10,19 @@ import CitiesFilter from '../cities-filter/cities-filter';
 import {OFFER_PROP_TYPES} from '../../types.js';
 import {getOffersByCityAndFilter} from '../../utils';
 import {actions} from '../../store/actions';
-import withActiveId from '../../hocs/with-active-id';
+import withActiveCardId from '../../hocs/with-active-card-id';
 
-const CitiesResult = (props) => {
-  const {
-    placesCount,
-    city,
-    filteredOffers,
-    onOfferClick,
-    currentFilter,
-    onCardHover,
-    activeCardId,
-    onFilterChange,
-    offers,
-  } = props;
-
+const CitiesResult = ({
+  placesCount,
+  city,
+  filteredOffers,
+  onOfferClick,
+  currentFilter,
+  onCardHover,
+  activeCardId,
+  onFilterChange,
+  offers,
+}) => {
   const handleFilterChange = (selectedFilter) => {
     if (currentFilter !== selectedFilter) {
       onFilterChange(offers, city, selectedFilter);
@@ -85,6 +83,5 @@ const mapDispatchToProps = (dispatch) => {
   }};
 };
 
-
 export {CitiesResult};
-export default connect(mapStateToProps, mapDispatchToProps)(withActiveId(CitiesResult));
+export default compose(connect(mapStateToProps, mapDispatchToProps), withActiveCardId)(CitiesResult);

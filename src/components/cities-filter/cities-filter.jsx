@@ -2,38 +2,35 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import CitiesFilterItem from '../cities-filter-item/cities-filter-item';
-import withToggleMenu from '../../hocs/with-toggle-menu';
+import withToggle from '../../hocs/with-toggle';
 
 import {FilterType} from '../../constants';
 
 const FILTER_POPUP_OPENED_CLASS = `places__options--opened`;
 const filtersList = Object.values(FilterType);
 
-const CitiesFilter = (props) => {
-  const {currentFilter, isMenuOpen, onMenuClick, onFilterChange} = props;
-
-  const handleFilterClick = (evt) => {
-    const selectedFilter = evt.target.textContent;
+const CitiesFilter = ({currentFilter, isToggleOpen, onToggleClick, onFilterChange}) => {
+  const handleFilterClick = (selectedFilter) => () => {
     onFilterChange(selectedFilter);
-    onMenuClick();
+    onToggleClick();
   };
 
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by </span>
-      <span className="places__sorting-type" tabIndex="0" onClick={onMenuClick}>
+      <span className="places__sorting-type" tabIndex="0" onClick={onToggleClick}>
         {currentFilter}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${isMenuOpen ? FILTER_POPUP_OPENED_CLASS : ``}`}>
+      <ul className={`places__options places__options--custom ${isToggleOpen ? FILTER_POPUP_OPENED_CLASS : ``}`}>
         {filtersList.map((filter) => (
           <CitiesFilterItem
             key={filter}
             filter={filter}
             currentFilter={currentFilter}
-            handleFilterClick={handleFilterClick}
+            handleFilterClick={handleFilterClick(filter)}
           />
         ))}
       </ul>
@@ -44,8 +41,8 @@ const CitiesFilter = (props) => {
 CitiesFilter.propTypes = {
   currentFilter: PropTypes.string.isRequired,
   onFilterChange: PropTypes.func.isRequired,
-  isMenuOpen: PropTypes.bool.isRequired,
-  onMenuClick: PropTypes.func.isRequired,
+  isToggleOpen: PropTypes.bool.isRequired,
+  onToggleClick: PropTypes.func.isRequired,
 };
 
-export default withToggleMenu(CitiesFilter);
+export default withToggle(CitiesFilter);

@@ -12,7 +12,8 @@ const OfferList = ({offers, onHoverCard, onOfferClick}) => (
         offer={offer}
         key={offer.id}
         onCardHover={onHoverCard}
-        onCardClick={onOfferClick}/>
+        onCardClick={onOfferClick}
+      />
     ))}
   </div>
 );

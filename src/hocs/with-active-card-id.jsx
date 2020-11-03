@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import {OFFER_PROP_TYPES} from '../types';
 
-const withActiveId = (Component) => {
-  class WithActiveId extends PureComponent {
+const withActiveCardId = (Component) => {
+  class WithActiveCardId extends PureComponent {
     constructor(props) {
       super(props);
 
@@ -36,7 +36,7 @@ const withActiveId = (Component) => {
     }
   }
 
-  WithActiveId.propTypes = {
+  WithActiveCardId.propTypes = {
     city: PropTypes.string.isRequired,
     onOfferClick: PropTypes.func.isRequired,
     placesCount: PropTypes.number.isRequired,
@@ -50,8 +50,8 @@ const withActiveId = (Component) => {
     ).isRequired,
   };
 
-  return WithActiveId;
+  return WithActiveCardId;
 };
 
 
-export default withActiveId;
+export default withActiveCardId;

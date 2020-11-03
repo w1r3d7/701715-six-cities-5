@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {RATING_COUNT} from '../../constants';
-
-const ReviewRating = ({title, index}) => {
-  const rating = RATING_COUNT[index];
+const ReviewRating = ({title, rating}) => {
   return (
     <React.Fragment key={title}>
       <input
@@ -26,7 +23,7 @@ const ReviewRating = ({title, index}) => {
 
 ReviewRating.propTypes = {
   title: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
+  rating: PropTypes.string.isRequired,
 };
 
 export default ReviewRating;
