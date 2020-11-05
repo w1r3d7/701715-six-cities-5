@@ -1,17 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {RATING_COUNT} from '../../constants';
-
-const ReviewRating = ({title, index, onStarClick, currentRating}) => {
-  const rating = RATING_COUNT[index];
+const ReviewRating = ({title, rating}) => {
   return (
-    <React.Fragment key={title + index}>
+    <React.Fragment key={title}>
       <input
         className="form__rating-input visually-hidden" name="rating"
         value={rating} id={`${rating}-stars`} type="radio"
-        onChange={onStarClick}
-        checked={rating === currentRating}
       />
       <label
         htmlFor={`${rating}-stars`}
@@ -28,9 +23,7 @@ const ReviewRating = ({title, index, onStarClick, currentRating}) => {
 
 ReviewRating.propTypes = {
   title: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
-  onStarClick: PropTypes.func.isRequired,
-  currentRating: PropTypes.string,
+  rating: PropTypes.string.isRequired,
 };
 
 export default ReviewRating;
