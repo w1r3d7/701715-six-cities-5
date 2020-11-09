@@ -2,7 +2,7 @@ import {FilterType, RATING_IN_PERCENT, SINGULAR} from './constants';
 
 export const getRatingInPercentage = (rating) => `${rating * RATING_IN_PERCENT}%`;
 
-export const filterOffersByCity = (offers, city) => offers.filter((offer) => offer.city === city);
+export const filterOffersByCity = (offers, city) => offers.filter((offer) => offer.city.name === city);
 
 export const sortOffersByFilterType = (filteredOffers, filterType) => {
   switch (filterType) {

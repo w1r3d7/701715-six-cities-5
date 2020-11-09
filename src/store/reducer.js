@@ -1,12 +1,11 @@
 import {City, FilterType} from '../constants.js';
-import offers from '../mocks/offers';
 import {getOffersByCityAndFilter} from '../utils';
 import {ActionType} from './actions';
 import {extend} from '../utils';
 
 const initialState = {
   currentCity: City.PARIS,
-  offers,
+  offers: [],
   currentFilter: FilterType.POPULAR,
 };
 
@@ -27,6 +26,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         currentFilter: action.payload.currentFilter,
         filteredOffers: action.payload.filteredOffers,
+      });
+    case ActionType.GET_OFFERS:
+      return extend(state, {
+        offers: action.payload
       });
     default:
       return state;
