@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import AppHeader from '../components/app-header/app-header';
-import CitiesResult from '../components/cities-result/cities-result';
-import CitiesEmpty from '../components/cities-empty/cities-empty';
+import CitiesContainer from '../components/cities-container/cities-container';
 import CitiesList from '../components/cities-list/cities-list';
-import Loading from '../components/loading/loading';
 
 import {OFFER_PROP_TYPES} from '../types.js';
 import {changeCity} from '../store/app/actions';
@@ -17,7 +15,6 @@ import {
   getOffers,
   getOffersLoadingStatus
 } from '../store/selectors';
-
 
 const PAGE_MAIN_EMPTY_CLASS = `page__main--index-empty`;
 
@@ -40,20 +37,23 @@ const Main = ({
 
   const isOffersEmpty = !(filteredOffers.length > 0);
 
-  const citiesContainer = (
-    isOffersEmpty
-      ? <CitiesEmpty city={currentCity} />
-      : <CitiesResult city={currentCity} onOfferClick={onOfferClick} offers={filteredOffers}/>
-  );
-
   return (
     <div className={`page page--gray page--main ${isOffersEmpty ? PAGE_MAIN_EMPTY_CLASS : ``}`}>
       <AppHeader />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <CitiesList handleCityClick={handleCityClick} currentCity={currentCity} />
+        <CitiesList
+          handleCityClick={handleCityClick}
+          currentCity={currentCity}
+        />
         <div className="cities">
-          {isOffersLoaded ? citiesContainer : <Loading />}
+          <CitiesContainer
+            isLoaded={isOffersLoaded}
+            isOffersEmpty={isOffersEmpty}
+            currentCity={currentCity}
+            offers={filteredOffers}
+            onOfferClick={onOfferClick}
+          />
         </div>
       </main>
     </div>

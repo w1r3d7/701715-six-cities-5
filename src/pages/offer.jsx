@@ -1,25 +1,14 @@
 import React, {PureComponent} from 'react';
-import {Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import AppHeader from '../components/app-header/app-header';
-import ReviewsList from '../components/reviews-list/reviews-list';
 import OfferDetailsCard from '../components/offer-details-card/offer-details-card';
-import OfferDetailsMap from '../components/offer-details-map/offer-details-map';
-import OfferDetailsPremiumMark from '../components/offer-details-premium-mark/offer-details-premium-mark';
-import Loading from '../components/loading/loading';
 
-import {getRatingInPercentage, checkForPlural} from '../utils.js';
 import {OFFER_PROP_TYPES} from '../types.js';
-import {BOOKMARK_ACTIVE_CLASS} from '../constants.js';
-import {fetchOfferDetails, requestOfferDetails} from '../store/data/actions';
+import {fetchOfferDetails} from '../store/data/actions';
 import {getOfferDetails, getOfferDetailsLoadingStatus} from '../store/selectors';
 import OfferDetailsProperty from '../components/offers-details-property/offers-details-property';
-
-
-const OTHER_OFFERS_MAX_COUNT = 3;
-
 
 class Offer extends PureComponent {
 
@@ -33,20 +22,11 @@ class Offer extends PureComponent {
 
     this.offerId = match.params.id;
 
-
-
-
     return (
       <div className="page">
         <AppHeader />
         <main className="page__main page__main--property">
-          {
-            isOfferDetailsLoaded
-              ?
-              <OfferDetailsProperty offer={offer} />
-              :
-              <Loading />
-          }
+          <OfferDetailsProperty isLoaded={isOfferDetailsLoaded} offer={offer} />
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
@@ -65,6 +45,8 @@ class Offer extends PureComponent {
 
 Offer.propTypes = {
   offer: PropTypes.shape(OFFER_PROP_TYPES),
+  isOfferDetailsLoaded: PropTypes.bool.isRequired,
+  fetchOffer: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired

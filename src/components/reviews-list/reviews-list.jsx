@@ -38,4 +38,5 @@ ReviewsList.propTypes = {
   onFormSubmit: PropTypes.func.isRequired,
 };
 
+export {ReviewsList};
 export default withReviews(ReviewsList);

@@ -24,6 +24,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         isOfferDetailsLoaded: false,
       });
+    case ActionType.OFFERS_REQUESTED:
+      return extend(state, {
+        isOffersLoaded: false,
+      });
     default:
       return state;
   }

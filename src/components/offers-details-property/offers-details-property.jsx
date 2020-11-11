@@ -6,6 +6,8 @@ import OfferDetailsPremiumMark from '../offer-details-premium-mark/offer-details
 import {BOOKMARK_ACTIVE_CLASS} from '../../constants';
 import {checkForPlural, getRatingInPercentage} from '../../utils';
 import {OFFER_PROP_TYPES} from '../../types';
+import {withLoading} from '../../hocs/with-loading';
+import ReviewsContainer from '../reviews-container/reviews-container';
 
 const PREMIUM_HOST_CLASS = `property__avatar-wrapper--pro`;
 const BEDROOM = `bedroom`;
@@ -26,6 +28,7 @@ const OfferDetailsProperty = ({offer}) => {
     hostDescription,
     hostAvatar,
     isHostPremium,
+    id,
   } = offer;
 
   const generatedPhotos = photosUrl.map((url) => (
@@ -95,7 +98,7 @@ const OfferDetailsProperty = ({offer}) => {
               <p className="property__text">{hostDescription}</p>
             </div>
           </div>
-          {/*<ReviewsList reviews={reviews} />*/}
+          <ReviewsContainer offerId={id} />
         </div>
       </div>
       {/*<OfferDetailsMap offers={otherOffers} city={offer.city} />*/}
@@ -106,5 +109,5 @@ const OfferDetailsProperty = ({offer}) => {
 OfferDetailsProperty.propTypes = {
   offer: PropTypes.shape(OFFER_PROP_TYPES).isRequired,
 };
-
-export default OfferDetailsProperty;
+export {OfferDetailsProperty};
+export default withLoading(OfferDetailsProperty);
