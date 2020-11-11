@@ -1,23 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import AppHeader from '../app-header/app-header';
-import CitiesResult from '../cities-result/cities-result';
-import CitiesEmpty from '../cities-empty/cities-empty';
-import CitiesList from '../cities-list/cities-list';
-import Loading from '../loading/loading';
+import AppHeader from '../components/app-header/app-header';
+import CitiesResult from '../components/cities-result/cities-result';
+import CitiesEmpty from '../components/cities-empty/cities-empty';
+import CitiesList from '../components/cities-list/cities-list';
+import Loading from '../components/loading/loading';
 
-import {OFFER_PROP_TYPES} from '../../types.js';
-import {changeCity} from '../../store/app';
+import {OFFER_PROP_TYPES} from '../types.js';
+import {changeCity} from '../store/app/actions';
 import {
   getCurrentCity,
   getCurrentFilter,
   getFilteredOffers,
   getOffers,
   getOffersLoadingStatus
-} from '../../store/selectors';
+} from '../store/selectors';
 
 
 const PAGE_MAIN_EMPTY_CLASS = `page__main--index-empty`;
@@ -83,10 +82,9 @@ const mapStateToProps = (state) => ({
   isOffersLoaded: getOffersLoadingStatus(state),
 });
 
-const mapDispatchToProps = (dispatch) => {
-  const onCityChange = bindActionCreators(changeCity, dispatch);
-  return {onCityChange: (currentCity) => onCityChange(currentCity)};
-};
+const mapDispatchToProps = (dispatch) => ({
+  onCityChange: (currentCity) => dispatch(changeCity(currentCity))
+});
 
 export {Main};
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

@@ -8,7 +8,7 @@ import CitiesMap from '../cities-map/cities-map';
 import CitiesFilter from '../cities-filter/cities-filter';
 
 import {OFFER_PROP_TYPES} from '../../types.js';
-import {changeFilter} from '../../store/app';
+import {changeFilter} from '../../store/app/actions';
 import withActiveCardId from '../../hocs/with-active-card-id';
 import {getCurrentFilter} from '../../store/selectors';
 

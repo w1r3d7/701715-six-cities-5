@@ -1,5 +1,4 @@
 import {adaptOfferToClient} from '../adapaters';
-import {extend} from '../../utils';
 
 const Url = {
   OFFERS: `/hotels`,
@@ -7,6 +6,7 @@ const Url = {
 
 export const ActionType = {
   GET_OFFERS: `GET_OFFERS`,
+  OFFER_DETAILS_REQUESTED: `OFFER_DETAILS_REQUESTED`,
   GET_OFFER_DETAILS: `GET_OFFER_DETAILS`,
 };
 
@@ -20,6 +20,10 @@ export const getOfferDetails = (offer) => ({
   payload: offer
 });
 
+const requestOfferDetails = () => ({
+  type: ActionType.OFFER_DETAILS_REQUESTED
+});
+
 
 export const fetchOffers = () => (dispatch, _state, api) => (
   api.get(Url.OFFERS)
@@ -27,34 +31,13 @@ export const fetchOffers = () => (dispatch, _state, api) => (
     .then((offers) => dispatch(getOffers(offers)))
 );
 
-export const fetchOfferDetails = (id) => (dispatch, _state, api) => (
+export const fetchOfferDetails = (id) => (dispatch, _state, api) => {
+  dispatch(requestOfferDetails());
   api.get(`${Url.OFFERS}/${id}`)
     .then(({data}) => adaptOfferToClient(data))
     .then((offer) => dispatch(getOfferDetails(offer)))
-);
-
-const initialState = {
-  offers: [],
-  offerDetails: null,
-  isOffersLoaded: false,
 };
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ActionType.GET_OFFERS:
-      return extend(state, {
-        offers: action.payload,
-        isOffersLoaded: true,
-      });
-    case ActionType.GET_OFFER_DETAILS:
-      return extend(state, {
-        offerDetails: action.payload,
-      });
-    default:
-      return state;
-  }
-};
 
-export {reducer};
 
 

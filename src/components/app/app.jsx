@@ -1,10 +1,10 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 
-import Main from '../main/main';
-import Login from '../login/login';
-import Favorites from '../favorites/favorites';
-import OfferDetails from '../offer-details/offer-details';
+import Main from '../../pages/main';
+import Login from '../../pages/login';
+import Favorites from '../../pages/favorites';
+import OfferDetails from '../../pages/offer';
 
 const App = () => (
   <Router>
