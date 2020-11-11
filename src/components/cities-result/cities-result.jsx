@@ -8,26 +8,27 @@ import CitiesMap from '../cities-map/cities-map';
 import CitiesFilter from '../cities-filter/cities-filter';
 
 import {OFFER_PROP_TYPES} from '../../types.js';
-import {getOffersByCityAndFilter} from '../../utils';
-import {actions} from '../../store/actions';
+import {changeFilter} from '../../store/app';
 import withActiveCardId from '../../hocs/with-active-card-id';
+import {getCurrentFilter} from '../../store/selectors';
 
 const CitiesResult = ({
-  placesCount,
+  offers,
   city,
-  filteredOffers,
   onOfferClick,
   currentFilter,
   onCardHover,
   activeCardId,
   onFilterChange,
-  offers,
 }) => {
   const handleFilterChange = (selectedFilter) => {
     if (currentFilter !== selectedFilter) {
-      onFilterChange(offers, city, selectedFilter);
+      onFilterChange(selectedFilter);
     }
   };
+
+  const placesCount = offers.length;
+
 
   return (
     <div className="cities__places-container container">
@@ -36,7 +37,7 @@ const CitiesResult = ({
         <b className="places__found">{placesCount} places to stay in {city}</b>
         <CitiesFilter onFilterChange={handleFilterChange} currentFilter={currentFilter} />
         <OfferList
-          offers={filteredOffers}
+          offers={offers}
           onOfferClick={onOfferClick}
           onHoverCard={onCardHover}
         />
@@ -44,7 +45,7 @@ const CitiesResult = ({
       <div className="cities__right-section">
         <CitiesMap
           city={city}
-          offers={filteredOffers}
+          offers={offers}
           activeCardId={activeCardId}
         />
       </div>
@@ -55,32 +56,22 @@ const CitiesResult = ({
 CitiesResult.propTypes = {
   city: PropTypes.string.isRequired,
   onOfferClick: PropTypes.func.isRequired,
-  placesCount: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(
-      PropTypes.shape(OFFER_PROP_TYPES).isRequired
-  ).isRequired,
   currentFilter: PropTypes.string.isRequired,
-  onFilterChange: PropTypes.func.isRequired,
-  filteredOffers: PropTypes.arrayOf(
+  offers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,
   activeCardId: PropTypes.number,
   onCardHover: PropTypes.func.isRequired,
+  onFilterChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  placesCount: state.filteredOffers.length,
-  offers: state.offers,
-  filteredOffers: state.filteredOffers,
-  currentFilter: state.currentFilter,
+  currentFilter: getCurrentFilter(state),
 });
 
 const mapDispatchToProps = (dispatch) => {
-  const onFilterChange = bindActionCreators(actions.changeFilter, dispatch);
-  return {onFilterChange: (offers, city, currentFilter) => {
-    const filteredOffers = getOffersByCityAndFilter(offers, city, currentFilter);
-    return onFilterChange(currentFilter, filteredOffers);
-  }};
+  const onFilterChange = bindActionCreators(changeFilter, dispatch);
+  return {onFilterChange: (currentFilter) => onFilterChange(currentFilter)};
 };
 
 export {CitiesResult};

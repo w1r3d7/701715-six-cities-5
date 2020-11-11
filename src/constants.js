@@ -36,8 +36,3 @@ export const RATING_TITLES = [
 ];
 
 export const RATING_COUNT = [`5`, `4`, `3`, `2`, `1`];
-
-export const CityNameToCoordinates = {
-  [City.AMSTERDAM]: [52.38333, 4.9],
-  [City.PARIS]: [48.8729139, 2.3216323]
-};

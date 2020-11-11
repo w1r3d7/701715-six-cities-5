@@ -7,14 +7,30 @@ import AppHeader from '../app-header/app-header';
 import CitiesResult from '../cities-result/cities-result';
 import CitiesEmpty from '../cities-empty/cities-empty';
 import CitiesList from '../cities-list/cities-list';
+import Loading from '../loading/loading';
 
 import {OFFER_PROP_TYPES} from '../../types.js';
-import {actions} from '../../store/actions';
-import {getOffersByCityAndFilter} from '../../utils';
+import {changeCity} from '../../store/app';
+import {
+  getCurrentCity,
+  getCurrentFilter,
+  getFilteredOffers,
+  getOffers,
+  getOffersLoadingStatus
+} from '../../store/selectors';
+
 
 const PAGE_MAIN_EMPTY_CLASS = `page__main--index-empty`;
 
-const Main = ({offers, onOfferClick, currentCity, onCityChange, filteredOffers, currentFilter}) => {
+const Main = ({
+  offers,
+  onOfferClick,
+  currentCity,
+  onCityChange,
+  currentFilter,
+  filteredOffers,
+  isOffersLoaded
+}) => {
   const handleCityClick = (evt) => {
     evt.preventDefault();
     const selectedCity = evt.target.textContent;
@@ -25,6 +41,12 @@ const Main = ({offers, onOfferClick, currentCity, onCityChange, filteredOffers, 
 
   const isOffersEmpty = !(filteredOffers.length > 0);
 
+  const citiesContainer = (
+    isOffersEmpty
+      ? <CitiesEmpty city={currentCity} />
+      : <CitiesResult city={currentCity} onOfferClick={onOfferClick} offers={filteredOffers}/>
+  );
+
   return (
     <div className={`page page--gray page--main ${isOffersEmpty ? PAGE_MAIN_EMPTY_CLASS : ``}`}>
       <AppHeader />
@@ -32,11 +54,7 @@ const Main = ({offers, onOfferClick, currentCity, onCityChange, filteredOffers, 
         <h1 className="visually-hidden">Cities</h1>
         <CitiesList handleCityClick={handleCityClick} currentCity={currentCity} />
         <div className="cities">
-          {
-            isOffersEmpty
-              ? <CitiesEmpty city={currentCity} />
-              : <CitiesResult city={currentCity} onOfferClick={onOfferClick}/>
-          }
+          {isOffersLoaded ? citiesContainer : <Loading />}
         </div>
       </main>
     </div>
@@ -49,26 +67,25 @@ Main.propTypes = {
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,
   currentCity: PropTypes.string.isRequired,
+  onCityChange: PropTypes.func.isRequired,
+  currentFilter: PropTypes.string.isRequired,
   filteredOffers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,
-  onCityChange: PropTypes.func.isRequired,
-  currentFilter: PropTypes.string.isRequired,
+  isOffersLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  currentCity: state.currentCity,
-  offers: state.offers,
-  filteredOffers: state.filteredOffers,
-  currentFilter: state.currentFilter,
+  currentCity: getCurrentCity(state),
+  offers: getOffers(state),
+  filteredOffers: getFilteredOffers(state),
+  currentFilter: getCurrentFilter(state),
+  isOffersLoaded: getOffersLoadingStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => {
-  const onCityChange = bindActionCreators(actions.changeCity, dispatch);
-  return {onCityChange: (currentCity, offers, currentFilter) => {
-    const filteredOffers = getOffersByCityAndFilter(offers, currentCity, currentFilter);
-    return onCityChange(currentCity, filteredOffers);
-  }};
+  const onCityChange = bindActionCreators(changeCity, dispatch);
+  return {onCityChange: (currentCity) => onCityChange(currentCity)};
 };
 
 export {Main};
