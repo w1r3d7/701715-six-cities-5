@@ -4,8 +4,10 @@ import {ActionType} from './actions';
 const initialState = {
   offers: [],
   offerDetails: null,
+  reviews: null,
   isOffersLoaded: false,
   isOfferDetailsLoaded: false,
+  isReviewsLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -14,6 +16,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         offers: action.payload,
         isOffersLoaded: true,
+      });
+    case ActionType.OFFERS_REQUESTED:
+      return extend(state, {
+        isOffersLoaded: false,
       });
     case ActionType.GET_OFFER_DETAILS:
       return extend(state, {
@@ -24,9 +30,14 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         isOfferDetailsLoaded: false,
       });
-    case ActionType.OFFERS_REQUESTED:
+    case ActionType.GET_REVIEWS:
       return extend(state, {
-        isOffersLoaded: false,
+        reviews: action.payload,
+        isReviewsLoaded: true,
+      });
+    case ActionType.REVIEWS_REQUESTED:
+      return extend(state, {
+        isReviewsLoaded: false,
       });
     default:
       return state;

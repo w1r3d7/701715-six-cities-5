@@ -1,19 +1,53 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import ReviewsList from '../reviews-list/reviews-list';
 
+import {fetchReviews} from '../../store/data/actions';
+import {getReviews, getReviewsLoadingStatus} from '../../store/selectors';
+import {REVIEW_PROP_TYPES} from '../../types';
 
-const ReviewsContainer = ({offerId}) => {
+
+class ReviewsContainer extends PureComponent {
+  componentDidMount() {
+    const {offerId, getReviewsList} = this.props;
+
+    getReviewsList(offerId);
+  }
 
 
-  return (
-    <h1>{offerId}</h1>
-  );
-};
+  render() {
+    const {
+      reviews,
+      isReviewsLoaded
+    } = this.props;
+
+    return (
+      <ReviewsList
+        isLoaded={isReviewsLoaded}
+        reviews={reviews}
+      />
+    );
+  }
+}
 
 ReviewsContainer.propTypes = {
   offerId: PropTypes.number.isRequired,
+  reviews: PropTypes.arrayOf(
+      PropTypes.shape(REVIEW_PROP_TYPES).isRequired
+  ),
+  isReviewsLoaded: PropTypes.bool.isRequired,
+  getReviewsList: PropTypes.func.isRequired,
 };
 
-export default ReviewsContainer;
+const mapStateToProps = (state) => ({
+  reviews: getReviews(state),
+  isReviewsLoaded: getReviewsLoadingStatus(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getReviewsList: (id) => dispatch(fetchReviews(id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewsContainer);

@@ -1,4 +1,4 @@
-import {adaptOfferToClient} from '../adapaters';
+import {adaptOfferToClient, adaptReviewToClient} from '../adapaters';
 
 const Url = {
   OFFERS: `/hotels/`,
@@ -7,17 +7,23 @@ const Url = {
 
 export const ActionType = {
   GET_OFFERS: `GET_OFFERS`,
-  OFFER_DETAILS_REQUESTED: `OFFER_DETAILS_REQUESTED`,
-  GET_OFFER_DETAILS: `GET_OFFER_DETAILS`,
   OFFERS_REQUESTED: `OFFERS_REQUESTED`,
+  GET_OFFER_DETAILS: `GET_OFFER_DETAILS`,
+  OFFER_DETAILS_REQUESTED: `OFFER_DETAILS_REQUESTED`,
+  GET_REVIEWS: `GET_REVIEWS`,
+  REVIEWS_REQUESTED: `REVIEWS_REQUESTED`,
 };
 
-export const getOffers = (offers) => ({
+const getOffers = (offers) => ({
   type: ActionType.GET_OFFERS,
   payload: offers,
 });
 
-export const getOfferDetails = (offer) => ({
+const requestOffers = () => ({
+  type: ActionType.OFFERS_REQUESTED
+});
+
+const getOfferDetails = (offer) => ({
   type: ActionType.GET_OFFER_DETAILS,
   payload: offer
 });
@@ -26,8 +32,13 @@ const requestOfferDetails = () => ({
   type: ActionType.OFFER_DETAILS_REQUESTED
 });
 
-const requestOffers = () => ({
-  type: ActionType.OFFERS_REQUESTED
+const getReviews = (reviews) => ({
+  type: ActionType.GET_REVIEWS,
+  payload: reviews,
+});
+
+const requestReviews = () => ({
+  type: ActionType.REVIEWS_REQUESTED,
 });
 
 
@@ -46,8 +57,8 @@ export const fetchOfferDetails = (id) => (dispatch, _state, api) => {
 };
 
 export const fetchReviews = (id) => (dispatch, _state, api) => {
-  // dispatch(requestOfferDetails());
+  dispatch(requestReviews());
   api.get(Url.COMMENTS + id)
-    .then(({data}) => adaptOfferToClient(data))
-    .then((offer) => dispatch(getOfferDetails(offer)));
+    .then(({data}) => data.map((item) => adaptReviewToClient(item)))
+    .then((reviews) => dispatch(getReviews(reviews)));
 };

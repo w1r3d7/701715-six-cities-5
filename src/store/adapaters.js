@@ -27,4 +27,22 @@ const adaptOfferToClient = (offer) => {
   return result;
 };
 
-export {adaptOfferToClient};
+const adaptReviewToClient = (review) => {
+  const result = Object.assign(
+      {},
+      review,
+      {
+        reviewText: review.comment,
+        photoUrl: review.user.avatar_url,
+        name: review.user.name,
+        isUserPremium: review.user.is_pro,
+        userId: review.user.id,
+      }
+  );
+
+  delete result.user;
+  delete result.comment;
+  return result;
+};
+
+export {adaptOfferToClient, adaptReviewToClient};

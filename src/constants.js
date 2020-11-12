@@ -2,6 +2,7 @@ export const BOOKMARK_ACTIVE_CLASS = `place-card__bookmark-button--active`;
 const MAX_RATING = 5;
 export const RATING_IN_PERCENT = 100 / MAX_RATING;
 export const SINGULAR = 1;
+export const MAX_REVIEWS = 10;
 
 export const OfferType = {
   APARTMENT: `apartment`,

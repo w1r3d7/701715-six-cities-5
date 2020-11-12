@@ -4,8 +4,10 @@ export const REVIEW_PROP_TYPES = {
   name: PropTypes.string,
   photoUrl: PropTypes.string,
   reviewText: PropTypes.string,
-  rating: PropTypes.string,
+  rating: PropTypes.number,
   date: PropTypes.string,
+  isUserPremium: PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export const OFFER_PROP_TYPES = {
