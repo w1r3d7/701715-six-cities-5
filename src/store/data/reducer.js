@@ -3,11 +3,13 @@ import {ActionType} from './actions';
 
 const initialState = {
   offers: [],
-  offerDetails: null,
-  reviews: null,
   isOffersLoaded: false,
+  offerDetails: null,
   isOfferDetailsLoaded: false,
+  reviews: null,
   isReviewsLoaded: false,
+  nearbyOffers: null,
+  isNearbyOffersLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -38,6 +40,15 @@ const reducer = (state = initialState, action) => {
     case ActionType.REVIEWS_REQUESTED:
       return extend(state, {
         isReviewsLoaded: false,
+      });
+    case ActionType.GET_NEARBY_OFFERS:
+      return extend(state, {
+        nearbyOffers: action.payload,
+        isNearbyOffersLoaded: true,
+      });
+    case ActionType.NEARBY_OFFERS_REQUESTED:
+      return extend(state, {
+        isNearbyOffersLoaded: false,
       });
     default:
       return state;

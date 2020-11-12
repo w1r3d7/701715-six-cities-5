@@ -3,6 +3,7 @@ import {adaptOfferToClient, adaptReviewToClient} from '../adapaters';
 const Url = {
   OFFERS: `/hotels/`,
   COMMENTS: `/comments/`,
+  NEARBY: `/nearby/`,
 };
 
 export const ActionType = {
@@ -12,6 +13,8 @@ export const ActionType = {
   OFFER_DETAILS_REQUESTED: `OFFER_DETAILS_REQUESTED`,
   GET_REVIEWS: `GET_REVIEWS`,
   REVIEWS_REQUESTED: `REVIEWS_REQUESTED`,
+  GET_NEARBY_OFFERS: `GET_NEARBY_OFFERS`,
+  NEARBY_OFFERS_REQUESTED: `NEARBY_OFFERS_REQUESTED`,
 };
 
 const getOffers = (offers) => ({
@@ -41,6 +44,15 @@ const requestReviews = () => ({
   type: ActionType.REVIEWS_REQUESTED,
 });
 
+const getNearbyOffers = (offers) => ({
+  type: ActionType.GET_NEARBY_OFFERS,
+  payload: offers,
+});
+
+const requestNearbyOffers = () => ({
+  type: ActionType.NEARBY_OFFERS_REQUESTED,
+});
+
 
 export const fetchOffers = () => (dispatch, _state, api) => {
   requestOffers();
@@ -61,4 +73,11 @@ export const fetchReviews = (id) => (dispatch, _state, api) => {
   api.get(Url.COMMENTS + id)
     .then(({data}) => data.map((item) => adaptReviewToClient(item)))
     .then((reviews) => dispatch(getReviews(reviews)));
+};
+
+export const fetchNearbyOffers = (id) => (dispatch, _state, api) => {
+  dispatch(requestNearbyOffers());
+  api.get(Url.OFFERS + id + Url.NEARBY)
+    .then(({data}) => data.map((item) => adaptOfferToClient(item)))
+    .then((offers) => dispatch(getNearbyOffers(offers)));
 };

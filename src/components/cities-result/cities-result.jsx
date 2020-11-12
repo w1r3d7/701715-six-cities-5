@@ -44,7 +44,6 @@ const CitiesResult = ({
       </section>
       <div className="cities__right-section">
         <CitiesMap
-          city={city}
           offers={offers}
           activeCardId={activeCardId}
         />

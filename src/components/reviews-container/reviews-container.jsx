@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import ReviewsList from '../reviews-list/reviews-list';
 
 import {fetchReviews} from '../../store/data/actions';
-import {getReviews, getReviewsLoadingStatus} from '../../store/selectors';
+import {getSortedReviews, getReviewsLoadingStatus} from '../../store/selectors';
 import {REVIEW_PROP_TYPES} from '../../types';
 
 
@@ -42,7 +42,7 @@ ReviewsContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  reviews: getReviews(state),
+  reviews: getSortedReviews(state),
   isReviewsLoaded: getReviewsLoadingStatus(state),
 });
 

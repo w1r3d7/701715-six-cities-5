@@ -80,7 +80,6 @@ class Map extends PureComponent {
 
 Map.propTypes = {
   mapType: PropTypes.string.isRequired,
-  city: PropTypes.string.isRequired,
   activeCardId: PropTypes.number,
   offers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired

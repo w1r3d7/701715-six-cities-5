@@ -5,16 +5,14 @@ import Map from '../map/map';
 
 import {OFFER_PROP_TYPES} from '../../types';
 
-const OfferDetailsMap = ({offers, city}) => (
+const OfferDetailsMap = ({offers}) => (
   <Map
     mapType="property__map"
     offers={offers}
-    city={city}
   />
 );
 
 OfferDetailsMap.propTypes = {
-  city: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import OfferDetailsPremiumMark from '../offer-details-premium-mark/offer-details-premium-mark';
+import OfferDetailsMap from '../offer-details-map/offer-details-map';
 
 import {BOOKMARK_ACTIVE_CLASS} from '../../constants';
 import {checkForPlural, getRatingInPercentage} from '../../utils';
@@ -12,7 +13,7 @@ import ReviewsContainer from '../reviews-container/reviews-container';
 const PREMIUM_HOST_CLASS = `property__avatar-wrapper--pro`;
 const BEDROOM = `bedroom`;
 
-const OfferDetailsProperty = ({offer}) => {
+const OfferDetailsProperty = ({offer, nearbyOffers}) => {
   const {
     photosUrl,
     type,
@@ -101,13 +102,16 @@ const OfferDetailsProperty = ({offer}) => {
           <ReviewsContainer offerId={id} />
         </div>
       </div>
-      {/*<OfferDetailsMap offers={otherOffers} city={offer.city} />*/}
+      <OfferDetailsMap offers={nearbyOffers} />
     </section>
   );
 };
 
 OfferDetailsProperty.propTypes = {
   offer: PropTypes.shape(OFFER_PROP_TYPES).isRequired,
+  nearbyOffers: PropTypes.arrayOf(
+      PropTypes.shape(OFFER_PROP_TYPES).isRequired
+  ).isRequired
 };
 export {OfferDetailsProperty};
 export default withLoading(OfferDetailsProperty);
