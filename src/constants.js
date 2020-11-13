@@ -4,13 +4,6 @@ export const RATING_IN_PERCENT = 100 / MAX_RATING;
 export const SINGULAR = 1;
 export const MAX_REVIEWS = 10;
 
-export const OfferType = {
-  APARTMENT: `apartment`,
-  HOTEL: `hotel`,
-  HOUSE: `house`,
-  ROOM: `room`,
-};
-
 export const City = {
   PARIS: `Paris`,
   COLOGNE: `Cologne`,
@@ -26,7 +19,6 @@ export const FilterType = {
   PRICE_HIGH_TO_LOW: `Price: high to low`,
   TOP_RATED_FIRST: `Top rated first`,
 };
-
 
 export const RATING_TITLES = [
   `perfect`,
