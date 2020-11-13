@@ -4,6 +4,16 @@ export const RATING_IN_PERCENT = 100 / MAX_RATING;
 export const SINGULAR = 1;
 export const MAX_REVIEWS = 10;
 
+export const Route = {
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`,
+};
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
 export const City = {
   PARIS: `Paris`,
   COLOGNE: `Cologne`,

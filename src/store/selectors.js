@@ -12,6 +12,9 @@ export const getReviews = (state) => state[NameSpace.DATA].reviews;
 export const getReviewsLoadingStatus = (state) => state[NameSpace.DATA].isReviewsLoaded;
 export const getNearbyOffers = (state) => state[NameSpace.DATA].nearbyOffers;
 export const getNearbyOffersLoadingStatus = (state) => state[NameSpace.DATA].isNearbyOffersLoaded;
+export const getAuthStatus = (state) => state[NameSpace.USER].authorizationStatus;
+export const getUserInformation = (state) => state[NameSpace.USER].info;
+
 
 export const getFilteredOffers = createSelector(
     getOffers,

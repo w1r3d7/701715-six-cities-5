@@ -45,4 +45,20 @@ const adaptReviewToClient = (review) => {
   return result;
 };
 
-export {adaptOfferToClient, adaptReviewToClient};
+const adaptUserInfoToClient = (userInfo) => {
+  const result = Object.assign(
+      {},
+      userInfo,
+      {
+        avatarUrl: userInfo.avatar_url,
+        isPremiumUser: userInfo.is_pro,
+      }
+  );
+
+  delete result.avatar_url;
+  delete result.is_pro;
+
+  return result;
+};
+
+export {adaptOfferToClient, adaptReviewToClient, adaptUserInfoToClient};

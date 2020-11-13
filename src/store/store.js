@@ -4,8 +4,12 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 import reducer from './root-reducer';
+import {requireAuthorization} from './user/actions';
+import {AuthorizationStatus} from '../constants';
 
-const api = createApi();
+const api = createApi(
+    () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))
+);
 
 export const store = createStore(
     reducer,
