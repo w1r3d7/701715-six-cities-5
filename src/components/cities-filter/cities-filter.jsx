@@ -9,7 +9,12 @@ import {FilterType} from '../../constants';
 const FILTER_POPUP_OPENED_CLASS = `places__options--opened`;
 const filtersList = Object.values(FilterType);
 
-const CitiesFilter = ({currentFilter, isToggleOpen, onToggleClick, onFilterChange}) => {
+const CitiesFilter = ({
+  currentFilter,
+  isToggleOpen,
+  onToggleClick,
+  onFilterChange
+}) => {
   const handleFilterClick = (selectedFilter) => () => {
     onFilterChange(selectedFilter);
     onToggleClick();

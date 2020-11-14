@@ -12,11 +12,9 @@ import {RouteUrl} from '../../constants';
 const OfferCard = ({offer, onCardHover}) => {
   const {
     id,
-    photosUrl,
+    previewImage,
     isPremium,
   } = offer;
-
-  const [mainPhotoUrl] = photosUrl;
 
   const handleCardHover = () => {
     onCardHover(id);
@@ -27,7 +25,7 @@ const OfferCard = ({offer, onCardHover}) => {
       <PlaceCardPremiumMark isPremium={isPremium} />
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={RouteUrl.OFFER + id}>
-          <img className="place-card__image" src={mainPhotoUrl} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
         </Link>
       </div>
       <PlaceCard offer={offer} />

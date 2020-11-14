@@ -21,7 +21,8 @@ export const saveUserInformation = (userInfo) => ({
 export const checkAuth = () => (dispatch, _state, api) => {
   api.get(`/login`)
     .then(({data}) => dispatch(saveUserInformation(data)))
-    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)));
+    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
+    .catch(() => {});
 };
 
 export const login = ({email, password}) => (dispatch, _state, api) => {

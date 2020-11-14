@@ -14,6 +14,7 @@ const adaptOfferToClient = (offer) => {
         hostAvatar: offer.host.avatar_url,
         isHostPremium: offer.host.is_pro,
         maxCapacity: offer.max_adults,
+        previewImage: offer.preview_image,
       }
   );
 
@@ -23,6 +24,7 @@ const adaptOfferToClient = (offer) => {
   delete result.host;
   delete result.goods;
   delete result.max_adults;
+  delete result.preview_image;
 
   return result;
 };

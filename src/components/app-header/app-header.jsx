@@ -18,7 +18,7 @@ const AppHeader = ({authStatus, userInfo: {email}}) => {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Link to="/" className="header__logo-link">
+            <Link to={RouteUrl.HOME} className="header__logo-link">
               <img
                 className="header__logo"
                 src="/img/logo.svg"

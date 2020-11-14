@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
-import {BOOKMARK_ACTIVE_CLASS, RouteUrl} from '../../constants';
+import {AuthorizationStatus, BOOKMARK_ACTIVE_CLASS, RouteUrl} from '../../constants';
 import {getRatingInPercentage} from '../../utils';
 import {OFFER_PROP_TYPES} from '../../types';
+import {getAuthStatus} from '../../store/selectors';
+import {browserHistory} from '../../browser-history';
 
 
-const PlaceCard = ({offer, cardType}) => {
+const PlaceCard = ({offer, cardType, authStatus}) => {
 
   const {
     id,
@@ -20,6 +23,13 @@ const PlaceCard = ({offer, cardType}) => {
 
   const handleButtonClick = (evt) => {
     evt.preventDefault();
+
+    if (authStatus === AuthorizationStatus.NO_AUTH) {
+      browserHistory.push(RouteUrl.LOGIN);
+      return;
+    }
+
+
   };
 
   return (
@@ -61,7 +71,12 @@ PlaceCard.defaultProps = {
 
 PlaceCard.propTypes = {
   cardType: PropTypes.string.isRequired,
-  offer: PropTypes.shape(OFFER_PROP_TYPES).isRequired
+  offer: PropTypes.shape(OFFER_PROP_TYPES).isRequired,
+  authStatus: PropTypes.string.isRequired,
 };
 
-export default PlaceCard;
+const mapStateToProps = (state) => ({
+  authStatus: getAuthStatus(state),
+});
+
+export default connect(mapStateToProps)(PlaceCard);

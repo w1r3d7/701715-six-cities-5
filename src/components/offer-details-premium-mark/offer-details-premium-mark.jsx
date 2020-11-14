@@ -5,7 +5,9 @@ import PremiumMark from '../premium-mark/premium-mark';
 
 const PROPERTY_CLASS = `property`;
 
-const OfferDetailsPremiumMark = ({isPremium}) => (<PremiumMark cardType={PROPERTY_CLASS} isPremium={isPremium} />);
+const OfferDetailsPremiumMark = ({isPremium}) => (
+  <PremiumMark cardType={PROPERTY_CLASS} isPremium={isPremium} />
+);
 
 OfferDetailsPremiumMark.propTypes = {
   isPremium: PropTypes.bool.isRequired,
