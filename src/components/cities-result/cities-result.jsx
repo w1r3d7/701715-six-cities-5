@@ -15,7 +15,6 @@ import {getCurrentFilter} from '../../store/selectors';
 const CitiesResult = ({
   offers,
   city,
-  onOfferClick,
   currentFilter,
   onCardHover,
   activeCardId,
@@ -38,7 +37,6 @@ const CitiesResult = ({
         <CitiesFilter onFilterChange={handleFilterChange} currentFilter={currentFilter} />
         <OfferList
           offers={offers}
-          onOfferClick={onOfferClick}
           onHoverCard={onCardHover}
         />
       </section>
@@ -54,7 +52,6 @@ const CitiesResult = ({
 
 CitiesResult.propTypes = {
   city: PropTypes.string.isRequired,
-  onOfferClick: PropTypes.func.isRequired,
   currentFilter: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired

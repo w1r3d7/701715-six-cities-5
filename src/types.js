@@ -26,6 +26,7 @@ export const OFFER_PROP_TYPES = {
   bedroomsCount: PropTypes.number.isRequired,
   maxCapacity: PropTypes.number.isRequired,
   hostName: PropTypes.string.isRequired,
+  previewImage: PropTypes.string.isRequired,
   hostDescription: PropTypes.string.isRequired,
   hostAvatar: PropTypes.string.isRequired,
   isHostPremium: PropTypes.bool.isRequired,

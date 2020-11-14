@@ -20,7 +20,6 @@ const PAGE_MAIN_EMPTY_CLASS = `page__main--index-empty`;
 
 const Main = ({
   offers,
-  onOfferClick,
   currentCity,
   onCityChange,
   currentFilter,
@@ -52,7 +51,6 @@ const Main = ({
             isOffersEmpty={isOffersEmpty}
             currentCity={currentCity}
             offers={filteredOffers}
-            onOfferClick={onOfferClick}
           />
         </div>
       </main>
@@ -61,7 +59,6 @@ const Main = ({
 };
 
 Main.propTypes = {
-  onOfferClick: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,

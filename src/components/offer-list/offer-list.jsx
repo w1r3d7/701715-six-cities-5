@@ -5,14 +5,13 @@ import OfferCard from '../offer-card/offer-card';
 
 import {OFFER_PROP_TYPES} from '../../types.js';
 
-const OfferList = ({offers, onHoverCard, onOfferClick}) => (
+const OfferList = ({offers, onHoverCard}) => (
   <div className="cities__places-list places__list tabs__content">
     {offers.map((offer) => (
       <OfferCard
         offer={offer}
         key={offer.id}
         onCardHover={onHoverCard}
-        onCardClick={onOfferClick}
       />
     ))}
   </div>
@@ -20,7 +19,6 @@ const OfferList = ({offers, onHoverCard, onOfferClick}) => (
 
 OfferList.propTypes = {
   onHoverCard: PropTypes.func.isRequired,
-  onOfferClick: PropTypes.func.isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired

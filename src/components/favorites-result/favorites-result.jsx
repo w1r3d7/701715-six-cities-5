@@ -11,8 +11,8 @@ const getCities = (offers) => {
   return Array.from(uniqCities);
 };
 
-const FavoritesResult = ({favoritesOffers}) => {
-  const cities = getCities(favoritesOffers);
+const FavoritesResult = ({favoriteOffers}) => {
+  const cities = getCities(favoriteOffers);
   return (
     <main className="page__main page__main--favorites">
       <div className="page__favorites-container container">
@@ -23,7 +23,7 @@ const FavoritesResult = ({favoritesOffers}) => {
               <FavoritesItem
                 key={cityItem}
                 city={cityItem}
-                offers={favoritesOffers}
+                offers={favoriteOffers}
               />
             ))}
           </ul>
@@ -34,7 +34,7 @@ const FavoritesResult = ({favoritesOffers}) => {
 };
 
 FavoritesResult.propTypes = {
-  favoritesOffers: PropTypes.arrayOf(
+  favoriteOffers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired
 };

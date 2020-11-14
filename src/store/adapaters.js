@@ -14,6 +14,7 @@ const adaptOfferToClient = (offer) => {
         hostAvatar: offer.host.avatar_url,
         isHostPremium: offer.host.is_pro,
         maxCapacity: offer.max_adults,
+        previewImage: offer.preview_image,
       }
   );
 
@@ -23,6 +24,7 @@ const adaptOfferToClient = (offer) => {
   delete result.host;
   delete result.goods;
   delete result.max_adults;
+  delete result.preview_image;
 
   return result;
 };
@@ -45,4 +47,20 @@ const adaptReviewToClient = (review) => {
   return result;
 };
 
-export {adaptOfferToClient, adaptReviewToClient};
+const adaptUserInfoToClient = (userInfo) => {
+  const result = Object.assign(
+      {},
+      userInfo,
+      {
+        avatarUrl: userInfo.avatar_url,
+        isPremiumUser: userInfo.is_pro,
+      }
+  );
+
+  delete result.avatar_url;
+  delete result.is_pro;
+
+  return result;
+};
+
+export {adaptOfferToClient, adaptReviewToClient, adaptUserInfoToClient};
