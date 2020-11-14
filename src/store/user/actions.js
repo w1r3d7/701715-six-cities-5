@@ -1,4 +1,5 @@
 import {AuthorizationStatus} from '../../constants';
+import {browserHistory} from '../../browser-history';
 
 export const ActionType = {
   CHECK_AUTH: `CHECK_AUTH`,
@@ -26,5 +27,6 @@ export const checkAuth = () => (dispatch, _state, api) => {
 export const login = ({email, password}) => (dispatch, _state, api) => {
   api.post(`/login`, {email, password})
     .then(({data}) => dispatch(saveUserInformation(data)))
-    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)));
+    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => browserHistory.push(`/`));
 };

@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 import PlaceCard from '../place-card/place-card';
 import PlaceCardPremiumMark from '../place-card-premium-mark/place-card-premium-mark';
 
 import {OFFER_PROP_TYPES} from '../../types.js';
+import {RouteUrl} from '../../constants';
 
-const OfferCard = ({offer, onCardClick, onCardHover}) => {
+
+const OfferCard = ({offer, onCardHover}) => {
   const {
     id,
     photosUrl,
@@ -19,18 +22,13 @@ const OfferCard = ({offer, onCardClick, onCardHover}) => {
     onCardHover(id);
   };
 
-  const handleCardClick = (evt) => {
-    evt.preventDefault();
-    onCardClick(id);
-  };
-
   return (
-    <article className="cities__place-card place-card" onMouseOver={handleCardHover} onClick={handleCardClick}>
+    <article className="cities__place-card place-card" onMouseOver={handleCardHover}>
       <PlaceCardPremiumMark isPremium={isPremium} />
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={RouteUrl.OFFER + id}>
           <img className="place-card__image" src={mainPhotoUrl} width="260" height="200" alt="Place image" />
-        </a>
+        </Link>
       </div>
       <PlaceCard offer={offer} />
     </article>
@@ -38,7 +36,6 @@ const OfferCard = ({offer, onCardClick, onCardHover}) => {
 };
 
 OfferCard.propTypes = {
-  onCardClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
   offer: PropTypes.shape(OFFER_PROP_TYPES).isRequired,
 };

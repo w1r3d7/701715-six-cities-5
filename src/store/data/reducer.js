@@ -10,6 +10,8 @@ const initialState = {
   isReviewsLoaded: false,
   nearbyOffers: null,
   isNearbyOffersLoaded: false,
+  favoriteOffers: null,
+  isFavoriteOffersLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -49,6 +51,15 @@ const reducer = (state = initialState, action) => {
     case ActionType.NEARBY_OFFERS_REQUESTED:
       return extend(state, {
         isNearbyOffersLoaded: false,
+      });
+    case ActionType.GET_FAVORITE_OFFERS:
+      return extend(state, {
+        favoriteOffers: action.payload,
+        isFavoriteOffersLoaded: true,
+      });
+    case ActionType.FAVORITE_OFFERS_REQUESTED:
+      return extend(state, {
+        isFavoriteOffersLoaded: false,
       });
     default:
       return state;

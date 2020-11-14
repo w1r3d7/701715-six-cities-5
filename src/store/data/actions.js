@@ -4,6 +4,7 @@ const Url = {
   OFFERS: `/hotels/`,
   COMMENTS: `/comments/`,
   NEARBY: `/nearby/`,
+  FAVORITE: `/favorite`,
 };
 
 export const ActionType = {
@@ -15,6 +16,8 @@ export const ActionType = {
   REVIEWS_REQUESTED: `REVIEWS_REQUESTED`,
   GET_NEARBY_OFFERS: `GET_NEARBY_OFFERS`,
   NEARBY_OFFERS_REQUESTED: `NEARBY_OFFERS_REQUESTED`,
+  GET_FAVORITE_OFFERS: `GET_FAVORITE_OFFERS`,
+  FAVORITE_OFFERS_REQUESTED: `FAVORITE_OFFERS_REQUESTED`,
 };
 
 const getOffers = (offers) => ({
@@ -53,6 +56,15 @@ const requestNearbyOffers = () => ({
   type: ActionType.NEARBY_OFFERS_REQUESTED,
 });
 
+const getFavoriteOffers = (offers) => ({
+  type: ActionType.GET_FAVORITE_OFFERS,
+  payload: offers,
+});
+
+const requestFavoriteOffers = () => ({
+  type: ActionType.FAVORITE_OFFERS_REQUESTED,
+});
+
 
 export const fetchOffers = () => (dispatch, _state, api) => {
   requestOffers();
@@ -80,4 +92,11 @@ export const fetchNearbyOffers = (id) => (dispatch, _state, api) => {
   api.get(Url.OFFERS + id + Url.NEARBY)
     .then(({data}) => data.map((item) => adaptOfferToClient(item)))
     .then((offers) => dispatch(getNearbyOffers(offers)));
+};
+
+export const fetchFavoriteOffers = () => (dispatch, _state, api) => {
+  requestFavoriteOffers();
+  api.get(Url.FAVORITE)
+    .then(({data}) => data.map((item) => adaptOfferToClient(item)))
+    .then((offers) => dispatch(getFavoriteOffers(offers)));
 };

@@ -10,7 +10,6 @@ const CitiesContainer = ({
   isOffersEmpty,
   currentCity,
   offers,
-  onOfferClick,
 }) => {
   return (
     isOffersEmpty
@@ -20,7 +19,6 @@ const CitiesContainer = ({
       :
       <CitiesResult
         city={currentCity}
-        onOfferClick={onOfferClick}
         offers={offers}/>
   );
 };
@@ -30,7 +28,6 @@ CitiesContainer.propTypes = {
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,
   currentCity: PropTypes.string.isRequired,
-  onOfferClick: PropTypes.func.isRequired,
   isOffersEmpty: PropTypes.bool.isRequired,
 };
 

@@ -4,14 +4,14 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import {getAuthStatus, getUserInformation} from '../../store/selectors';
-import {AuthorizationStatus, Route} from '../../constants';
+import {AuthorizationStatus, RouteUrl} from '../../constants';
 
 const SIGN_IN_TEXT = `Sign in`;
 
 const AppHeader = ({authStatus, userInfo: {email}}) => {
   const isLogin = authStatus === AuthorizationStatus.AUTH;
 
-  const route = isLogin ? Route.FAVORITES : Route.LOGIN;
+  const route = isLogin ? RouteUrl.FAVORITES : RouteUrl.LOGIN;
 
   return (
     <header className="header">

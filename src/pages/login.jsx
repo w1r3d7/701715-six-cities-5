@@ -1,4 +1,5 @@
 import React, {createRef, PureComponent} from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -97,6 +98,10 @@ class Login extends PureComponent {
     );
   }
 }
+
+Login.propTypes = {
+  loginAction: PropTypes.func.isRequired,
+};
 
 const mapDispatchToProps = (dispatch) => ({
   loginAction: (authInfo) => dispatch(login(authInfo))

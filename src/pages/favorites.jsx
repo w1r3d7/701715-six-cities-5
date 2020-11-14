@@ -1,40 +1,49 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import AppHeader from '../components/app-header/app-header';
 import AppFooter from '../components/app-footer/app-footer';
-import FavoritesEmpty from '../components/favorites-empty/favorites-empty';
-import FavoritesResult from '../components/favorites-result/favorites-result';
+import FavoritesContainer from '../components/favorites-container/favorites-container';
 
+import {fetchFavoriteOffers} from '../store/data/actions';
 import {OFFER_PROP_TYPES} from '../types.js';
+import {getFavoriteLoadingStatus, getFavoriteOffers} from '../store/selectors';
 
-const Favorites = ({offers}) => {
-  const favoritesOffers = offers.filter((offer) => offer.isInBookmark);
-  const isFavoritesEmpty = Boolean(!favoritesOffers.length);
+class Favorites extends PureComponent {
 
-  return (
-    <div className="page">
-      <AppHeader />
-      {
-        isFavoritesEmpty
-          ? <FavoritesEmpty />
-          : <FavoritesResult favoritesOffers={favoritesOffers}/>
-      }
-      <AppFooter />
-    </div>
-  );
-};
+  componentDidMount() {
+    this.props.fetchFavoriteOffersAction();
+  }
+
+  render() {
+    const {favoriteLoadingStatus, favoriteOffers} = this.props;
+    return (
+      <div className="page">
+        <AppHeader />
+        <FavoritesContainer isLoaded={favoriteLoadingStatus} favoriteOffers={favoriteOffers} />
+        <AppFooter />
+      </div>
+    );
+  }
+}
 
 Favorites.propTypes = {
-  offers: PropTypes.arrayOf(
+  favoriteOffers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
-  ).isRequired
+  ),
+  favoriteLoadingStatus: PropTypes.bool.isRequired,
+  fetchFavoriteOffersAction: PropTypes.func.isRequired,
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  fetchFavoriteOffersAction: () => dispatch(fetchFavoriteOffers())
+});
+
 const mapStateToProps = (state) => ({
-  offers: state.offers,
+  favoriteOffers: getFavoriteOffers(state),
+  favoriteLoadingStatus: getFavoriteLoadingStatus(state),
 });
 
 export {Favorites};
-export default connect(mapStateToProps)(Favorites);
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

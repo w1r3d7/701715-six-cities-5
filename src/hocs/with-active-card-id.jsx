@@ -38,7 +38,6 @@ const withActiveCardId = (Component) => {
 
   WithActiveCardId.propTypes = {
     city: PropTypes.string.isRequired,
-    onOfferClick: PropTypes.func.isRequired,
     offers: PropTypes.arrayOf(
         PropTypes.shape(OFFER_PROP_TYPES).isRequired
     ).isRequired,
