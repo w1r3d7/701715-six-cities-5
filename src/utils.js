@@ -1,8 +1,8 @@
-import {FilterType, RATING_IN_PERCENT, SINGULAR} from './constants';
+import {FilterType, RATING_IN_PERCENT, SINGULAR, MAX_REVIEWS} from './constants';
 
 export const getRatingInPercentage = (rating) => `${rating * RATING_IN_PERCENT}%`;
 
-export const filterOffersByCity = (offers, city) => offers.filter((offer) => offer.city === city);
+export const filterOffersByCity = (offers, city) => offers.filter((offer) => offer.city.name === city);
 
 export const sortOffersByFilterType = (filteredOffers, filterType) => {
   switch (filterType) {
@@ -24,3 +24,20 @@ export const getOffersByCityAndFilter = (offers, city, filterType) => {
 export const extend = (a, b) => Object.assign({}, a, b);
 
 export const checkForPlural = (item, count) => count > SINGULAR ? `${item}s` : item;
+
+export const formatDate = (date) => {
+  const newDate = new Date(date);
+
+  return new Intl.DateTimeFormat(`en-US`, {month: `long`, year: `numeric`}).format(newDate);
+};
+
+export const sortAndCutReviews = (reviews) => {
+  if (!reviews) {
+    return reviews;
+  }
+
+  return reviews
+    .slice()
+    .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
+    .slice(0, MAX_REVIEWS);
+};

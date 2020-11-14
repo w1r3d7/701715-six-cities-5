@@ -4,8 +4,10 @@ export const REVIEW_PROP_TYPES = {
   name: PropTypes.string,
   photoUrl: PropTypes.string,
   reviewText: PropTypes.string,
-  rating: PropTypes.string,
+  rating: PropTypes.number,
   date: PropTypes.string,
+  isUserPremium: PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export const OFFER_PROP_TYPES = {
@@ -17,7 +19,7 @@ export const OFFER_PROP_TYPES = {
   description: PropTypes.string.isRequired,
   isPremium: PropTypes.bool.isRequired,
   isInBookmark: PropTypes.bool.isRequired,
-  rating: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
   facilities: PropTypes.arrayOf(
       PropTypes.string.isRequired
   ).isRequired,
@@ -27,8 +29,13 @@ export const OFFER_PROP_TYPES = {
   hostDescription: PropTypes.string.isRequired,
   hostAvatar: PropTypes.string.isRequired,
   isHostPremium: PropTypes.bool.isRequired,
-  city: PropTypes.string.isRequired,
-  reviews: PropTypes.array.isRequired,
+  city: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 

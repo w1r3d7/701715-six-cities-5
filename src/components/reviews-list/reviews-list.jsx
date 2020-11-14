@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {compose} from 'redux';
 
 import ReviewItem from '../review-item/review-item';
 import ReviewForm from '../review-form/review-form';
 import withReviews from '../../hocs/with-reviews';
 
 import {REVIEW_PROP_TYPES} from '../../types';
+import {withLoading} from '../../hocs/with-loading';
 
 const EMPTY_REVIEWS = 0;
 
@@ -38,4 +40,8 @@ ReviewsList.propTypes = {
   onFormSubmit: PropTypes.func.isRequired,
 };
 
-export default withReviews(ReviewsList);
+export {ReviewsList};
+export default compose(
+    withLoading,
+    withReviews
+)(ReviewsList);

@@ -39,15 +39,11 @@ const withActiveCardId = (Component) => {
   WithActiveCardId.propTypes = {
     city: PropTypes.string.isRequired,
     onOfferClick: PropTypes.func.isRequired,
-    placesCount: PropTypes.number.isRequired,
     offers: PropTypes.arrayOf(
         PropTypes.shape(OFFER_PROP_TYPES).isRequired
     ).isRequired,
     currentFilter: PropTypes.string.isRequired,
     onFilterChange: PropTypes.func.isRequired,
-    filteredOffers: PropTypes.arrayOf(
-        PropTypes.shape(OFFER_PROP_TYPES).isRequired
-    ).isRequired,
   };
 
   return WithActiveCardId;

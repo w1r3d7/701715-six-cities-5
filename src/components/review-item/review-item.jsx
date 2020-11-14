@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {REVIEW_PROP_TYPES} from '../../types.js';
-import {getRatingInPercentage} from '../../utils.js';
+import {formatDate, getRatingInPercentage} from '../../utils.js';
 
 const ReviewItem = ({review}) => {
   const {
@@ -36,7 +36,7 @@ const ReviewItem = ({review}) => {
         <p className="reviews__text">
           {reviewText}
         </p>
-        <time className="reviews__time" dateTime={date}>{date}</time>
+        <time className="reviews__time" dateTime={date}>{formatDate(date)}</time>
       </div>
     </li>
   );

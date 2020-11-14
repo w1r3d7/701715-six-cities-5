@@ -2,13 +2,7 @@ export const BOOKMARK_ACTIVE_CLASS = `place-card__bookmark-button--active`;
 const MAX_RATING = 5;
 export const RATING_IN_PERCENT = 100 / MAX_RATING;
 export const SINGULAR = 1;
-
-export const OfferType = {
-  APARTMENT: `apartment`,
-  HOTEL: `hotel`,
-  HOUSE: `house`,
-  ROOM: `room`,
-};
+export const MAX_REVIEWS = 10;
 
 export const City = {
   PARIS: `Paris`,
@@ -26,7 +20,6 @@ export const FilterType = {
   TOP_RATED_FIRST: `Top rated first`,
 };
 
-
 export const RATING_TITLES = [
   `perfect`,
   `good`,
@@ -36,8 +29,3 @@ export const RATING_TITLES = [
 ];
 
 export const RATING_COUNT = [`5`, `4`, `3`, `2`, `1`];
-
-export const CityNameToCoordinates = {
-  [City.AMSTERDAM]: [52.38333, 4.9],
-  [City.PARIS]: [48.8729139, 2.3216323]
-};
