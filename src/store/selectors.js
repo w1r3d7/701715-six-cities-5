@@ -16,7 +16,8 @@ export const getAuthStatus = (state) => state[NameSpace.USER].authorizationStatu
 export const getUserInformation = (state) => state[NameSpace.USER].info;
 export const getFavoriteOffers = (state) => state[NameSpace.DATA].favoriteOffers;
 export const getFavoriteLoadingStatus = (state) => state[NameSpace.DATA].isFavoriteOffersLoaded;
-
+export const getError = (state) => state[NameSpace.DATA].sendReviewError;
+export const getReviewSendStatus = (state) => state[NameSpace.DATA].isReviewRequestSend;
 
 export const getFilteredOffers = createSelector(
     getOffers,

@@ -12,6 +12,8 @@ const initialState = {
   isNearbyOffersLoaded: false,
   favoriteOffers: null,
   isFavoriteOffersLoaded: false,
+  isReviewRequestSend: false,
+  sendReviewError: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -60,6 +62,18 @@ const reducer = (state = initialState, action) => {
     case ActionType.FAVORITE_OFFERS_REQUESTED:
       return extend(state, {
         isFavoriteOffersLoaded: false,
+      });
+    case ActionType.REVIEW_SEND_REQUESTED:
+      return extend(state, {
+        isReviewRequestSend: true,
+      });
+    case ActionType.REVIEW_SEND:
+      return extend(state, {
+        isReviewRequestSend: false,
+      });
+    case ActionType.WRITE_ERROR:
+      return extend(state, {
+        sendReviewError: action.payload,
       });
     default:
       return state;

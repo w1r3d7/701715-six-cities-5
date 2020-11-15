@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {compose} from 'redux';
+import {connect} from 'react-redux';
 
 import ReviewItem from '../review-item/review-item';
 import ReviewForm from '../review-form/review-form';
-import withReviews from '../../hocs/with-reviews';
 
 import {REVIEW_PROP_TYPES} from '../../types';
 import {withLoading} from '../../hocs/with-loading';
+import {getAuthStatus} from '../../store/selectors';
+import {AuthorizationStatus} from '../../constants';
 
 const EMPTY_REVIEWS = 0;
 
-const ReviewsList = ({reviews, onFormSubmit}) => {
+const ReviewsList = ({reviews, authStatus, offerId}) => {
+  const isLoggedIn = authStatus === AuthorizationStatus.AUTH;
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">
@@ -27,21 +30,25 @@ const ReviewsList = ({reviews, onFormSubmit}) => {
           reviews.map((review) => <ReviewItem review={review} key={review.id} />)
         }
       </ul>
-      <ReviewForm onSubmit={onFormSubmit} />
+      {isLoggedIn && <ReviewForm offerId={offerId} />}
     </section>
   );
-
 };
 
 ReviewsList.propTypes = {
   reviews: PropTypes.arrayOf(
       PropTypes.shape(REVIEW_PROP_TYPES).isRequired
   ).isRequired,
-  onFormSubmit: PropTypes.func.isRequired,
+  authStatus: PropTypes.string.isRequired,
+  offerId: PropTypes.number.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  authStatus: getAuthStatus(state),
+});
 
 export {ReviewsList};
 export default compose(
     withLoading,
-    withReviews
+    connect(mapStateToProps)
 )(ReviewsList);
