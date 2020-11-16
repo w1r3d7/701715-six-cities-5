@@ -38,6 +38,6 @@ export const sortAndCutReviews = (reviews) => {
 
   return reviews
     .slice()
-    .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, MAX_REVIEWS);
 };

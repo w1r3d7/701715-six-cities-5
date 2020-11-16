@@ -12,7 +12,7 @@ import {
   getNearbyOffers,
   getNearbyOffersLoadingStatus,
 } from '../store/selectors';
-import OfferDetailsProperty from '../components/offers-details-property/offers-details-property';
+import OfferDetailsProperty from '../components/offer-details-property/offer-details-property';
 import OfferDetailsNearbyList from '../components/offer-details-nearby-list/offer-details-nearby-list';
 
 class Offer extends PureComponent {

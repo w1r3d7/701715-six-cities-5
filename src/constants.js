@@ -12,6 +12,14 @@ export const RouteUrl = {
   HOME: `/`,
 };
 
+export const ApiUrl = {
+  OFFERS: `/hotels/`,
+  COMMENTS: `/comments/`,
+  NEARBY: `/nearby/`,
+  FAVORITE: `/favorite`,
+  LOGIN: `/login`,
+};
+
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,

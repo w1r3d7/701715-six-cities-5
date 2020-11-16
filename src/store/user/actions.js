@@ -1,4 +1,4 @@
-import {AuthorizationStatus} from '../../constants';
+import {AuthorizationStatus, ApiUrl, RouteUrl} from '../../constants';
 import {browserHistory} from '../../browser-history';
 
 export const ActionType = {
@@ -19,15 +19,15 @@ export const saveUserInformation = (userInfo) => ({
 });
 
 export const checkAuth = () => (dispatch, _state, api) => {
-  api.get(`/login`)
+  api.get(ApiUrl.LOGIN)
     .then(({data}) => dispatch(saveUserInformation(data)))
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
     .catch(() => {});
 };
 
 export const login = ({email, password}) => (dispatch, _state, api) => {
-  api.post(`/login`, {email, password})
+  api.post(ApiUrl.LOGIN, {email, password})
     .then(({data}) => dispatch(saveUserInformation(data)))
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
-    .then(() => browserHistory.push(`/`));
+    .then(() => browserHistory.push(RouteUrl.HOME));
 };

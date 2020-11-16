@@ -20,11 +20,13 @@ class ReviewsContainer extends PureComponent {
   render() {
     const {
       reviews,
-      isReviewsLoaded
+      isReviewsLoaded,
+      offerId
     } = this.props;
 
     return (
       <ReviewsList
+        offerId={offerId}
         isLoaded={isReviewsLoaded}
         reviews={reviews}
       />
