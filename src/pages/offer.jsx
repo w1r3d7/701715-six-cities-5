@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import AppHeader from '../components/app-header/app-header';
 
 import {OFFER_PROP_TYPES} from '../types.js';
-import {fetchNearbyOffers, fetchOfferDetails} from '../store/data/actions';
+import {fetchNearbyOffers, fetchOfferDetails} from '../store/data/api-actions';
 import {
   getOfferDetails,
   getOfferDetailsLoadingStatus,

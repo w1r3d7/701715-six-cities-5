@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import OfferDetailsPremiumMark from '../offer-details-premium-mark/offer-details-premium-mark';
 import OfferDetailsMap from '../offer-details-map/offer-details-map';
 
-import {BOOKMARK_ACTIVE_CLASS} from '../../constants';
-import {checkForPlural, getRatingInPercentage} from '../../utils';
+import {BOOKMARK_ACTIVE_CLASS} from '../../constants/constants';
+import {checkForPlural, getRatingInPercentage} from '../../utils/utils';
 import {OFFER_PROP_TYPES} from '../../types';
 import {withLoading} from '../../hocs/with-loading';
 import ReviewsContainer from '../reviews-container/reviews-container';

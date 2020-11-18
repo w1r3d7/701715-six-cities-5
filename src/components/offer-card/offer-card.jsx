@@ -6,7 +6,7 @@ import PlaceCard from '../place-card/place-card';
 import PlaceCardPremiumMark from '../place-card-premium-mark/place-card-premium-mark';
 
 import {OFFER_PROP_TYPES} from '../../types.js';
-import {RouteUrl} from '../../constants';
+import {RouteUrl} from '../../constants/constants';
 
 
 const OfferCard = ({offer, onCardHover}) => {

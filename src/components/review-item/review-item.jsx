@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {REVIEW_PROP_TYPES} from '../../types.js';
-import {formatDate, getRatingInPercentage} from '../../utils.js';
+import {formatDate, getRatingInPercentage} from '../../utils/utils.js';
 
 const ReviewItem = ({review}) => {
   const {

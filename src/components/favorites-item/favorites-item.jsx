@@ -6,7 +6,7 @@ import FavoritesCard from '../favorites-card/favorites-card';
 import {OFFER_PROP_TYPES} from '../../types.js';
 
 const FavoritesItem = ({city, offers}) => {
-  const favoritesOffersByCities = offers.filter((offer) => offer.city === city);
+  const favoritesOffersByCities = offers.filter((offer) => offer.city.name === city);
 
   return (
     <li className="favorites__locations-items" key={city}>

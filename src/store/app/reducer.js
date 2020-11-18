@@ -1,5 +1,5 @@
-import {City, FilterType} from '../../constants';
-import {extend} from '../../utils';
+import {City, FilterType} from '../../constants/constants';
+import {extend} from '../../utils/utils';
 import {ActionType} from './actions';
 
 

@@ -1,6 +1,6 @@
 import {ActionType} from './actions';
-import {extend} from '../../utils';
-import {AuthorizationStatus} from '../../constants';
+import {extend} from '../../utils/utils';
+import {AuthorizationStatus} from '../../constants/constants';
 
 
 const initialState = {

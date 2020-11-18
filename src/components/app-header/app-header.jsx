@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import {getAuthStatus, getUserInformation} from '../../store/selectors';
-import {AuthorizationStatus, RouteUrl} from '../../constants';
+import {AuthorizationStatus, RouteUrl} from '../../constants/constants';
 
 const SIGN_IN_TEXT = `Sign in`;
 
@@ -57,4 +57,5 @@ const mapStateToProps = (state) => ({
   userInfo: getUserInformation(state)
 });
 
+export {AppHeader};
 export default connect(mapStateToProps)(AppHeader);

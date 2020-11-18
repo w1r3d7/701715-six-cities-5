@@ -7,7 +7,7 @@ import Favorites from '../../pages/favorites';
 import OfferDetails from '../../pages/offer';
 import PrivateRoute from '../private-route/private-route';
 
-import {RouteUrl} from '../../constants';
+import {RouteUrl} from '../../constants/constants';
 import {browserHistory} from '../../browser-history';
 
 const App = () => (

@@ -9,7 +9,7 @@ import ReviewForm from '../review-form/review-form';
 import {REVIEW_PROP_TYPES} from '../../types';
 import {withLoading} from '../../hocs/with-loading';
 import {getAuthStatus} from '../../store/selectors';
-import {AuthorizationStatus} from '../../constants';
+import {AuthorizationStatus} from '../../constants/constants';
 
 const EMPTY_REVIEWS = 0;
 

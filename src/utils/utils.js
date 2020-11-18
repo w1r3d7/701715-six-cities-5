@@ -1,4 +1,9 @@
-import {FilterType, RATING_IN_PERCENT, SINGULAR, MAX_REVIEWS} from './constants';
+import {
+  FilterType,
+  RATING_IN_PERCENT,
+  SINGULAR,
+  MAX_REVIEWS
+} from '../constants/constants';
 
 export const getRatingInPercentage = (rating) => `${rating * RATING_IN_PERCENT}%`;
 
@@ -41,3 +46,25 @@ export const sortAndCutReviews = (reviews) => {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, MAX_REVIEWS);
 };
+
+const findIndex = (array, item) => {
+  return array.findIndex((it) => it.id === item.id);
+};
+
+export const replaceItem = (array, item) => {
+  const itemIndex = findIndex(array, item);
+  return [
+    ...array.slice(0, itemIndex),
+    item,
+    ...array.slice(itemIndex + 1)
+  ];
+};
+
+export const removeItem = (array, item) => {
+  const itemIndex = findIndex(array, item);
+  return [
+    ...array.slice(0, itemIndex),
+    ...array.slice(itemIndex + 1)
+  ];
+};
+

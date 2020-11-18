@@ -1,4 +1,4 @@
-import {extend} from '../../utils';
+import {extend, replaceItem, removeItem} from '../../utils/utils';
 import {ActionType} from './actions';
 
 const initialState = {
@@ -75,10 +75,20 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         sendReviewError: action.payload,
       });
+    case ActionType.REMOVE_FROM_FAVORITE:
+      return extend(state, {
+        favoriteOffers: removeItem(state.favoriteOffers, action.payload)
+      });
+    case ActionType.CHANGE_FAVORITE_STATUS:
+      return extend(state, {
+        offers: replaceItem(state.offers, action.payload)
+      }
+      );
     default:
       return state;
   }
 };
+
 
 export {reducer};
 

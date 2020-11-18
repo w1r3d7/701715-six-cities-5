@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 
 import ReviewRating from '../review-rating/review-rating';
 
-import {RATING_COUNT, RATING_TITLES} from '../../constants.js';
-import {sendReview} from '../../store/data/actions';
+import {RATING_COUNT, RATING_TITLES} from '../../constants/constants.js';
+import {sendReview} from '../../store/data/api-actions';
 import {getError, getReviewSendStatus} from '../../store/selectors';
 
 const FormFieldName = {

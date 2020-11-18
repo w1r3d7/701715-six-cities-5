@@ -6,7 +6,7 @@ import AppHeader from '../components/app-header/app-header';
 import AppFooter from '../components/app-footer/app-footer';
 import FavoritesContainer from '../components/favorites-container/favorites-container';
 
-import {fetchFavoriteOffers} from '../store/data/actions';
+import {fetchFavoriteOffers} from '../store/data/api-actions';
 import {OFFER_PROP_TYPES} from '../types.js';
 import {getFavoriteLoadingStatus, getFavoriteOffers} from '../store/selectors';
 

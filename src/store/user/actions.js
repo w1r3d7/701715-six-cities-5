@@ -1,4 +1,4 @@
-import {AuthorizationStatus, ApiUrl, RouteUrl} from '../../constants';
+import {AuthorizationStatus, ApiUrl, RouteUrl} from '../../constants/constants';
 import {browserHistory} from '../../browser-history';
 
 export const ActionType = {

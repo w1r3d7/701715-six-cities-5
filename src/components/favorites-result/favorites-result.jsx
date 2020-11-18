@@ -6,7 +6,7 @@ import FavoritesItem from '../favorites-item/favorites-item';
 import {OFFER_PROP_TYPES} from '../../types.js';
 
 const getCities = (offers) => {
-  const cities = offers.map((offer) => offer.city);
+  const cities = offers.map((offer) => offer.city.name);
   const uniqCities = new Set(cities);
   return Array.from(uniqCities);
 };
