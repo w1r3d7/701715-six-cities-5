@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import OfferDetailsPremiumMark from '../offer-details-premium-mark/offer-details-premium-mark';
 import OfferDetailsMap from '../offer-details-map/offer-details-map';
 
-import {BOOKMARK_ACTIVE_CLASS} from '../../constants/constants';
+import {PROPERTY_BOOKMARK_ACTIVE_CLASS} from '../../constants/constants';
 import {checkForPlural, getRatingInPercentage} from '../../utils/utils';
 import {OFFER_PROP_TYPES} from '../../types';
 import {withLoading} from '../../hocs/with-loading';
@@ -55,7 +55,7 @@ const OfferDetailsProperty = ({offer, nearbyOffers}) => {
           <div className="property__name-wrapper">
             <h1 className="property__name">{description}</h1>
             <button
-              className={`property__bookmark-button button ${isInBookmark ? BOOKMARK_ACTIVE_CLASS : ``}`}
+              className={`property__bookmark-button button ${isInBookmark ? PROPERTY_BOOKMARK_ACTIVE_CLASS : ``}`}
               type="button">
               <svg className="property__bookmark-icon" width="31" height="33">
                 <use xlinkHref="#icon-bookmark" />

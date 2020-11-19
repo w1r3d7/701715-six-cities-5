@@ -3,8 +3,8 @@ const MAX_RATING = 5;
 export const RATING_IN_PERCENT = 100 / MAX_RATING;
 export const SINGULAR = 1;
 export const MAX_REVIEWS = 10;
-
 export const FAVORITE_CARD_CLASS = `favorites__card-info`;
+export const PROPERTY_BOOKMARK_ACTIVE_CLASS = `property__bookmark-button--active`;
 
 export const RouteUrl = {
   LOGIN: `/login`,
