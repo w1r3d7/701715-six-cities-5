@@ -27,7 +27,20 @@ const getCityLocation = ([offer]) => {
 };
 
 class Map extends PureComponent {
-  renderMap() {
+  renderMarkers() {
+    const {offers, activeCardId} = this.props;
+
+    const getIcon = (id) => activeCardId === id ? ACTIVE_ICON : DEFAULT_ICON;
+
+    this.layerGroup = leaflet.layerGroup(offers.map((offer) => {
+      const icon = getIcon(offer.id);
+      const coordinates = [offer.location.latitude, offer.location.longitude];
+      return leaflet.marker(coordinates, {icon});
+    }));
+    this.layerGroup.addTo(this.map);
+  }
+
+  componentDidMount() {
     const {city, zoom} = getCityLocation(this.props.offers);
 
     this.map = leaflet.map(`map`, {
@@ -43,23 +56,6 @@ class Map extends PureComponent {
       .addTo(this.map);
 
     this.renderMarkers();
-  }
-
-  renderMarkers() {
-    const {offers, activeCardId} = this.props;
-
-    const getIcon = (id) => activeCardId === id ? ACTIVE_ICON : DEFAULT_ICON;
-
-    this.layerGroup = leaflet.layerGroup(offers.map((offer) => {
-      const icon = getIcon(offer.id);
-      const coordinates = [offer.location.latitude, offer.location.longitude];
-      return leaflet.marker(coordinates, {icon});
-    }));
-    this.layerGroup.addTo(this.map);
-  }
-
-  componentDidMount() {
-    this.renderMap();
   }
 
   componentDidUpdate() {

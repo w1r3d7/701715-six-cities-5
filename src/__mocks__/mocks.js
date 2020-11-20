@@ -181,6 +181,12 @@ export const offers = [{
 }
 ];
 
+export const info = {
+  "avatar_url": `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/5.jpg`,
+  "email": `xyz@xyz.com`,
+  "id": 1,
+  "name": `xyz`,
+};
 
 export const reviews = [{
   "id": 1,
@@ -202,3 +208,8 @@ export const reviews = [{
   "userId": 2
 }
 ];
+
+export const user = {
+  "email": `Oliver.conner@gmail.com`,
+  "password": `12345678`
+};

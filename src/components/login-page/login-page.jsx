@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {login} from '../../store/user/actions';
+import {login} from '../../store/user/api-actions';
 
 class LoginPage extends PureComponent {
   constructor(props) {

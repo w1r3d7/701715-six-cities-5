@@ -16,7 +16,7 @@ const initialState = {
   sendReviewError: null,
 };
 
-const reducer = (state = initialState, action) => {
+const data = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.GET_OFFERS:
       return extend(state, {
@@ -90,5 +90,5 @@ const reducer = (state = initialState, action) => {
 };
 
 
-export {reducer};
+export {data};
 

@@ -8,19 +8,19 @@ const initialState = {
   currentFilter: FilterType.POPULAR,
 };
 
-const reducer = (state = initialState, action) => {
+const app = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_CITY:
       return extend(state, {
-        currentCity: action.payload.currentCity,
+        currentCity: action.payload,
       });
     case ActionType.CHANGE_FILTER:
       return extend(state, {
-        currentFilter: action.payload.currentFilter,
+        currentFilter: action.payload,
       });
     default:
       return state;
   }
 };
 
-export {reducer};
+export {app};
