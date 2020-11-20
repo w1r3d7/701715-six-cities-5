@@ -7,7 +7,7 @@ import OfferDetailsMap from '../offer-details-map/offer-details-map';
 import {PROPERTY_BOOKMARK_ACTIVE_CLASS} from '../../constants/constants';
 import {checkForPlural, getRatingInPercentage} from '../../utils/utils';
 import {OFFER_PROP_TYPES} from '../../types';
-import {withLoading} from '../../hocs/with-loading';
+import withLoading from '../../hocs/with-loading';
 import ReviewsContainer from '../reviews-container/reviews-container';
 
 const PREMIUM_HOST_CLASS = `property__avatar-wrapper--pro`;

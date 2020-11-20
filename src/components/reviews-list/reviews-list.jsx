@@ -7,7 +7,7 @@ import ReviewItem from '../review-item/review-item';
 import ReviewForm from '../review-form/review-form';
 
 import {REVIEW_PROP_TYPES} from '../../types';
-import {withLoading} from '../../hocs/with-loading';
+import withLoading from '../../hocs/with-loading';
 import {getAuthStatus} from '../../store/selectors';
 import {AuthorizationStatus} from '../../constants/constants';
 

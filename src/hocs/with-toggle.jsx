@@ -1,5 +1,4 @@
 import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
 
 const withToggle = (Component) => {
   class WithToggle extends PureComponent {
@@ -29,12 +28,6 @@ const withToggle = (Component) => {
       );
     }
   }
-
-  WithToggle.propTypes = {
-    currentFilter: PropTypes.string.isRequired,
-    onFilterChange: PropTypes.func.isRequired,
-  };
-
   return WithToggle;
 };
 

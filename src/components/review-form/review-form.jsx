@@ -96,4 +96,5 @@ const mapStateToProps = (state) => ({
   reviewRequestStatus: getReviewSendStatus(state),
 });
 
+export {ReviewForm};
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewForm);

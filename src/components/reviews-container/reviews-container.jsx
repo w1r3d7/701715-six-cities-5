@@ -52,4 +52,5 @@ const mapDispatchToProps = (dispatch) => ({
   getReviewsList: (id) => dispatch(fetchReviews(id))
 });
 
+export {ReviewsContainer};
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewsContainer);

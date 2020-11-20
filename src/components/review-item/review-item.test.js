@@ -3,7 +3,9 @@ import renderer from 'react-test-renderer';
 
 import ReviewItem from './review-item';
 
-import {review} from '../../__mocks__/mocks';
+import {reviews} from '../../__mocks__/mocks';
+
+const [review] = reviews;
 
 test(`ReviewItem render correctly`, () => {
   const tree = renderer

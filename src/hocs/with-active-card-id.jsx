@@ -1,7 +1,4 @@
 import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
-
-import {OFFER_PROP_TYPES} from '../types';
 
 const withActiveCardId = (Component) => {
   class WithActiveCardId extends PureComponent {
@@ -35,15 +32,6 @@ const withActiveCardId = (Component) => {
       );
     }
   }
-
-  WithActiveCardId.propTypes = {
-    city: PropTypes.string.isRequired,
-    offers: PropTypes.arrayOf(
-        PropTypes.shape(OFFER_PROP_TYPES).isRequired
-    ).isRequired,
-    currentFilter: PropTypes.string.isRequired,
-    onFilterChange: PropTypes.func.isRequired,
-  };
 
   return WithActiveCardId;
 };

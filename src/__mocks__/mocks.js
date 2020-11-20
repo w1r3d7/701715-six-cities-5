@@ -182,7 +182,7 @@ export const offers = [{
 ];
 
 
-export const review = {
+export const reviews = [{
   "id": 1,
   "rating": 4,
   "date": `2020-11-15T13:58:19.494Z`,
@@ -191,4 +191,14 @@ export const review = {
   "name": `xyz`,
   "isUserPremium": false,
   "userId": 1
-};
+}, {
+  "id": 2,
+  "rating": 3,
+  "date": `2020-10-15T13:58:19.494Z`,
+  "reviewText": `1111`,
+  "photoUrl": `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/4.jpg`,
+  "name": `xyza`,
+  "isUserPremium": true,
+  "userId": 2
+}
+];

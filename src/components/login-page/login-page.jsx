@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {login} from '../store/user/actions';
+import {login} from '../../store/user/actions';
 
-class Login extends PureComponent {
+class LoginPage extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -99,7 +99,7 @@ class Login extends PureComponent {
   }
 }
 
-Login.propTypes = {
+LoginPage.propTypes = {
   loginAction: PropTypes.func.isRequired,
 };
 
@@ -107,5 +107,5 @@ const mapDispatchToProps = (dispatch) => ({
   loginAction: (authInfo) => dispatch(login(authInfo))
 });
 
-
-export default connect(null, mapDispatchToProps)(Login);
+export {LoginPage};
+export default connect(null, mapDispatchToProps)(LoginPage);

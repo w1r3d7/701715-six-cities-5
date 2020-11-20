@@ -2,23 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import AppHeader from '../components/app-header/app-header';
-import CitiesContainer from '../components/cities-container/cities-container';
-import CitiesList from '../components/cities-list/cities-list';
+import AppHeader from '../app-header/app-header';
+import CitiesContainer from '../cities-container/cities-container';
+import CitiesList from '../cities-list/cities-list';
 
-import {OFFER_PROP_TYPES} from '../types.js';
-import {changeCity} from '../store/app/actions';
+import {OFFER_PROP_TYPES} from '../../types.js';
+import {changeCity} from '../../store/app/actions';
 import {
   getCurrentCity,
   getCurrentFilter,
   getFilteredOffers,
   getOffers,
   getOffersLoadingStatus
-} from '../store/selectors';
+} from '../../store/selectors';
 
 const PAGE_MAIN_EMPTY_CLASS = `page__main--index-empty`;
 
-const Main = ({
+const MainPage = ({
   offers,
   currentCity,
   onCityChange,
@@ -58,7 +58,7 @@ const Main = ({
   );
 };
 
-Main.propTypes = {
+MainPage.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,
@@ -83,5 +83,5 @@ const mapDispatchToProps = (dispatch) => ({
   onCityChange: (currentCity) => dispatch(changeCity(currentCity))
 });
 
-export {Main};
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export {MainPage};
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

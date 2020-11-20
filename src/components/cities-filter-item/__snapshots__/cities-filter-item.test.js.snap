@@ -19,33 +19,3 @@ exports[`CitiesFilterItem render currently CitiesFilterItem not match CurrentFil
   Popular
 </li>
 `;
-
-exports[`CitiesFilterItem render currently CitiesFilterItem with CurrentFilter 1`] = `
-<li
-  className="places__option places__option--active"
-  onClick={[Function]}
-  tabIndex="0"
->
-  Popular
-</li>
-`;
-
-exports[`CitiesFilterItem render currently CitiesFilterItem without CurrentFilter 1`] = `
-<li
-  className="places__option "
-  onClick={[Function]}
-  tabIndex="0"
->
-  Popular
-</li>
-`;
-
-exports[`CitiesFilterItem with CurrentFilter 1`] = `
-<li
-  className="places__option places__option--active"
-  onClick={[Function]}
-  tabIndex="0"
->
-  Popular
-</li>
-`;

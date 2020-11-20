@@ -2,15 +2,15 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import AppHeader from '../components/app-header/app-header';
-import AppFooter from '../components/app-footer/app-footer';
-import FavoritesContainer from '../components/favorites-container/favorites-container';
+import AppHeader from '../app-header/app-header';
+import AppFooter from '../app-footer/app-footer';
+import FavoritesContainer from '../favorites-container/favorites-container';
 
-import {fetchFavoriteOffers} from '../store/data/api-actions';
-import {OFFER_PROP_TYPES} from '../types.js';
-import {getFavoriteLoadingStatus, getFavoriteOffers} from '../store/selectors';
+import {fetchFavoriteOffers} from '../../store/data/api-actions';
+import {OFFER_PROP_TYPES} from '../../types.js';
+import {getFavoriteLoadingStatus, getFavoriteOffers} from '../../store/selectors';
 
-class Favorites extends PureComponent {
+class FavoritesPage extends PureComponent {
 
   componentDidMount() {
     this.props.fetchFavoriteOffersAction();
@@ -28,7 +28,7 @@ class Favorites extends PureComponent {
   }
 }
 
-Favorites.propTypes = {
+FavoritesPage.propTypes = {
   favoriteOffers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ),
@@ -45,5 +45,5 @@ const mapStateToProps = (state) => ({
   favoriteLoadingStatus: getFavoriteLoadingStatus(state),
 });
 
-export {Favorites};
-export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
+export {FavoritesPage};
+export default connect(mapStateToProps, mapDispatchToProps)(FavoritesPage);

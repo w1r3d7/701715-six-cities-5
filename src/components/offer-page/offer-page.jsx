@@ -2,20 +2,20 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import AppHeader from '../components/app-header/app-header';
+import AppHeader from '../app-header/app-header';
 
-import {OFFER_PROP_TYPES} from '../types.js';
-import {fetchNearbyOffers, fetchOfferDetails} from '../store/data/api-actions';
+import {OFFER_PROP_TYPES} from '../../types.js';
+import {fetchNearbyOffers, fetchOfferDetails} from '../../store/data/api-actions';
 import {
   getOfferDetails,
   getOfferDetailsLoadingStatus,
   getNearbyOffers,
   getNearbyOffersLoadingStatus,
-} from '../store/selectors';
-import OfferDetailsProperty from '../components/offer-details-property/offer-details-property';
-import OfferDetailsNearbyList from '../components/offer-details-nearby-list/offer-details-nearby-list';
+} from '../../store/selectors';
+import OfferDetailsProperty from '../offer-details-property/offer-details-property';
+import OfferDetailsNearbyList from '../offer-details-nearby-list/offer-details-nearby-list';
 
-class Offer extends PureComponent {
+class OfferPage extends PureComponent {
 
   componentDidMount() {
     const {fetchOffer, fetchNearby} = this.props;
@@ -53,7 +53,7 @@ class Offer extends PureComponent {
   }
 }
 
-Offer.propTypes = {
+OfferPage.propTypes = {
   offer: PropTypes.shape(OFFER_PROP_TYPES),
   isOfferDetailsLoaded: PropTypes.bool.isRequired,
   fetchOffer: PropTypes.func.isRequired,
@@ -81,5 +81,5 @@ const mapDispatchToProps = (dispatch) => ({
   fetchNearby: (id) => dispatch(fetchNearbyOffers(id)),
 });
 
-export {Offer};
-export default connect(mapStateToProps, mapDispatchToProps)(Offer);
+export {OfferPage};
+export default connect(mapStateToProps, mapDispatchToProps)(OfferPage);
