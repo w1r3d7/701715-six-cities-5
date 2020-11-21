@@ -51,4 +51,5 @@ CitiesFilter.propTypes = {
   onToggleClick: PropTypes.func.isRequired,
 };
 
+export {CitiesFilter};
 export default withToggle(CitiesFilter);

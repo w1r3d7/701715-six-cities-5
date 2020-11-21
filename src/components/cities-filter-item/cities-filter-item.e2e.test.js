@@ -7,7 +7,7 @@ import {FilterType} from '../../__mocks__/mocks';
 
 configure({adapter: new Adapter()});
 
-test(`CitiesFilter, click on "Filter" button`, () => {
+test(`CitiesFilterItem, click on "Filter" button`, () => {
   const onFilterButtonClick = jest.fn();
 
   const wrapper = shallow(
