@@ -14,7 +14,6 @@ const adaptedOffers = offersFromServer.map((offerItem) => adaptOfferToClient(off
 const [reviewFromServer] = reviewsFromServer;
 const adaptedReviews = reviewsFromServer.map((reviewItem) => adaptReviewToClient(reviewItem));
 const offerId = 1;
-const dispatch = jest.fn();
 const getOffers = apiAction.fetchOffers();
 const getOfferDetails = apiAction.fetchOfferDetails(offerId);
 const getReviews = apiAction.fetchReviews(offerId);
@@ -36,6 +35,7 @@ new MockAdapter(api)
 
 describe(`Data Async operations work correctly`, () => {
   it(`Should make a correct API GET /hotels`, () => {
+    const dispatch = jest.fn();
     return getOffers(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
@@ -47,6 +47,7 @@ describe(`Data Async operations work correctly`, () => {
   });
 
   it(`Should make a correct API GET /hotels/id`, () => {
+    const dispatch = jest.fn();
     return getOfferDetails(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(2);
@@ -61,6 +62,7 @@ describe(`Data Async operations work correctly`, () => {
   });
 
   it(`Should make a correct API GET /comments/id`, () => {
+    const dispatch = jest.fn();
     return getReviews(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(2);
@@ -75,6 +77,7 @@ describe(`Data Async operations work correctly`, () => {
   });
 
   it(`Should make a correct API POST /comments/id`, () => {
+    const dispatch = jest.fn();
     return sendReview(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(4);
@@ -96,6 +99,7 @@ describe(`Data Async operations work correctly`, () => {
   });
 
   it(`Should make a correct API GET /hotels/id/nearby`, () => {
+    const dispatch = jest.fn();
     return getNearbyOffers(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(2);
@@ -110,6 +114,7 @@ describe(`Data Async operations work correctly`, () => {
   });
 
   it(`Should make a correct API GET /favorite`, () => {
+    const dispatch = jest.fn();
     return getFavoriteOffers(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(2);
@@ -124,6 +129,7 @@ describe(`Data Async operations work correctly`, () => {
   });
 
   it(`Should make a correct API POST /favorite/id/0`, () => {
+    const dispatch = jest.fn();
     return removeFromFavorite(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
@@ -135,6 +141,7 @@ describe(`Data Async operations work correctly`, () => {
   });
 
   it(`Should make a correct API POST /favorite/id/1`, () => {
+    const dispatch = jest.fn();
     return addToFavorite(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);

@@ -1,40 +1,23 @@
-import React, {PureComponent} from 'react';
+import React, {useState} from 'react';
 
 const withActiveCardId = (Component) => {
-  class WithActiveCardId extends PureComponent {
-    constructor(props) {
-      super(props);
+  const WithActiveCardId = (props) => {
+    const [activeCardId, setActiveCardId] = useState(null);
 
-      this.state = {
-        activeCardId: null,
-      };
+    const handleCardHover = (cardId) => {
+      if (activeCardId !== cardId) {
+        setActiveCardId(cardId);
+      }
+    };
 
-      this.handleCardHover = this.handleCardHover.bind(this);
-    }
-
-    handleCardHover(activeCardId) {
-      this.setState((prevState) => (
-        prevState.activeCardId === activeCardId
-          ? null
-          : {activeCardId})
-      );
-    }
-
-    render() {
-      const {activeCardId} = this.state;
-
-      return (
-        <Component
-          activeCardId={activeCardId}
-          onCardHover={this.handleCardHover}
-          {...this.props}
-        />
-      );
-    }
-  }
-
+    return (
+      <Component
+        activeCardId={activeCardId}
+        onCardHover={handleCardHover}
+        {...props}
+      />
+    );
+  };
   return WithActiveCardId;
 };
-
-
 export default withActiveCardId;

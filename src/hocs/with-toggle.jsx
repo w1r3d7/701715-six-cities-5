@@ -1,35 +1,23 @@
-import React, {PureComponent} from 'react';
+import React, {useState} from 'react';
 
 const withToggle = (Component) => {
-  class WithToggle extends PureComponent {
-    constructor(props) {
-      super(props);
+  const WithToggle = (props) => {
+    const [isToggleOpen, setToggleState] = useState(false);
 
-      this.state = {
-        isToggleOpen: false,
-      };
+    const onToggleClick = () => {
+      setToggleState(!isToggleOpen);
+    };
 
-      this.handleToggleClick = this.handleToggleClick.bind(this);
-    }
+    return (
+      <Component
+        isToggleOpen={isToggleOpen}
+        onToggleClick={onToggleClick}
+        {...props}
+      />
+    );
+  };
 
-    handleToggleClick() {
-      this.setState((prevState) => {
-        return {isToggleOpen: !prevState.isToggleOpen};
-      });
-    }
-
-    render() {
-      return (
-        <Component
-          isToggleOpen={this.state.isToggleOpen}
-          onToggleClick={this.handleToggleClick}
-          {...this.props}
-        />
-      );
-    }
-  }
   return WithToggle;
 };
-
-
 export default withToggle;
+

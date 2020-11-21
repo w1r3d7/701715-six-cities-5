@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -10,23 +10,22 @@ import {fetchFavoriteOffers} from '../../store/data/api-actions';
 import {OFFER_PROP_TYPES} from '../../types.js';
 import {getFavoriteLoadingStatus, getFavoriteOffers} from '../../store/selectors';
 
-class FavoritesPage extends PureComponent {
+const FavoritesPage = (props) => {
 
-  componentDidMount() {
-    this.props.fetchFavoriteOffersAction();
-  }
+  const {favoriteLoadingStatus, favoriteOffers, fetchFavoriteOffersAction} = props;
 
-  render() {
-    const {favoriteLoadingStatus, favoriteOffers} = this.props;
-    return (
-      <div className="page">
-        <AppHeader />
-        <FavoritesContainer isLoaded={favoriteLoadingStatus} favoriteOffers={favoriteOffers} />
-        <AppFooter />
-      </div>
-    );
-  }
-}
+  useEffect(() => {
+    fetchFavoriteOffersAction();
+  }, []);
+
+  return (
+    <div className="page">
+      <AppHeader />
+      <FavoritesContainer isLoaded={favoriteLoadingStatus} favoriteOffers={favoriteOffers} />
+      <AppFooter />
+    </div>
+  );
+};
 
 FavoritesPage.propTypes = {
   favoriteOffers: PropTypes.arrayOf(

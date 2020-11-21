@@ -11,7 +11,7 @@ const MockComponentWrapped = withActiveCardId(MockComponent);
 test(`withActiveCardId work correctly`, () => {
   const wrapper = shallow(<MockComponentWrapped />);
 
-  expect(wrapper.state().activeCardId).toEqual(null);
+  expect(wrapper.props().activeCardId).toEqual(null);
   wrapper.props().onCardHover(1);
-  expect(wrapper.state().activeCardId).toEqual(1);
+  expect(wrapper.props().activeCardId).toEqual(1);
 });

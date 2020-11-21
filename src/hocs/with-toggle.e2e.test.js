@@ -12,7 +12,7 @@ const MockComponentWrapped = withToggle(MockComponent);
 test(`WithToggle work correctly`, () => {
   const wrapper = shallow(<MockComponentWrapped />);
 
-  expect(wrapper.state().isToggleOpen).toEqual(false);
+  expect(wrapper.props().isToggleOpen).toEqual(false);
   wrapper.props().onToggleClick();
-  expect(wrapper.state().isToggleOpen).toEqual(true);
+  expect(wrapper.props().isToggleOpen).toEqual(true);
 });
