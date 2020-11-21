@@ -1,19 +1,17 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import Map from './map';
+import OfferDetailsProperty from './offer-details-property';
 
 import {offers} from '../../__mocks__/mocks';
 
-test(`Map render correctly`, () => {
+const [offer] = offers;
+
+test(`OfferDetailsProperty render correctly`, () => {
   const tree = renderer
     .create(
-        <Map
-          mapType={`property__map`}
-          offers={offers}
-        />
+        <OfferDetailsProperty offer={offer} nearbyOffers={offers} />
     )
     .toJSON();
-
   expect(tree).toMatchSnapshot();
 });

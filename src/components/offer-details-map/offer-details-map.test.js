@@ -1,17 +1,14 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import Map from './map';
+import OfferDetailsMap from './offer-details-map';
 
 import {offers} from '../../__mocks__/mocks';
 
-test(`Map render correctly`, () => {
+test(`OfferDetailsMap render correctly`, () => {
   const tree = renderer
     .create(
-        <Map
-          mapType={`property__map`}
-          offers={offers}
-        />
+        <OfferDetailsMap offers={offers} />
     )
     .toJSON();
 

@@ -28,7 +28,7 @@ describe(`CitiesContainer render correctly`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it.skip(`CitiesContainer have offers`, () => {
+  it(`CitiesContainer have offers`, () => {
     const initialState = {
       APP: {
         currentFilter: FilterType.POPULAR,
