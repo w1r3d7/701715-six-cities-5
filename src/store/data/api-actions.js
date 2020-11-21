@@ -21,21 +21,21 @@ import {
 
 export const fetchOffers = () => (dispatch, _state, api) => {
   requestOffers();
-  api.get(ApiUrl.OFFERS)
+  return api.get(ApiUrl.OFFERS)
     .then(({data}) => data.map((item) => adaptOfferToClient(item)))
     .then((offers) => dispatch(getOffers(offers)));
 };
 
 export const fetchOfferDetails = (id) => (dispatch, _state, api) => {
   dispatch(requestOfferDetails());
-  api.get(ApiUrl.OFFERS + id)
+  return api.get(ApiUrl.OFFERS + id)
     .then(({data}) => adaptOfferToClient(data))
     .then((offer) => dispatch(getOfferDetails(offer)));
 };
 
 export const fetchReviews = (id) => (dispatch, _state, api) => {
   dispatch(requestReviews());
-  api.get(ApiUrl.COMMENTS + id)
+  return api.get(ApiUrl.COMMENTS + id)
     .then(({data}) => data.map((item) => adaptReviewToClient(item)))
     .then((reviews) => dispatch(getReviews(reviews)));
 };
@@ -43,7 +43,7 @@ export const fetchReviews = (id) => (dispatch, _state, api) => {
 export const sendReview = (id, review) => (dispatch, _state, api) => {
   dispatch(sendReviewRequested());
   dispatch(writeError(null));
-  api.post(ApiUrl.COMMENTS + id, review)
+  return api.post(ApiUrl.COMMENTS + id, review)
     .then(({data}) => data.map((item) => adaptReviewToClient(item)))
     .then((reviews) => dispatch(getReviews(reviews)))
     .then(() => dispatch(reviewSend()))
@@ -55,27 +55,27 @@ export const sendReview = (id, review) => (dispatch, _state, api) => {
 
 export const fetchNearbyOffers = (id) => (dispatch, _state, api) => {
   dispatch(requestNearbyOffers());
-  api.get(ApiUrl.OFFERS + id + ApiUrl.NEARBY)
+  return api.get(ApiUrl.OFFERS + id + ApiUrl.NEARBY)
     .then(({data}) => data.map((item) => adaptOfferToClient(item)))
     .then((offers) => dispatch(getNearbyOffers(offers)));
 };
 
 export const fetchFavoriteOffers = () => (dispatch, _state, api) => {
-  requestFavoriteOffers();
-  api.get(ApiUrl.FAVORITE)
+  dispatch(requestFavoriteOffers());
+  return api.get(ApiUrl.FAVORITE)
     .then(({data}) => data.map((item) => adaptOfferToClient(item)))
     .then((offers) => dispatch(getFavoriteOffers(offers)));
 };
 
 export const removeFromFavorite = (offerId, cardType) => (dispatch, _state, api) => {
-  api.post(ApiUrl.FAVORITE + `/` + offerId + `/` + FavoriteStatus.REMOVE)
+  return api.post(`${ApiUrl.FAVORITE}/${offerId}/${FavoriteStatus.REMOVE}`)
     .then(({data}) => adaptOfferToClient(data))
     .then((offer) => dispatch(changeOfferFavoriteStatus(offer)))
     .then((action) => cardType === FAVORITE_CARD_CLASS ? dispatch(removeOfferFromFavorite(action.payload)) : null);
 };
 
 export const addToFavorite = (offerId) => (dispatch, _state, api) => {
-  api.post(ApiUrl.FAVORITE + `/` + offerId + `/` + FavoriteStatus.ADD)
+  return api.post(`${ApiUrl.FAVORITE}/${offerId}/${FavoriteStatus.ADD}`)
     .then(({data}) => adaptOfferToClient(data))
     .then((offer) => dispatch(changeOfferFavoriteStatus(offer)));
 };

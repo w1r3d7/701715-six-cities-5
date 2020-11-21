@@ -6,6 +6,10 @@ export const MAX_REVIEWS = 10;
 export const FAVORITE_CARD_CLASS = `favorites__card-info`;
 export const PROPERTY_BOOKMARK_ACTIVE_CLASS = `property__bookmark-button--active`;
 
+export const ResponseStatus = {
+  OK: 200,
+};
+
 export const RouteUrl = {
   LOGIN: `/login`,
   FAVORITES: `/favorites`,
