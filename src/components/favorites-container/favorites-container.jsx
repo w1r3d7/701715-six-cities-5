@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {withLoading} from '../../hocs/with-loading';
+import withLoading from '../../hocs/with-loading';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
 import FavoritesResult from '../favorites-result/favorites-result';
 import {OFFER_PROP_TYPES} from '../../types';

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-import {RouteUrl} from '../../constants';
+import {RouteUrl} from '../../constants/constants';
 
 const AppFooter = () => (
   <footer className="footer container">

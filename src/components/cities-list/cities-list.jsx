@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import CitiesItem from '../cities-item/cities-item';
 
-import {City} from '../../constants';
+import {City} from '../../constants/constants';
 
 const citiesList = Object.values(City);
 

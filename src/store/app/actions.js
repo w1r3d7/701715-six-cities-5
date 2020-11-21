@@ -5,14 +5,10 @@ export const ActionType = {
 
 export const changeCity = (currentCity) => ({
   type: ActionType.CHANGE_CITY,
-  payload: {
-    currentCity
-  }
+  payload: currentCity
 });
 
 export const changeFilter = (currentFilter) => ({
   type: ActionType.CHANGE_FILTER,
-  payload: {
-    currentFilter,
-  }
+  payload: currentFilter
 });

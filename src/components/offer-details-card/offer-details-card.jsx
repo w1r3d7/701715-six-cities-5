@@ -6,7 +6,7 @@ import PlaceCardPremiumMark from '../place-card-premium-mark/place-card-premium-
 
 import {OFFER_PROP_TYPES} from '../../types.js';
 import {Link} from 'react-router-dom';
-import {RouteUrl} from '../../constants';
+import {RouteUrl} from '../../constants/constants';
 
 const OfferDetailsCard = ({offer}) => {
   const {previewImage, isPremium, id} = offer;

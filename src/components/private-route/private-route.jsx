@@ -4,7 +4,7 @@ import {Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 
-import {AuthorizationStatus} from '../../constants';
+import {AuthorizationStatus} from '../../constants/constants';
 import {getAuthStatus} from '../../store/selectors';
 
 const PrivateRoute = ({

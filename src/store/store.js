@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 
 import reducer from './root-reducer';
 import {requireAuthorization} from './user/actions';
-import {AuthorizationStatus} from '../constants';
+import {AuthorizationStatus} from '../constants/constants';
 
 const api = createApi(
     () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))

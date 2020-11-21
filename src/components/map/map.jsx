@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
@@ -26,57 +26,45 @@ const getCityLocation = ([offer]) => {
   return {city, zoom};
 };
 
-class Map extends PureComponent {
-  renderMap() {
-    const {city, zoom} = getCityLocation(this.props.offers);
+const Map = (props) => {
+  let map;
+  let layerGroup;
+  const {offers, activeCardId} = props;
+  const {city, zoom} = getCityLocation(props.offers);
 
-    this.map = leaflet.map(`map`, {
+  const renderMarkers = () => {
+    const getIcon = (id) => activeCardId === id ? ACTIVE_ICON : DEFAULT_ICON;
+
+    layerGroup = leaflet.layerGroup(offers.map((offer) => {
+      const icon = getIcon(offer.id);
+      const coordinates = [offer.location.latitude, offer.location.longitude];
+      return leaflet.marker(coordinates, {icon});
+    }));
+    layerGroup.addTo(map);
+  };
+
+  useEffect(() => {
+    map = leaflet.map(`map`, {
       center: city,
       zoom,
       zoomControl: false,
       marker: true
     });
-    this.map.setView(city, zoom);
+    map.setView(city, zoom);
 
     leaflet
       .tileLayer(LAYER, {attribution: COPYRIGHT})
-      .addTo(this.map);
+      .addTo(map);
 
-    this.renderMarkers();
-  }
+    renderMarkers();
 
-  renderMarkers() {
-    const {offers, activeCardId} = this.props;
+    return () => {
+      map.remove();
+    };
+  }, [city]);
 
-    const getIcon = (id) => activeCardId === id ? ACTIVE_ICON : DEFAULT_ICON;
-
-    this.layerGroup = leaflet.layerGroup(offers.map((offer) => {
-      const icon = getIcon(offer.id);
-      const coordinates = [offer.location.latitude, offer.location.longitude];
-      return leaflet.marker(coordinates, {icon});
-    }));
-    this.layerGroup.addTo(this.map);
-  }
-
-  componentDidMount() {
-    this.renderMap();
-  }
-
-  componentDidUpdate() {
-    this.layerGroup.clearLayers();
-    this.renderMarkers();
-    const {city, zoom} = getCityLocation(this.props.offers);
-    this.map.flyTo(city, zoom);
-  }
-
-  componentWillUnmount() {
-    this.map.remove();
-  }
-
-  render() {
-    return <section id="map" className={`${this.props.mapType} map`} />;
-  }
-}
+  return <section id="map" className={`${props.mapType} map`} />;
+};
 
 Map.propTypes = {
   mapType: PropTypes.string.isRequired,

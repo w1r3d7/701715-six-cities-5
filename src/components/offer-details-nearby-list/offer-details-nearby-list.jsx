@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import OfferDetailsCard from '../offer-details-card/offer-details-card';
-import {withLoading} from '../../hocs/with-loading';
+import withLoading from '../../hocs/with-loading';
 import {OFFER_PROP_TYPES} from '../../types';
 
 const OfferDetailsNearbyList = ({nearbyOffers}) => {

@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {getOffersByCityAndFilter, sortAndCutReviews} from '../utils';
+import {getOffersByCityAndFilter, sortAndCutReviews} from '../utils/utils';
 import {NameSpace} from './root-reducer';
 
 export const getOffers = (state) => state[NameSpace.DATA].offers;

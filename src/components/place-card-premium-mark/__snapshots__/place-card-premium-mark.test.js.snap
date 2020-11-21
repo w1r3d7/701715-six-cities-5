@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlaceCardPremiumMark render correctly It is premium 1`] = `
+<div
+  className="place-card__mark"
+>
+  <span>
+    Premium
+  </span>
+</div>
+`;
+
+exports[`PlaceCardPremiumMark render correctly It isn't premium 1`] = `null`;

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OfferDetailsPremiumMark render correctly Is Premium 1`] = `
+<div
+  className="property__mark"
+>
+  <span>
+    Premium
+  </span>
+</div>
+`;
+
+exports[`OfferDetailsPremiumMark render correctly Is not Premium 1`] = `null`;

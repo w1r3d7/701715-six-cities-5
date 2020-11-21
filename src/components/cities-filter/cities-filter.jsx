@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import CitiesFilterItem from '../cities-filter-item/cities-filter-item';
 import withToggle from '../../hocs/with-toggle';
 
-import {FilterType} from '../../constants';
+import {FilterType} from '../../constants/constants';
 
 const FILTER_POPUP_OPENED_CLASS = `places__options--opened`;
 const filtersList = Object.values(FilterType);
@@ -29,7 +29,8 @@ const CitiesFilter = ({
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${isToggleOpen ? FILTER_POPUP_OPENED_CLASS : ``}`}>
+      <ul
+        className={`places__options places__options--custom ${isToggleOpen ? FILTER_POPUP_OPENED_CLASS : ``}`}>
         {filtersList.map((filter) => (
           <CitiesFilterItem
             key={filter}
@@ -50,4 +51,5 @@ CitiesFilter.propTypes = {
   onToggleClick: PropTypes.func.isRequired,
 };
 
+export {CitiesFilter};
 export default withToggle(CitiesFilter);

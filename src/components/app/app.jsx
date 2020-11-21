@@ -1,13 +1,13 @@
 import React from 'react';
 import {Router, Route, Switch, Link} from 'react-router-dom';
 
-import Main from '../../pages/main';
-import Login from '../../pages/login';
-import Favorites from '../../pages/favorites';
-import OfferDetails from '../../pages/offer';
+import Main from '../main-page/main-page';
+import Login from '../login-page/login-page';
+import Favorites from '../favorites-page/favorites-page';
+import OfferDetails from '../offer-page/offer-page';
 import PrivateRoute from '../private-route/private-route';
 
-import {RouteUrl} from '../../constants';
+import {RouteUrl} from '../../constants/constants';
 import {browserHistory} from '../../browser-history';
 
 const App = () => (

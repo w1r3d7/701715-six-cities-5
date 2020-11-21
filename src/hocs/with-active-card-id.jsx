@@ -1,52 +1,23 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
-
-import {OFFER_PROP_TYPES} from '../types';
+import React, {useState} from 'react';
 
 const withActiveCardId = (Component) => {
-  class WithActiveCardId extends PureComponent {
-    constructor(props) {
-      super(props);
+  const WithActiveCardId = (props) => {
+    const [activeCardId, setActiveCardId] = useState(null);
 
-      this.state = {
-        activeCardId: null,
-      };
+    const handleCardHover = (cardId) => {
+      if (activeCardId !== cardId) {
+        setActiveCardId(cardId);
+      }
+    };
 
-      this.handleCardHover = this.handleCardHover.bind(this);
-    }
-
-    handleCardHover(activeCardId) {
-      this.setState((prevState) => (
-        prevState.activeCardId === activeCardId
-          ? null
-          : {activeCardId})
-      );
-    }
-
-    render() {
-      const {activeCardId} = this.state;
-
-      return (
-        <Component
-          activeCardId={activeCardId}
-          onCardHover={this.handleCardHover}
-          {...this.props}
-        />
-      );
-    }
-  }
-
-  WithActiveCardId.propTypes = {
-    city: PropTypes.string.isRequired,
-    offers: PropTypes.arrayOf(
-        PropTypes.shape(OFFER_PROP_TYPES).isRequired
-    ).isRequired,
-    currentFilter: PropTypes.string.isRequired,
-    onFilterChange: PropTypes.func.isRequired,
+    return (
+      <Component
+        activeCardId={activeCardId}
+        onCardHover={handleCardHover}
+        {...props}
+      />
+    );
   };
-
   return WithActiveCardId;
 };
-
-
 export default withActiveCardId;
