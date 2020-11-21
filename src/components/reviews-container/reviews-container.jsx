@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -9,30 +9,26 @@ import {getSortedReviews, getReviewsLoadingStatus} from '../../store/selectors';
 import {REVIEW_PROP_TYPES} from '../../types';
 
 
-class ReviewsContainer extends PureComponent {
-  componentDidMount() {
-    const {offerId, getReviewsList} = this.props;
+const ReviewsContainer = (props) => {
+  const {
+    reviews,
+    isReviewsLoaded,
+    offerId,
+    getReviewsList
+  } = props;
 
+  useEffect(() => {
     getReviewsList(offerId);
-  }
+  }, []);
 
-
-  render() {
-    const {
-      reviews,
-      isReviewsLoaded,
-      offerId
-    } = this.props;
-
-    return (
-      <ReviewsList
-        offerId={offerId}
-        isLoaded={isReviewsLoaded}
-        reviews={reviews}
-      />
-    );
-  }
-}
+  return (
+    <ReviewsList
+      offerId={offerId}
+      isLoaded={isReviewsLoaded}
+      reviews={reviews}
+    />
+  );
+};
 
 ReviewsContainer.propTypes = {
   offerId: PropTypes.number.isRequired,

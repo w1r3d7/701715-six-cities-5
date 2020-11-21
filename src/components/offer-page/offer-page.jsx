@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -15,43 +15,40 @@ import {
 import OfferDetailsProperty from '../offer-details-property/offer-details-property';
 import OfferDetailsNearbyList from '../offer-details-nearby-list/offer-details-nearby-list';
 
-class OfferPage extends PureComponent {
+const OfferPage = (props) => {
+  const {
+    match,
+    offer,
+    isOfferDetailsLoaded,
+    nearbyOffers,
+    isNearbyOffersLoaded,
+    fetchOffer,
+    fetchNearby
+  } = props;
+  const offerId = match.params.id;
 
-  componentDidMount() {
-    const {fetchOffer, fetchNearby} = this.props;
-    fetchOffer(this.offerId);
-    fetchNearby(this.offerId);
-  }
+  useEffect(() => {
+    fetchOffer(offerId);
+    fetchNearby(offerId);
+  }, [offerId]);
 
-  render() {
-    const {
-      match,
-      offer,
-      isOfferDetailsLoaded,
-      nearbyOffers,
-      isNearbyOffersLoaded
-    } = this.props;
-
-    this.offerId = match.params.id;
-
-    return (
-      <div className="page">
-        <AppHeader />
-        <main className="page__main page__main--property">
-          <OfferDetailsProperty isLoaded={isOfferDetailsLoaded && isNearbyOffersLoaded} offer={offer} nearbyOffers={nearbyOffers} />
-          <div className="container">
-            <section className="near-places places">
-              <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              <div className="near-places__list places__list">
-                <OfferDetailsNearbyList nearbyOffers={nearbyOffers} isLoaded={isNearbyOffersLoaded} />
-              </div>
-            </section>
-          </div>
-        </main>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="page">
+      <AppHeader />
+      <main className="page__main page__main--property">
+        <OfferDetailsProperty isLoaded={isOfferDetailsLoaded && isNearbyOffersLoaded} offer={offer} nearbyOffers={nearbyOffers} />
+        <div className="container">
+          <section className="near-places places">
+            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <div className="near-places__list places__list">
+              <OfferDetailsNearbyList nearbyOffers={nearbyOffers} isLoaded={isNearbyOffersLoaded} />
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  );
+};
 
 OfferPage.propTypes = {
   offer: PropTypes.shape(OFFER_PROP_TYPES),
