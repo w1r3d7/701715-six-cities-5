@@ -58,7 +58,7 @@ const LoginPage = ({loginAction, currentCity}) => {
                   type="email"
                   name="email"
                   placeholder="Email"
-                  required=""
+                  required={true}
                   ref={emailRef}
                 />
               </div>
@@ -69,7 +69,7 @@ const LoginPage = ({loginAction, currentCity}) => {
                   type="password"
                   name="password"
                   placeholder="Password"
-                  required=""
+                  required={true}
                   ref={passwordRef}
                 />
               </div>

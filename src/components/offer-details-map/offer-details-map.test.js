@@ -8,7 +8,7 @@ import {offers} from '../../__mocks__/mocks';
 test(`OfferDetailsMap render correctly`, () => {
   const tree = renderer
     .create(
-        <OfferDetailsMap offers={offers} />
+        <OfferDetailsMap offers={offers} activeCardId={1}/>
     )
     .toJSON();
 

@@ -10,9 +10,11 @@ import {fetchFavoriteOffers} from '../../store/data/api-actions';
 import {OFFER_PROP_TYPES} from '../../types.js';
 import {getFavoriteLoadingStatus, getFavoriteOffers} from '../../store/selectors';
 
-const FavoritesPage = (props) => {
-
-  const {favoriteLoadingStatus, favoriteOffers, fetchFavoriteOffersAction} = props;
+const FavoritesPage = ({
+  favoriteLoadingStatus,
+  favoriteOffers,
+  fetchFavoriteOffersAction
+}) => {
 
   useEffect(() => {
     fetchFavoriteOffersAction();

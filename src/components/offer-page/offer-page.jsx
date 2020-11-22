@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import AppHeader from '../app-header/app-header';
+import OfferDetailsProperty from '../offer-details-property/offer-details-property';
+import OfferDetailsNearbyList from '../offer-details-nearby-list/offer-details-nearby-list';
 
 import {OFFER_PROP_TYPES} from '../../types.js';
 import {fetchNearbyOffers, fetchOfferDetails} from '../../store/data/api-actions';
@@ -12,8 +14,7 @@ import {
   getNearbyOffers,
   getNearbyOffersLoadingStatus,
 } from '../../store/selectors';
-import OfferDetailsProperty from '../offer-details-property/offer-details-property';
-import OfferDetailsNearbyList from '../offer-details-nearby-list/offer-details-nearby-list';
+
 
 const OfferPage = (props) => {
   const {
@@ -36,12 +37,19 @@ const OfferPage = (props) => {
     <div className="page">
       <AppHeader />
       <main className="page__main page__main--property">
-        <OfferDetailsProperty isLoaded={isOfferDetailsLoaded && isNearbyOffersLoaded} offer={offer} nearbyOffers={nearbyOffers} />
+        <OfferDetailsProperty
+          isLoaded={isOfferDetailsLoaded && isNearbyOffersLoaded}
+          offer={offer}
+          nearbyOffers={nearbyOffers}
+        />
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferDetailsNearbyList nearbyOffers={nearbyOffers} isLoaded={isNearbyOffersLoaded} />
+              <OfferDetailsNearbyList
+                nearbyOffers={nearbyOffers}
+                isLoaded={isNearbyOffersLoaded}
+              />
             </div>
           </section>
         </div>

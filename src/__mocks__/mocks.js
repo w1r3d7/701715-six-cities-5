@@ -192,6 +192,8 @@ export const info = {
   "name": `xyz`,
 };
 
+export const infoFromServer = {"id": 1, "email": `xyz@xyz.com`, "name": `xyz`, "avatar_url": `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/5.jpg`, "is_pro": false};
+
 export const reviews = [{
   "id": 1,
   "rating": 4,

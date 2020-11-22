@@ -6,11 +6,11 @@ import {connect} from 'react-redux';
 import OfferDetailsPremiumMark from '../offer-details-premium-mark/offer-details-premium-mark';
 import OfferDetailsMap from '../offer-details-map/offer-details-map';
 import ReviewsContainer from '../reviews-container/reviews-container';
+import withLoading from '../../hocs/with-loading';
 
 import {FavoriteButtonType, PROPERTY_BOOKMARK_ACTIVE_CLASS} from '../../constants/constants';
 import {checkForPlural, getRatingInPercentage} from '../../utils/utils';
 import {OFFER_PROP_TYPES} from '../../types';
-import withLoading from '../../hocs/with-loading';
 import {changeFavoriteStatus} from '../../store/data/api-actions';
 
 const PREMIUM_HOST_CLASS = `property__avatar-wrapper--pro`;
@@ -118,7 +118,7 @@ const OfferDetailsProperty = ({
           <ReviewsContainer offerId={id} />
         </div>
       </div>
-      <OfferDetailsMap offers={nearbyOffers} />
+      <OfferDetailsMap offers={[...nearbyOffers, offer]} activeCardId={id} />
     </section>
   );
 };

@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 import PlaceCard from '../place-card/place-card';
 import PlaceCardPremiumMark from '../place-card-premium-mark/place-card-premium-mark';
 
 import {OFFER_PROP_TYPES} from '../../types.js';
-import {Link} from 'react-router-dom';
 import {FavoriteButtonType, RouteUrl} from '../../constants/constants';
 
 const OfferDetailsCard = ({offer}) => {
