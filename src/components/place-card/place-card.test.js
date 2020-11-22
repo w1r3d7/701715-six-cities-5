@@ -17,8 +17,7 @@ it(`PlaceCard render correctly`, () => {
           <PlaceCard
             authStatus={AuthorizationStatus.AUTH}
             offer={offer}
-            removeFromFavoriteAction={noop}
-            addToFavoriteAction={noop}
+            changeFavoriteStatusAction={noop}
           />
         </BrowserRouter>
 

@@ -99,8 +99,22 @@ describe(`Data Actions work correctly`, () => {
   });
 
   it(`Action changeOfferFavoriteStatus work correctly`, () => {
+    expect(actions.changeOffersFavoriteStatus(offer)).toEqual({
+      type: ActionType.CHANGE_OFFERS_FAVORITE_STATUS,
+      payload: offer
+    });
+  });
+
+  it(`Action changeNearbyOffersFavoriteStatus work correctly`, () => {
+    expect(actions.changeNearbyOffersFavoriteStatus(offer)).toEqual({
+      type: ActionType.CHANGE_NEARBY_OFFERS_FAVORITE_STATUS,
+      payload: offer
+    });
+  });
+
+  it(`Action changeOfferFavoriteStatus work correctly`, () => {
     expect(actions.changeOfferFavoriteStatus(offer)).toEqual({
-      type: ActionType.CHANGE_FAVORITE_STATUS,
+      type: ActionType.CHANGE_OFFER_FAVORITE_STATUS,
       payload: offer
     });
   });

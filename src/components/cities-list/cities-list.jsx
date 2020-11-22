@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import CitiesItem from '../cities-item/cities-item';
 
-import {City} from '../../constants/constants';
+import {CityName} from '../../constants/constants';
 
-const citiesList = Object.values(City);
+const citiesList = Object.values(CityName);
 
 const CitiesList = ({currentCity, handleCityClick}) => (
   <div className="tabs">

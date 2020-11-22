@@ -3,9 +3,9 @@ import MockAdapter from 'axios-mock-adapter';
 import {createApi} from '../../services/api';
 import * as apiAction from './api-actions';
 
-import {ApiUrl, ResponseStatus} from '../../constants/constants';
+import {ApiUrl, ResponseStatus, FavoriteStatus} from '../../constants/constants';
 import {reviewsFromServer, offersFromServer} from '../../__mocks__/mocks';
-import {ActionType, FavoriteStatus} from './actions';
+import {ActionType} from './actions';
 import {adaptOfferToClient, adaptReviewToClient} from '../adapaters';
 
 const api = createApi(() => {});
@@ -20,8 +20,7 @@ const getReviews = apiAction.fetchReviews(offerId);
 const sendReview = apiAction.sendReview(offerId, reviewFromServer);
 const getNearbyOffers = apiAction.fetchNearbyOffers(offerId);
 const getFavoriteOffers = apiAction.fetchFavoriteOffers();
-const removeFromFavorite = apiAction.removeFromFavorite(offerId);
-const addToFavorite = apiAction.addToFavorite(offerId);
+const changeFavoriteStatus = apiAction.changeFavoriteStatus(offerId);
 
 new MockAdapter(api)
   .onGet(ApiUrl.OFFERS).reply(ResponseStatus.OK, offersFromServer)
@@ -128,25 +127,13 @@ describe(`Data Async operations work correctly`, () => {
       });
   });
 
-  it(`Should make a correct API POST /favorite/id/0`, () => {
+  it(`Should make a correct API POST /favorite/id/*`, () => {
     const dispatch = jest.fn();
-    return removeFromFavorite(dispatch, () => {}, api)
+    return changeFavoriteStatus(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.CHANGE_FAVORITE_STATUS,
-          payload: adaptOfferToClient(offerFromServer)
-        });
-      });
-  });
-
-  it(`Should make a correct API POST /favorite/id/1`, () => {
-    const dispatch = jest.fn();
-    return addToFavorite(dispatch, () => {}, api)
-      .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.CHANGE_FAVORITE_STATUS,
+          type: ActionType.CHANGE_OFFERS_FAVORITE_STATUS,
           payload: adaptOfferToClient(offerFromServer)
         });
       });

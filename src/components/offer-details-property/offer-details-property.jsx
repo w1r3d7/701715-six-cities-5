@@ -1,19 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
 
 import OfferDetailsPremiumMark from '../offer-details-premium-mark/offer-details-premium-mark';
 import OfferDetailsMap from '../offer-details-map/offer-details-map';
+import ReviewsContainer from '../reviews-container/reviews-container';
+import withLoading from '../../hocs/with-loading';
 
-import {PROPERTY_BOOKMARK_ACTIVE_CLASS} from '../../constants/constants';
+import {FavoriteButtonType, PROPERTY_BOOKMARK_ACTIVE_CLASS} from '../../constants/constants';
 import {checkForPlural, getRatingInPercentage} from '../../utils/utils';
 import {OFFER_PROP_TYPES} from '../../types';
-import withLoading from '../../hocs/with-loading';
-import ReviewsContainer from '../reviews-container/reviews-container';
+import {changeFavoriteStatus} from '../../store/data/api-actions';
 
 const PREMIUM_HOST_CLASS = `property__avatar-wrapper--pro`;
 const BEDROOM = `bedroom`;
 
-const OfferDetailsProperty = ({offer, nearbyOffers}) => {
+const OfferDetailsProperty = ({
+  offer,
+  nearbyOffers,
+  changeFavoriteStatusAction
+}) => {
   const {
     photosUrl,
     type,
@@ -42,6 +49,13 @@ const OfferDetailsProperty = ({offer, nearbyOffers}) => {
     <li key={facility} className="property__inside-item">{facility}</li>
   ));
 
+  const favoriteButtonClass = isInBookmark ? PROPERTY_BOOKMARK_ACTIVE_CLASS : ``;
+
+  const handleFavoriteButtonClick = (evt) => {
+    evt.preventDefault();
+    changeFavoriteStatusAction(id, FavoriteButtonType.OFFER_PAGE, isInBookmark);
+  };
+
   return (
     <section className="property">
       <div className="property__gallery-container container">
@@ -55,8 +69,10 @@ const OfferDetailsProperty = ({offer, nearbyOffers}) => {
           <div className="property__name-wrapper">
             <h1 className="property__name">{description}</h1>
             <button
-              className={`property__bookmark-button button ${isInBookmark ? PROPERTY_BOOKMARK_ACTIVE_CLASS : ``}`}
-              type="button">
+              className={`property__bookmark-button button ${favoriteButtonClass}`}
+              type="button"
+              onClick={handleFavoriteButtonClick}
+            >
               <svg className="property__bookmark-icon" width="31" height="33">
                 <use xlinkHref="#icon-bookmark" />
               </svg>
@@ -102,7 +118,7 @@ const OfferDetailsProperty = ({offer, nearbyOffers}) => {
           <ReviewsContainer offerId={id} />
         </div>
       </div>
-      <OfferDetailsMap offers={nearbyOffers} />
+      <OfferDetailsMap offers={[...nearbyOffers, offer]} activeCardId={id} />
     </section>
   );
 };
@@ -111,7 +127,17 @@ OfferDetailsProperty.propTypes = {
   offer: PropTypes.shape(OFFER_PROP_TYPES).isRequired,
   nearbyOffers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
-  ).isRequired
+  ).isRequired,
+  changeFavoriteStatusAction: PropTypes.func.isRequired,
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  changeFavoriteStatusAction: (id, favoriteButtonType, isInBookmark) => (
+    dispatch(changeFavoriteStatus(id, favoriteButtonType, isInBookmark)
+    )),
+});
+
 export {OfferDetailsProperty};
-export default withLoading(OfferDetailsProperty);
+export default compose(
+    connect(null, mapDispatchToProps),
+    withLoading)(OfferDetailsProperty);

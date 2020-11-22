@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import CitiesEmpty from '../cities-empty/cities-empty';
 import CitiesResult from '../cities-result/cities-result';
 import withLoading from '../../hocs/with-loading';
+
 import {OFFER_PROP_TYPES} from '../../types';
 
 const CitiesContainer = ({

@@ -185,10 +185,32 @@ describe(`Data reducer work correctly`, () => {
     expect(data({
       offers
     }, {
-      type: ActionType.CHANGE_FAVORITE_STATUS,
+      type: ActionType.CHANGE_OFFERS_FAVORITE_STATUS,
       payload: offer,
     })).toEqual({
       offers: replaceItem(offers, offer),
+    });
+  });
+
+  it(`Reducer should update nearby offers favorite status by changeFavoriteStatus `, () => {
+    expect(data({
+      nearbyOffers: offers,
+    }, {
+      type: ActionType.CHANGE_NEARBY_OFFERS_FAVORITE_STATUS,
+      payload: offer,
+    })).toEqual({
+      nearbyOffers: replaceItem(offers, offer),
+    });
+  });
+
+  it(`Reducer should update offer favorite status by changeFavoriteStatus `, () => {
+    expect(data({
+      offerDetails: null,
+    }, {
+      type: ActionType.CHANGE_OFFER_FAVORITE_STATUS,
+      payload: offer,
+    })).toEqual({
+      offerDetails: offer,
     });
   });
 });

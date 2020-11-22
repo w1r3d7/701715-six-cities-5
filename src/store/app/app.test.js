@@ -1,5 +1,5 @@
 import {app} from './app';
-import {City, FilterType} from '../../constants/constants';
+import {CityName, FilterType} from '../../constants/constants';
 import {ActionType} from './actions';
 
 const city = `Cologne`;
@@ -7,7 +7,7 @@ const city = `Cologne`;
 describe(`App reducer work correctly`, () => {
   it(`Reducer return initial state`, () => {
     expect(app(undefined, {})).toEqual({
-      currentCity: City.PARIS,
+      currentCity: CityName.PARIS,
       currentFilter: FilterType.POPULAR,
     });
   });

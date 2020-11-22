@@ -12,13 +12,10 @@ export const ActionType = {
   REVIEW_SEND_REQUESTED: `REVIEW_SEND_REQUESTED`,
   WRITE_ERROR: `WRITE_ERROR`,
   REVIEW_SEND: `REVIEW_SEND`,
-  CHANGE_FAVORITE_STATUS: `CHANGE_FAVORITE_STATUS`,
+  CHANGE_OFFERS_FAVORITE_STATUS: `CHANGE_FAVORITE_STATUS`,
   REMOVE_FROM_FAVORITE: `REMOVE_FROM_FAVORITE`,
-};
-
-export const FavoriteStatus = {
-  ADD: 1,
-  REMOVE: 0,
+  CHANGE_NEARBY_OFFERS_FAVORITE_STATUS: `CHANGE_NEARBY_OFFERS_FAVORITE_STATUS`,
+  CHANGE_OFFER_FAVORITE_STATUS: `CHANGE_OFFER_FAVORITE_STATUS`
 };
 
 export const getOffers = (offers) => ({
@@ -84,8 +81,18 @@ export const removeOfferFromFavorite = (offer) => ({
   payload: offer,
 });
 
+export const changeOffersFavoriteStatus = (offer) => ({
+  type: ActionType.CHANGE_OFFERS_FAVORITE_STATUS,
+  payload: offer,
+});
+
+export const changeNearbyOffersFavoriteStatus = (offer) => ({
+  type: ActionType.CHANGE_NEARBY_OFFERS_FAVORITE_STATUS,
+  payload: offer,
+});
+
 export const changeOfferFavoriteStatus = (offer) => ({
-  type: ActionType.CHANGE_FAVORITE_STATUS,
+  type: ActionType.CHANGE_OFFER_FAVORITE_STATUS,
   payload: offer,
 });
 

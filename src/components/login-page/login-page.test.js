@@ -10,7 +10,10 @@ test(`LoginPage render correctly`, () => {
   const tree = renderer
     .create(
         <BrowserRouter>
-          <LoginPage loginAction={noop} />
+          <LoginPage
+            loginAction={noop}
+            currentCity={`Cologne`}
+          />
         </BrowserRouter>
     )
     .toJSON();
