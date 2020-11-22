@@ -127,10 +127,11 @@ exports[`LoginPage render correctly 1`] = `
         >
           <a
             className="locations__item-link"
-            href="#"
+            href="/"
+            onClick={[Function]}
           >
             <span>
-              Amsterdam
+              Cologne
             </span>
           </a>
         </div>

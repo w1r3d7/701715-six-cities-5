@@ -1,10 +1,10 @@
-import {City, FilterType} from '../../constants/constants';
+import {CityName, FilterType} from '../../constants/constants';
 import {extend} from '../../utils/utils';
 import {ActionType} from './actions';
 
 
 const initialState = {
-  currentCity: City.PARIS,
+  currentCity: CityName.PARIS,
   currentFilter: FilterType.POPULAR,
 };
 

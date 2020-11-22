@@ -6,8 +6,29 @@ export const MAX_REVIEWS = 10;
 export const FAVORITE_CARD_CLASS = `favorites__card-info`;
 export const PROPERTY_BOOKMARK_ACTIVE_CLASS = `property__bookmark-button--active`;
 
+export const RATING_TITLES = [
+  `perfect`,
+  `good`,
+  `not bad`,
+  `badly`,
+  `terribly`,
+];
+
+export const RATING_COUNTS = [`5`, `4`, `3`, `2`, `1`];
+
 export const ResponseStatus = {
   OK: 200,
+};
+
+export const FavoriteButtonType = {
+  FAVORITE_PAGE: `FAVORITE_PAGE`,
+  OFFER_PAGE: `OFFER_PAGE`,
+  NEARBY_OFFER: `NEARBY_OFFER`,
+};
+
+export const FavoriteStatus = {
+  ADD: 1,
+  REMOVE: 0,
 };
 
 export const RouteUrl = {
@@ -31,7 +52,7 @@ export const AuthorizationStatus = {
   NO_AUTH: `NO_AUTH`,
 };
 
-export const City = {
+export const CityName = {
   PARIS: `Paris`,
   COLOGNE: `Cologne`,
   BRUSSELS: `Brussels`,
@@ -46,13 +67,3 @@ export const FilterType = {
   PRICE_HIGH_TO_LOW: `Price: high to low`,
   TOP_RATED_FIRST: `Top rated first`,
 };
-
-export const RATING_TITLES = [
-  `perfect`,
-  `good`,
-  `not bad`,
-  `badly`,
-  `terribly`,
-];
-
-export const RATING_COUNT = [`5`, `4`, `3`, `2`, `1`];

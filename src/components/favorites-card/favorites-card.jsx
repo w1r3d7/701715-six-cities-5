@@ -6,7 +6,7 @@ import PlaceCard from '../place-card/place-card';
 import PlaceCardPremiumMark from '../place-card-premium-mark/place-card-premium-mark';
 
 import {OFFER_PROP_TYPES} from '../../types';
-import {RouteUrl, FAVORITE_CARD_CLASS} from '../../constants/constants';
+import {RouteUrl, FAVORITE_CARD_CLASS, FavoriteButtonType} from '../../constants/constants';
 
 const FavoritesCard = ({offer}) => {
   const {id, previewImage, isPremium} = offer;
@@ -19,7 +19,10 @@ const FavoritesCard = ({offer}) => {
           <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place image" />
         </Link>
       </div>
-      <PlaceCard cardType={FAVORITE_CARD_CLASS} offer={offer} />
+      <PlaceCard
+        cardType={FAVORITE_CARD_CLASS}
+        offer={offer}
+        favoriteButtonType={FavoriteButtonType.FAVORITE_PAGE} />
     </article>
   );
 };

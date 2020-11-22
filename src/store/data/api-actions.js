@@ -1,4 +1,4 @@
-import {ApiUrl, FAVORITE_CARD_CLASS} from '../../constants/constants';
+import {ApiUrl, FavoriteButtonType, FavoriteStatus} from '../../constants/constants';
 import {adaptOfferToClient, adaptReviewToClient} from '../adapaters';
 import {
   getOffers,
@@ -14,9 +14,10 @@ import {
   getNearbyOffers,
   requestFavoriteOffers,
   getFavoriteOffers,
-  FavoriteStatus,
+  changeOffersFavoriteStatus,
+  removeOfferFromFavorite,
+  changeNearbyOffersFavoriteStatus,
   changeOfferFavoriteStatus,
-  removeOfferFromFavorite
 } from './actions';
 
 export const fetchOffers = () => (dispatch, _state, api) => {
@@ -67,15 +68,26 @@ export const fetchFavoriteOffers = () => (dispatch, _state, api) => {
     .then((offers) => dispatch(getFavoriteOffers(offers)));
 };
 
-export const removeFromFavorite = (offerId, cardType) => (dispatch, _state, api) => {
-  return api.post(`${ApiUrl.FAVORITE}/${offerId}/${FavoriteStatus.REMOVE}`)
+export const changeFavoriteStatus = (
+    offerId,
+    favoriteButtonType,
+    isInBookmark
+) => (dispatch, _state, api) => {
+  const actionType = isInBookmark ? FavoriteStatus.REMOVE : FavoriteStatus.ADD;
+  return api.post(`${ApiUrl.FAVORITE}/${offerId}/${actionType}`)
     .then(({data}) => adaptOfferToClient(data))
-    .then((offer) => dispatch(changeOfferFavoriteStatus(offer)))
-    .then((action) => cardType === FAVORITE_CARD_CLASS ? dispatch(removeOfferFromFavorite(action.payload)) : null);
-};
-
-export const addToFavorite = (offerId) => (dispatch, _state, api) => {
-  return api.post(`${ApiUrl.FAVORITE}/${offerId}/${FavoriteStatus.ADD}`)
-    .then(({data}) => adaptOfferToClient(data))
-    .then((offer) => dispatch(changeOfferFavoriteStatus(offer)));
+    .then((offer) => dispatch(changeOffersFavoriteStatus(offer)))
+    .then((action) => {
+      switch (favoriteButtonType) {
+        case FavoriteButtonType.FAVORITE_PAGE:
+          dispatch(removeOfferFromFavorite(action.payload));
+          break;
+        case FavoriteButtonType.NEARBY_OFFER:
+          dispatch(changeNearbyOffersFavoriteStatus(action.payload));
+          break;
+        case FavoriteButtonType.OFFER_PAGE:
+          dispatch(changeOfferFavoriteStatus(action.payload));
+          break;
+      }
+    });
 };

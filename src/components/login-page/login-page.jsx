@@ -4,15 +4,15 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import {login} from '../../store/user/api-actions';
+import {getCurrentCity} from '../../store/selectors';
+import {RouteUrl} from '../../constants/constants';
 
-const LoginPage = (props) => {
+const LoginPage = ({loginAction, currentCity}) => {
   const emailRef = createRef();
   const passwordRef = createRef();
 
   const handleLoginSubmit = (evt) => {
     evt.preventDefault();
-
-    const {loginAction} = props;
 
     const authInfo = {
       email: emailRef.current.value,
@@ -78,9 +78,9 @@ const LoginPage = (props) => {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link className="locations__item-link" to={RouteUrl.HOME}>
+                <span>{currentCity}</span>
+              </Link>
             </div>
           </section>
         </div>
@@ -91,11 +91,16 @@ const LoginPage = (props) => {
 
 LoginPage.propTypes = {
   loginAction: PropTypes.func.isRequired,
+  currentCity: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   loginAction: (authInfo) => dispatch(login(authInfo))
 });
 
+const mapStateToProps = (state) => ({
+  currentCity: getCurrentCity(state)
+});
+
 export {LoginPage};
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

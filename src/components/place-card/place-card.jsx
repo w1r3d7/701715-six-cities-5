@@ -3,20 +3,25 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {AuthorizationStatus, BOOKMARK_ACTIVE_CLASS, RouteUrl} from '../../constants/constants';
+import {
+  AuthorizationStatus,
+  BOOKMARK_ACTIVE_CLASS,
+  RouteUrl,
+  FavoriteButtonType,
+} from '../../constants/constants';
 import {getRatingInPercentage} from '../../utils/utils';
 import {OFFER_PROP_TYPES} from '../../types';
 import {getAuthStatus} from '../../store/selectors';
 import {browserHistory} from '../../browser-history';
-import {addToFavorite, removeFromFavorite} from '../../store/data/api-actions';
+import {changeFavoriteStatus} from '../../store/data/api-actions';
 
 
 const PlaceCard = ({
   offer,
   cardType,
   authStatus,
-  removeFromFavoriteAction,
-  addToFavoriteAction
+  changeFavoriteStatusAction,
+  favoriteButtonType
 }) => {
 
   const {
@@ -36,12 +41,7 @@ const PlaceCard = ({
       return;
     }
 
-    if (isInBookmark) {
-      removeFromFavoriteAction(id, cardType);
-    } else {
-      addToFavoriteAction(id);
-    }
-
+    changeFavoriteStatusAction(id, favoriteButtonType, isInBookmark);
   };
 
   return (
@@ -78,15 +78,16 @@ const PlaceCard = ({
 };
 
 PlaceCard.defaultProps = {
-  cardType: ``
+  cardType: ``,
+  favoriteButtonType: FavoriteButtonType.OFFER_PAGE,
 };
 
 PlaceCard.propTypes = {
   cardType: PropTypes.string.isRequired,
   offer: PropTypes.shape(OFFER_PROP_TYPES).isRequired,
   authStatus: PropTypes.string.isRequired,
-  removeFromFavoriteAction: PropTypes.func.isRequired,
-  addToFavoriteAction: PropTypes.func.isRequired,
+  changeFavoriteStatusAction: PropTypes.func.isRequired,
+  favoriteButtonType: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
@@ -94,8 +95,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  removeFromFavoriteAction: (id, cardType) => dispatch(removeFromFavorite(id, cardType)),
-  addToFavoriteAction: (id) => dispatch(addToFavorite(id)),
+  changeFavoriteStatusAction: (id, favoriteButtonType, isInBookmark) => (
+    dispatch(changeFavoriteStatus(id, favoriteButtonType, isInBookmark)
+    )),
 });
 
 export {PlaceCard};

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import ReviewRating from '../review-rating/review-rating';
 
-import {RATING_COUNT, RATING_TITLES} from '../../constants/constants.js';
+import {RATING_COUNTS, RATING_TITLES} from '../../constants/constants.js';
 import {sendReview} from '../../store/data/api-actions';
 import {getError, getReviewSendStatus} from '../../store/selectors';
 
@@ -45,7 +45,7 @@ const ReviewForm = ({
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {RATING_TITLES.map((title, index) => {
-          const rating = RATING_COUNT[index];
+          const rating = RATING_COUNTS[index];
           return (
             <ReviewRating
               key={title}
