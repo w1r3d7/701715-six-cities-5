@@ -8,10 +8,17 @@ import OfferDetailsMap from '../offer-details-map/offer-details-map';
 import ReviewsContainer from '../reviews-container/reviews-container';
 import withLoading from '../../hocs/with-loading';
 
-import {FavoriteButtonType, PROPERTY_BOOKMARK_ACTIVE_CLASS} from '../../constants/constants';
+import {
+  AuthorizationStatus,
+  FavoriteButtonType,
+  PROPERTY_BOOKMARK_ACTIVE_CLASS,
+  RouteUrl,
+} from '../../constants/constants';
 import {checkForPlural, getRatingInPercentage} from '../../utils/utils';
 import {OFFER_PROP_TYPES} from '../../types';
 import {changeFavoriteStatus} from '../../store/data/api-actions';
+import {browserHistory} from '../../browser-history';
+import {getAuthStatus} from '../../store/selectors';
 
 const PREMIUM_HOST_CLASS = `property__avatar-wrapper--pro`;
 const BEDROOM = `bedroom`;
@@ -19,7 +26,8 @@ const BEDROOM = `bedroom`;
 const OfferDetailsProperty = ({
   offer,
   nearbyOffers,
-  changeFavoriteStatusAction
+  changeFavoriteStatusAction,
+  authStatus
 }) => {
   const {
     photosUrl,
@@ -53,6 +61,12 @@ const OfferDetailsProperty = ({
 
   const handleFavoriteButtonClick = (evt) => {
     evt.preventDefault();
+
+    if (authStatus === AuthorizationStatus.NO_AUTH) {
+      browserHistory.push(RouteUrl.LOGIN);
+      return;
+    }
+
     changeFavoriteStatusAction(id, FavoriteButtonType.OFFER_PAGE, isInBookmark);
   };
 
@@ -129,7 +143,12 @@ OfferDetailsProperty.propTypes = {
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,
   changeFavoriteStatusAction: PropTypes.func.isRequired,
+  authStatus: PropTypes.string.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  authStatus: getAuthStatus(state)
+});
 
 const mapDispatchToProps = (dispatch) => ({
   changeFavoriteStatusAction: (id, favoriteButtonType, isInBookmark) => (
@@ -139,5 +158,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 export {OfferDetailsProperty};
 export default compose(
-    connect(null, mapDispatchToProps),
-    withLoading)(OfferDetailsProperty);
+    connect(mapStateToProps, mapDispatchToProps),
+    withLoading
+)(OfferDetailsProperty);

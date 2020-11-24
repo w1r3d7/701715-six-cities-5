@@ -3,23 +3,24 @@ import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 import {offers} from '../../__mocks__/mocks';
-import {OfferDetailsProperty} from '../offer-details-property/offer-details-property';
+import {PlaceCard} from './place-card';
+import {AuthorizationStatus} from '../../constants/constants';
 
 configure({adapter: new Adapter()});
 const [offer] = offers;
 
-test(`OfferDetails, click on "Favorite" button`, () => {
+test(`PlaceCard, click on "Favorite" button`, () => {
   const onFavoriteButtonClick = jest.fn();
 
   const wrapper = shallow(
-      <OfferDetailsProperty
+      <PlaceCard
         offer={offer}
-        nearbyOffers={offers}
         changeFavoriteStatusAction={onFavoriteButtonClick}
+        authStatus={AuthorizationStatus.AUTH}
       />
   );
 
-  wrapper.find(`.property__bookmark-button`).simulate(`click`, {
+  wrapper.find(`.place-card__bookmark-button`).simulate(`click`, {
     preventDefault: () => {}
   });
   expect(onFavoriteButtonClick).toHaveBeenCalledTimes(1);

@@ -32,6 +32,7 @@ test(`OfferDetailsProperty render correctly`, () => {
             offer={offer}
             nearbyOffers={offers}
             changeFavoriteStatusAction={noop}
+            authStatus={AuthorizationStatus.AUTH}
           />
         </Provider>
     )
