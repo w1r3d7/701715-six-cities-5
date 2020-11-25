@@ -18,6 +18,11 @@ export const getFavoriteOffers = (state) => state[NameSpace.DATA].favoriteOffers
 export const getFavoriteLoadingStatus = (state) => state[NameSpace.DATA].isFavoriteOffersLoaded;
 export const getError = (state) => state[NameSpace.DATA].sendReviewError;
 export const getReviewSendStatus = (state) => state[NameSpace.DATA].isReviewRequestSend;
+export const getReviewsError = (state) => state[NameSpace.DATA].reviewsError;
+export const getOffersError = (state) => state[NameSpace.DATA].offersError;
+export const getOfferDetailsError = (state) => state[NameSpace.DATA].offerDetailsError;
+export const getNearbyOffersError = (state) => state[NameSpace.DATA].nearbyOffersError;
+export const getFavoriteOffersError = (state) => state[NameSpace.DATA].favoriteOffersError;
 
 export const getFilteredOffers = createSelector(
     getOffers,

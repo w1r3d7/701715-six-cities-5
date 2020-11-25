@@ -12,8 +12,8 @@ import {
   getCurrentCity,
   getCurrentFilter,
   getFilteredOffers,
-  getOffers,
-  getOffersLoadingStatus
+  getOffers, getOffersError,
+  getOffersLoadingStatus,
 } from '../../store/selectors';
 
 const PAGE_MAIN_EMPTY_CLASS = `page__main--index-empty`;
@@ -24,7 +24,8 @@ const MainPage = ({
   onCityChange,
   currentFilter,
   filteredOffers,
-  isOffersLoaded
+  isOffersLoaded,
+  offersError
 }) => {
   const handleCityClick = (evt) => {
     evt.preventDefault();
@@ -49,6 +50,7 @@ const MainPage = ({
           <CitiesContainer
             isLoaded={isOffersLoaded}
             isOffersEmpty={isOffersEmpty}
+            error={offersError}
             currentCity={currentCity}
             offers={filteredOffers}
           />
@@ -69,6 +71,7 @@ MainPage.propTypes = {
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ).isRequired,
   isOffersLoaded: PropTypes.bool.isRequired,
+  offersError: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
@@ -77,6 +80,7 @@ const mapStateToProps = (state) => ({
   filteredOffers: getFilteredOffers(state),
   currentFilter: getCurrentFilter(state),
   isOffersLoaded: getOffersLoadingStatus(state),
+  offersError: getOffersError(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

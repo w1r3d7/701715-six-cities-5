@@ -10,14 +10,19 @@ describe(`Data reducer work correctly`, () => {
     expect(data(void 0, {})).toEqual({
       offers: [],
       isOffersLoaded: false,
+      offersError: null,
       offerDetails: null,
       isOfferDetailsLoaded: false,
+      offerDetailsError: null,
       reviews: null,
       isReviewsLoaded: false,
+      reviewsError: null,
       nearbyOffers: null,
       isNearbyOffersLoaded: false,
+      nearbyOffersError: null,
       favoriteOffers: null,
       isFavoriteOffersLoaded: false,
+      favoriteOffersError: null,
       isReviewRequestSend: false,
       sendReviewError: null,
     });
@@ -38,11 +43,13 @@ describe(`Data reducer work correctly`, () => {
 
   it(`Reducer should update request status by request offers`, () => {
     expect(data({
+      offersError: `404`,
       isOffersLoaded: true
     }, {
       type: ActionType.OFFERS_REQUESTED,
     })).toEqual({
       isOffersLoaded: false,
+      offersError: null,
     });
   });
 
@@ -163,7 +170,7 @@ describe(`Data reducer work correctly`, () => {
     expect(data({
       sendReviewError: null,
     }, {
-      type: ActionType.WRITE_ERROR,
+      type: ActionType.SEND_REVIEW_ERROR,
       payload: `404`,
     })).toEqual({
       sendReviewError: `404`

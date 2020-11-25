@@ -8,7 +8,7 @@ import {
   requestReviews,
   getReviews,
   sendReviewRequested,
-  writeError,
+  writeSendReviewError,
   reviewSend,
   requestNearbyOffers,
   getNearbyOffers,
@@ -18,39 +18,47 @@ import {
   removeOfferFromFavorite,
   changeNearbyOffersFavoriteStatus,
   changeOfferFavoriteStatus,
+  saveOffersError,
+  saveReviewsError,
+  saveOfferDetailsError,
+  saveNearbyOffersError,
+  saveFavoriteOffersError
 } from './actions';
 
 export const fetchOffers = () => (dispatch, _state, api) => {
   requestOffers();
   return api.get(ApiUrl.OFFERS)
     .then(({data}) => data.map((item) => adaptOfferToClient(item)))
-    .then((offers) => dispatch(getOffers(offers)));
+    .then((offers) => dispatch(getOffers(offers)))
+    .catch((error) => dispatch(saveOffersError(error.response.statusText)));
 };
 
 export const fetchOfferDetails = (id) => (dispatch, _state, api) => {
   dispatch(requestOfferDetails());
   return api.get(ApiUrl.OFFERS + id)
     .then(({data}) => adaptOfferToClient(data))
-    .then((offer) => dispatch(getOfferDetails(offer)));
+    .then((offer) => dispatch(getOfferDetails(offer)))
+    .catch((error) => dispatch(saveOfferDetailsError(error.response.statusText)));
 };
 
 export const fetchReviews = (id) => (dispatch, _state, api) => {
   dispatch(requestReviews());
   return api.get(ApiUrl.COMMENTS + id)
     .then(({data}) => data.map((item) => adaptReviewToClient(item)))
-    .then((reviews) => dispatch(getReviews(reviews)));
+    .then((reviews) => dispatch(getReviews(reviews)))
+    .catch((error) => dispatch(saveReviewsError(error.response.statusText)));
 };
 
 export const sendReview = (id, review) => (dispatch, _state, api) => {
   dispatch(sendReviewRequested());
-  dispatch(writeError(null));
+  dispatch(writeSendReviewError(null));
   return api.post(ApiUrl.COMMENTS + id, review)
     .then(({data}) => data.map((item) => adaptReviewToClient(item)))
     .then((reviews) => dispatch(getReviews(reviews)))
     .then(() => dispatch(reviewSend()))
     .catch((error) => {
       dispatch(reviewSend());
-      dispatch(writeError(error.response.statusText));
+      dispatch(writeSendReviewError(error.response.statusText));
     });
 };
 
@@ -58,14 +66,16 @@ export const fetchNearbyOffers = (id) => (dispatch, _state, api) => {
   dispatch(requestNearbyOffers());
   return api.get(ApiUrl.OFFERS + id + ApiUrl.NEARBY)
     .then(({data}) => data.map((item) => adaptOfferToClient(item)))
-    .then((offers) => dispatch(getNearbyOffers(offers)));
+    .then((offers) => dispatch(getNearbyOffers(offers)))
+    .catch((error) => dispatch(saveNearbyOffersError(error.response.statusText)));
 };
 
 export const fetchFavoriteOffers = () => (dispatch, _state, api) => {
   dispatch(requestFavoriteOffers());
   return api.get(ApiUrl.FAVORITE)
     .then(({data}) => data.map((item) => adaptOfferToClient(item)))
-    .then((offers) => dispatch(getFavoriteOffers(offers)));
+    .then((offers) => dispatch(getFavoriteOffers(offers)))
+    .catch((error) => dispatch(saveFavoriteOffersError(error.response.statusText)));
 };
 
 export const changeFavoriteStatus = (

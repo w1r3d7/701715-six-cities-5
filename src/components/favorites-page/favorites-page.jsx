@@ -8,12 +8,13 @@ import FavoritesContainer from '../favorites-container/favorites-container';
 
 import {fetchFavoriteOffers} from '../../store/data/api-actions';
 import {OFFER_PROP_TYPES} from '../../types.js';
-import {getFavoriteLoadingStatus, getFavoriteOffers} from '../../store/selectors';
+import {getFavoriteLoadingStatus, getFavoriteOffers, getFavoriteOffersError} from '../../store/selectors';
 
 const FavoritesPage = ({
   favoriteLoadingStatus,
   favoriteOffers,
-  fetchFavoriteOffersAction
+  fetchFavoriteOffersAction,
+  favoriteOffersError
 }) => {
 
   useEffect(() => {
@@ -23,7 +24,11 @@ const FavoritesPage = ({
   return (
     <div className="page">
       <AppHeader />
-      <FavoritesContainer isLoaded={favoriteLoadingStatus} favoriteOffers={favoriteOffers} />
+      <FavoritesContainer
+        isLoaded={favoriteLoadingStatus}
+        favoriteOffers={favoriteOffers}
+        error={favoriteOffersError}
+      />
       <AppFooter />
     </div>
   );
@@ -35,6 +40,7 @@ FavoritesPage.propTypes = {
   ),
   favoriteLoadingStatus: PropTypes.bool.isRequired,
   fetchFavoriteOffersAction: PropTypes.func.isRequired,
+  favoriteOffersError: PropTypes.string
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -44,6 +50,7 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
   favoriteOffers: getFavoriteOffers(state),
   favoriteLoadingStatus: getFavoriteLoadingStatus(state),
+  favoriteOffersError: getFavoriteOffersError(state),
 });
 
 export {FavoritesPage};

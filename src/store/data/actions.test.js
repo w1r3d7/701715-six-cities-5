@@ -73,8 +73,8 @@ describe(`Data Actions work correctly`, () => {
   });
 
   it(`Action writeError work correctly`, () => {
-    expect(actions.writeError(`404`)).toEqual({
-      type: ActionType.WRITE_ERROR,
+    expect(actions.writeSendReviewError(`404`)).toEqual({
+      type: ActionType.SEND_REVIEW_ERROR,
       payload: `404`
     });
   });

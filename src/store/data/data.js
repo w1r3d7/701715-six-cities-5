@@ -4,14 +4,19 @@ import {ActionType} from './actions';
 const initialState = {
   offers: [],
   isOffersLoaded: false,
+  offersError: null,
   offerDetails: null,
   isOfferDetailsLoaded: false,
+  offerDetailsError: null,
   reviews: null,
   isReviewsLoaded: false,
+  reviewsError: null,
   nearbyOffers: null,
   isNearbyOffersLoaded: false,
+  nearbyOffersError: null,
   favoriteOffers: null,
   isFavoriteOffersLoaded: false,
+  favoriteOffersError: null,
   isReviewRequestSend: false,
   sendReviewError: null,
 };
@@ -26,6 +31,7 @@ const data = (state = initialState, action) => {
     case ActionType.OFFERS_REQUESTED:
       return extend(state, {
         isOffersLoaded: false,
+        offersError: null,
       });
     case ActionType.GET_OFFER_DETAILS:
       return extend(state, {
@@ -44,6 +50,7 @@ const data = (state = initialState, action) => {
     case ActionType.REVIEWS_REQUESTED:
       return extend(state, {
         isReviewsLoaded: false,
+        reviewsError: null,
       });
     case ActionType.GET_NEARBY_OFFERS:
       return extend(state, {
@@ -53,6 +60,7 @@ const data = (state = initialState, action) => {
     case ActionType.NEARBY_OFFERS_REQUESTED:
       return extend(state, {
         isNearbyOffersLoaded: false,
+        nearbyOffersError: null,
       });
     case ActionType.GET_FAVORITE_OFFERS:
       return extend(state, {
@@ -71,7 +79,7 @@ const data = (state = initialState, action) => {
       return extend(state, {
         isReviewRequestSend: false,
       });
-    case ActionType.WRITE_ERROR:
+    case ActionType.SEND_REVIEW_ERROR:
       return extend(state, {
         sendReviewError: action.payload,
       });
@@ -90,6 +98,26 @@ const data = (state = initialState, action) => {
     case ActionType.CHANGE_OFFER_FAVORITE_STATUS:
       return extend(state, {
         offerDetails: action.payload
+      });
+    case ActionType.SAVE_REVIEWS_ERROR:
+      return extend(state, {
+        reviewsError: action.payload
+      });
+    case ActionType.SAVE_OFFERS_ERROR:
+      return extend(state, {
+        offersError: action.payload
+      });
+    case ActionType.SAVE_OFFER_DETAILS_ERROR:
+      return extend(state, {
+        offerDetailsError: action.payload
+      });
+    case ActionType.SAVE_NEARBY_OFFERS_ERROR:
+      return extend(state, {
+        nearbyOffersError: action.payload
+      });
+    case ActionType.SAVE_FAVORITE_OFFERS_ERROR:
+      return extend(state, {
+        favoriteOffersError: action.payload
       });
     default:
       return state;

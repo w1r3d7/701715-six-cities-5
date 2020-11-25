@@ -84,7 +84,7 @@ describe(`Data Async operations work correctly`, () => {
           type: ActionType.REVIEW_SEND_REQUESTED,
         });
         expect(dispatch).toHaveBeenNthCalledWith(2, {
-          type: ActionType.WRITE_ERROR,
+          type: ActionType.SEND_REVIEW_ERROR,
           payload: null,
         });
         expect(dispatch).toHaveBeenNthCalledWith(3, {

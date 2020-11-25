@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import ReviewsList from '../reviews-list/reviews-list';
 
 import {fetchReviews} from '../../store/data/api-actions';
-import {getSortedReviews, getReviewsLoadingStatus} from '../../store/selectors';
+import {getSortedReviews, getReviewsLoadingStatus, getReviewsError} from '../../store/selectors';
 import {REVIEW_PROP_TYPES} from '../../types';
 
 
@@ -14,7 +14,8 @@ const ReviewsContainer = (props) => {
     reviews,
     isReviewsLoaded,
     offerId,
-    getReviewsList
+    getReviewsList,
+    reviewsError
   } = props;
 
   useEffect(() => {
@@ -26,6 +27,7 @@ const ReviewsContainer = (props) => {
       offerId={offerId}
       isLoaded={isReviewsLoaded}
       reviews={reviews}
+      error={reviewsError}
     />
   );
 };
@@ -37,11 +39,13 @@ ReviewsContainer.propTypes = {
   ),
   isReviewsLoaded: PropTypes.bool.isRequired,
   getReviewsList: PropTypes.func.isRequired,
+  reviewsError: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   reviews: getSortedReviews(state),
   isReviewsLoaded: getReviewsLoadingStatus(state),
+  reviewsError: getReviewsError(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

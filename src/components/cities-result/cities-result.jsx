@@ -71,4 +71,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export {CitiesResult};
-export default compose(connect(mapStateToProps, mapDispatchToProps), withActiveCardId)(CitiesResult);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withActiveCardId
+)(CitiesResult);

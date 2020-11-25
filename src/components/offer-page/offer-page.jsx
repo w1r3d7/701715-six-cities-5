@@ -12,20 +12,21 @@ import {
   getOfferDetails,
   getOfferDetailsLoadingStatus,
   getNearbyOffers,
-  getNearbyOffersLoadingStatus,
+  getNearbyOffersLoadingStatus, getOfferDetailsError, getNearbyOffersError,
 } from '../../store/selectors';
 
 
-const OfferPage = (props) => {
-  const {
-    match,
-    offer,
-    isOfferDetailsLoaded,
-    nearbyOffers,
-    isNearbyOffersLoaded,
-    fetchOffer,
-    fetchNearby
-  } = props;
+const OfferPage = ({
+  match,
+  offer,
+  isOfferDetailsLoaded,
+  nearbyOffers,
+  isNearbyOffersLoaded,
+  fetchOffer,
+  fetchNearby,
+  offerDetailsError,
+  nearbyOffersError
+}) => {
   const offerId = match.params.id;
 
   useEffect(() => {
@@ -39,6 +40,7 @@ const OfferPage = (props) => {
       <main className="page__main page__main--property">
         <OfferDetailsProperty
           isLoaded={isOfferDetailsLoaded && isNearbyOffersLoaded}
+          error={offerDetailsError || nearbyOffersError}
           offer={offer}
           nearbyOffers={nearbyOffers}
         />
@@ -49,6 +51,7 @@ const OfferPage = (props) => {
               <OfferDetailsNearbyList
                 nearbyOffers={nearbyOffers}
                 isLoaded={isNearbyOffersLoaded}
+                error={nearbyOffersError}
               />
             </div>
           </section>
@@ -63,6 +66,8 @@ OfferPage.propTypes = {
   isOfferDetailsLoaded: PropTypes.bool.isRequired,
   fetchOffer: PropTypes.func.isRequired,
   fetchNearby: PropTypes.func.isRequired,
+  offerDetailsError: PropTypes.string,
+  nearbyOffersError: PropTypes.string,
   nearbyOffers: PropTypes.arrayOf(
       PropTypes.shape(OFFER_PROP_TYPES).isRequired
   ),
@@ -79,6 +84,8 @@ const mapStateToProps = (state) => ({
   isOfferDetailsLoaded: getOfferDetailsLoadingStatus(state),
   nearbyOffers: getNearbyOffers(state),
   isNearbyOffersLoaded: getNearbyOffersLoadingStatus(state),
+  offerDetailsError: getOfferDetailsError(state),
+  nearbyOffersError: getNearbyOffersError(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

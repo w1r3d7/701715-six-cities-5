@@ -10,12 +10,17 @@ export const ActionType = {
   GET_FAVORITE_OFFERS: `GET_FAVORITE_OFFERS`,
   FAVORITE_OFFERS_REQUESTED: `FAVORITE_OFFERS_REQUESTED`,
   REVIEW_SEND_REQUESTED: `REVIEW_SEND_REQUESTED`,
-  WRITE_ERROR: `WRITE_ERROR`,
+  SEND_REVIEW_ERROR: `SEND_REVIEW_ERROR`,
   REVIEW_SEND: `REVIEW_SEND`,
   CHANGE_OFFERS_FAVORITE_STATUS: `CHANGE_FAVORITE_STATUS`,
   REMOVE_FROM_FAVORITE: `REMOVE_FROM_FAVORITE`,
   CHANGE_NEARBY_OFFERS_FAVORITE_STATUS: `CHANGE_NEARBY_OFFERS_FAVORITE_STATUS`,
-  CHANGE_OFFER_FAVORITE_STATUS: `CHANGE_OFFER_FAVORITE_STATUS`
+  CHANGE_OFFER_FAVORITE_STATUS: `CHANGE_OFFER_FAVORITE_STATUS`,
+  SAVE_OFFERS_ERROR: `SAVE_OFFERS_ERROR`,
+  SAVE_REVIEWS_ERROR: `SAVE_REVIEWS_ERROR`,
+  SAVE_OFFER_DETAILS_ERROR: `SAVE_OFFER_DETAILS_ERROR`,
+  SAVE_NEARBY_OFFERS_ERROR: `SAVE_NEARBY_OFFERS_ERROR`,
+  SAVE_FAVORITE_OFFERS_ERROR: `SAVE_FAVORITE_OFFERS_ERROR`
 };
 
 export const getOffers = (offers) => ({
@@ -63,8 +68,8 @@ export const requestFavoriteOffers = () => ({
   type: ActionType.FAVORITE_OFFERS_REQUESTED,
 });
 
-export const writeError = (error) => ({
-  type: ActionType.WRITE_ERROR,
+export const writeSendReviewError = (error) => ({
+  type: ActionType.SEND_REVIEW_ERROR,
   payload: error,
 });
 
@@ -96,3 +101,27 @@ export const changeOfferFavoriteStatus = (offer) => ({
   payload: offer,
 });
 
+export const saveOffersError = (error) => ({
+  type: ActionType.SAVE_OFFERS_ERROR,
+  payload: error
+});
+
+export const saveReviewsError = (error) => ({
+  type: ActionType.SAVE_REVIEWS_ERROR,
+  payload: error
+});
+
+export const saveOfferDetailsError = (error) => ({
+  type: ActionType.SAVE_OFFER_DETAILS_ERROR,
+  payload: error
+});
+
+export const saveNearbyOffersError = (error) => ({
+  type: ActionType.SAVE_NEARBY_OFFERS_ERROR,
+  payload: error
+});
+
+export const saveFavoriteOffersError = (error) => ({
+  type: ActionType.SAVE_FAVORITE_OFFERS_ERROR,
+  payload: error
+});
